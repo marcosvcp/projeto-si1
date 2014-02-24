@@ -3,18 +3,31 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import play.db.ebean.Model;
+
 import com.google.common.base.Objects;
 
 /**
  * Entidade que representa uma Cadeira.
  */
-public class Cadeira implements Comparable<Cadeira>{
+public class Cadeira extends Model implements Comparable<Cadeira> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// TODO PADRÃO DE PROJETO: ALTA COESÃO - so haverá informações coerentes com
 	// a classe
-	private int id;
+	@Id
+	private Long id;
+
 	private String nome;
 	private int creditos;
+
+	@OneToMany
 	private List<Cadeira> preRequisitos;
 	private int dificuldade; // dificuldade de 1 - 10
 
@@ -102,11 +115,11 @@ public class Cadeira implements Comparable<Cadeira>{
 		this.nome = nome;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

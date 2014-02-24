@@ -70,6 +70,7 @@ public class GerenciadorDeCadeiras {
 			criandoCadeira.addPreRequisito(cadeirasPorId.get(requisitos.item(i)
 					.getTextContent()));
 		}
+		criandoCadeira.setId(Long.valueOf(idCadeira));
 		cadeirasPorId.put(idCadeira, criandoCadeira);
 		if (periodo == PlanoDeCurso.PRIMEIRO_PERIODO) {
 			cadeiraPrimeiro.put(criandoCadeira.getNome(), criandoCadeira);

@@ -1,3 +1,9 @@
-2014-02-22 11:35:25,927 - [INFO] - from play in pool-4-thread-2 
+2014-02-22 12:10:48,589 - [INFO] - from play in pool-4-thread-2 
 Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
+2014-02-22 12:11:19,486 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:h2:persistencia/DBSI.db
+
+2014-02-22 12:11:20,254 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
 

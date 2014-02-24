@@ -1,6 +1,6 @@
 // @SOURCE:/home/marcos/Documents/projeto-si1/conf/routes
 // @HASH:6642a619be2be74461d8a59dbed137ab4aee4f95
-// @DATE:Sat Feb 22 11:15:10 BRT 2014
+// @DATE:Sat Feb 22 12:10:53 BRT 2014
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._
