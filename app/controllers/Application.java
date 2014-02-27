@@ -27,8 +27,6 @@ public class Application extends Controller {
 			} else {
 				plano = new PlanoDeCurso();
 				plano.save();
-				plano.distribuiCadeiras(new ArrayList<Cadeira>(
-						GerenciadorDeCadeiras.getMapaDeCadeiras().values()));
 				plano.update();
 			}
 		}

@@ -36,17 +36,15 @@ public class Periodo extends Model {
 	public Periodo(int numeroDoPeriodo) {
 		this.numeroDoPeriodo = numeroDoPeriodo;
 		cadeiras = new HashMap<String, Cadeira>();
-		if (numeroDoPeriodo == PlanoDeCurso.PRIMEIRO_PERIODO) {
-			addCadeiraPrimeiroPeriodo();
+		for(Cadeira cadeira: GerenciadorDeCadeiras.getMapaDeCadeiras().values()) {
+			if(cadeira.getPeriodoDefault() == numeroDoPeriodo) {
+				cadeiras.put(cadeira.getNome(), cadeira);
+			}
 		}
 	}
 
 	public int getNumero() {
 		return numeroDoPeriodo;
-	}
-
-	private void addCadeiraPrimeiroPeriodo() {
-		cadeiras = GerenciadorDeCadeiras.getCadeirasPrimeiro();
 	}
 
 	public Collection<Cadeira> getCadeiras() {
@@ -61,7 +59,7 @@ public class Periodo extends Model {
 		return cadeiras.get(cadeira);
 	}
 
-	public void addCadeira(Cadeira cadeira) throws Exception {
+	public void addCadeira(Cadeira cadeira) {
 		cadeiras.put(cadeira.getNome(), cadeira);
 	}
 

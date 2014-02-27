@@ -26,7 +26,6 @@ public class GerenciadorDeCadeiras {
 	// TODO PADRÃO DE PROJETO: CREATOR - Um gerenciador de cadeiras precisa do
 	// mapas de cadeiras contendo todas as cadeiras do curso
 	private static Map<String, Cadeira> listaDeCadeiras = new HashMap<String, Cadeira>();
-	private static Map<String, Cadeira> cadeiraPrimeiro = new HashMap<String, Cadeira>();
 
 	// TODO PADRÃO DE PROJETO: CONTROLLER - essa classe é responsável por
 	// controlar a adição de cadeiras no mapa.
@@ -71,13 +70,11 @@ public class GerenciadorDeCadeiras {
 					.getTextContent()));
 		}
 		criandoCadeira.setId(Long.valueOf(idCadeira));
-		//criandoCadeira.setPeriodoDefault(periodo);
+		criandoCadeira.setPeriodoDefault(periodo);
 		cadeirasPorId.put(idCadeira, criandoCadeira);
-		if (periodo == PlanoDeCurso.PRIMEIRO_PERIODO) {
-			cadeiraPrimeiro.put(criandoCadeira.getNome(), criandoCadeira);
-		} else {
-			listaDeCadeiras.put(criandoCadeira.getNome(), criandoCadeira);
-		}
+
+		listaDeCadeiras.put(criandoCadeira.getNome(), criandoCadeira);
+
 	}
 
 	/**
@@ -91,13 +88,6 @@ public class GerenciadorDeCadeiras {
 		Document doc = dBuilder.parse(fXmlFile);
 		doc.getDocumentElement().normalize();
 		return doc;
-	}
-
-	public static Map<String, Cadeira> getCadeirasPrimeiro() {
-		if (listaDeCadeiras.isEmpty()) {
-			populaMapas();
-		}
-		return cadeiraPrimeiro;
 	}
 
 	public static Map<String, Cadeira> getMapaDeCadeiras() {
