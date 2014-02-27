@@ -170,13 +170,6 @@ public class PlanoDeCurso extends Model {
 			if (periodo.getMapCadeiras().get(cadeira) != null) {
 				periodo.removerCadeira(removida);
 			}
-			// verifica as cadeiras que tem a cadeira a ser removida como
-			// pre-requisito e remove
-			for (Cadeira c : periodo.getCadeiras()) {
-				if (c.getPreRequisitos().contains(removida)) {
-					removeCadeira(c.getNome());
-				}
-			}
 		}
 	}
 

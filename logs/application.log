@@ -1,16 +1,16 @@
-2014-02-27 14:55:11,324 - [INFO] - from play in pool-4-thread-1 
+2014-02-27 15:02:58,571 - [INFO] - from play in pool-4-thread-3 
 Listening for HTTP on /0:0:0:0:0:0:0:0:9000
 
-2014-02-27 14:55:34,637 - [INFO] - from play in play-internal-execution-context-1 
+2014-02-27 15:03:09,402 - [INFO] - from play in play-internal-execution-context-1 
 datasource [jdbc:h2:persistencia/DBSI.db] bound to JNDI as DefaultDS
 
-2014-02-27 14:55:35,188 - [INFO] - from play in play-internal-execution-context-1 
+2014-02-27 15:03:09,920 - [INFO] - from play in play-internal-execution-context-1 
 database [default] connected at jdbc:h2:persistencia/DBSI.db
 
-2014-02-27 14:55:36,178 - [ERROR] - from application in New I/O worker #1 
+2014-02-27 15:03:10,842 - [ERROR] - from application in New I/O worker #1 
 
 
-! @6hd0a5j5h - Internal server error, for (GET) [/] ->
+! @6hd0b5fk9 - Internal server error, for (GET) [/] ->
 
 play.api.db.evolutions.InvalidDatabaseRevision: Database 'default' needs evolution![An SQL script need to be run on your database.]
 	at play.api.db.evolutions.EvolutionsPlugin$$anonfun$onStart$1$$anonfun$apply$1.apply$mcV$sp(Evolutions.scala:486) ~[play-jdbc_2.10.jar:2.2.1]
@@ -43,22 +43,58 @@ play.api.db.evolutions.InvalidDatabaseRevision: Database 'default' needs evoluti
 	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library.jar:na]
 
-2014-02-27 14:56:43,629 - [INFO] - from play in play-internal-execution-context-1 
+2014-02-27 15:03:11,148 - [ERROR] - from application in New I/O worker #2 
+
+
+! @6hd0b5fk9 - Internal server error, for (GET) [/] ->
+
+play.api.db.evolutions.InvalidDatabaseRevision: Database 'default' needs evolution![An SQL script need to be run on your database.]
+	at play.api.db.evolutions.EvolutionsPlugin$$anonfun$onStart$1$$anonfun$apply$1.apply$mcV$sp(Evolutions.scala:486) ~[play-jdbc_2.10.jar:2.2.1]
+	at play.api.db.evolutions.EvolutionsPlugin.withLock(Evolutions.scala:507) ~[play-jdbc_2.10.jar:2.2.1]
+	at play.api.db.evolutions.EvolutionsPlugin$$anonfun$onStart$1.apply(Evolutions.scala:461) ~[play-jdbc_2.10.jar:2.2.1]
+	at play.api.db.evolutions.EvolutionsPlugin$$anonfun$onStart$1.apply(Evolutions.scala:459) ~[play-jdbc_2.10.jar:2.2.1]
+	at scala.collection.immutable.List.foreach(List.scala:318) ~[scala-library.jar:na]
+	at play.api.db.evolutions.EvolutionsPlugin.onStart(Evolutions.scala:459) ~[play-jdbc_2.10.jar:2.2.1]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:88) ~[play_2.10.jar:2.2.1]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:88) ~[play_2.10.jar:2.2.1]
+	at scala.collection.immutable.List.foreach(List.scala:318) ~[scala-library.jar:na]
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:88) ~[play_2.10.jar:2.2.1]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:88) ~[play_2.10.jar:2.2.1]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:88) ~[play_2.10.jar:2.2.1]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:18) ~[play_2.10.jar:2.2.1]
+	at play.api.Play$.start(Play.scala:87) ~[play_2.10.jar:2.2.1]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:139) ~[play_2.10.jar:2.2.1]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:112) ~[play_2.10.jar:2.2.1]
+	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:112) ~[play_2.10.jar:2.2.1]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:110) ~[play_2.10.jar:2.2.1]
+	at scala.util.Success.flatMap(Try.scala:200) ~[scala-library.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110) ~[play_2.10.jar:2.2.1]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:102) ~[play_2.10.jar:2.2.1]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library.jar:na]
+
+2014-02-27 15:03:14,465 - [INFO] - from play in play-internal-execution-context-1 
 datasource [jdbc:h2:persistencia/DBSI.db] bound to JNDI as DefaultDS
 
-2014-02-27 14:56:43,849 - [INFO] - from play in play-internal-execution-context-1 
+2014-02-27 15:03:14,688 - [INFO] - from play in play-internal-execution-context-1 
 database [default] connected at jdbc:h2:persistencia/DBSI.db
 
-2014-02-27 14:56:44,127 - [INFO] - from play in play-internal-execution-context-1 
+2014-02-27 15:03:14,946 - [INFO] - from play in play-internal-execution-context-1 
 Application started (Dev)
 
-2014-02-27 14:57:30,524 - [ERROR] - from play in play-internal-execution-context-3 
+2014-02-27 15:04:12,188 - [ERROR] - from play in play-internal-execution-context-1 
 Cannot invoke the action, eventually got an error: javax.transaction.NotSupportedException: limite de créditos ultrapassado!
 
-2014-02-27 14:57:30,550 - [ERROR] - from application in play-internal-execution-context-3 
+2014-02-27 15:04:12,230 - [ERROR] - from application in play-internal-execution-context-1 
 
 
-! @6hd0ac6an - Internal server error, for (POST) [/addCadeira/Programa%C3%A7%C3%A3o%20I/1] ->
+! @6hd0b92g4 - Internal server error, for (POST) [/addCadeira/Compiladores/5] ->
 
 play.api.Application$$anon$1: Execution exception[[NotSupportedException: limite de créditos ultrapassado!]]
 	at play.api.Application$class.handleError(Application.scala:293) ~[play_2.10.jar:2.2.1]
@@ -105,15 +141,15 @@ Caused by: javax.transaction.NotSupportedException: limite de créditos ultrapas
 	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:386) ~[akka-actor_2.10.jar:2.2.0]
 	... 4 common frames omitted
 
-2014-02-27 14:57:34,402 - [ERROR] - from play in play-internal-execution-context-1 
-Cannot invoke the action, eventually got an error: java.util.ConcurrentModificationException
+2014-02-27 15:04:32,777 - [ERROR] - from play in play-internal-execution-context-7 
+Cannot invoke the action, eventually got an error: java.lang.Exception: Essa Cadeira não está alocada!
 
-2014-02-27 14:57:34,408 - [ERROR] - from application in play-internal-execution-context-1 
+2014-02-27 15:04:32,782 - [ERROR] - from application in play-internal-execution-context-7 
 
 
-! @6hd0acc38 - Internal server error, for (POST) [/remCadeira/Teoria%20dos%20Grafos] ->
+! @6hd0ba70i - Internal server error, for (POST) [/remCadeira/C%C3%A1%C4%BAculo%20I] ->
 
-play.api.Application$$anon$1: Execution exception[[ConcurrentModificationException: null]]
+play.api.Application$$anon$1: Execution exception[[Exception: Essa Cadeira não está alocada!]]
 	at play.api.Application$class.handleError(Application.scala:293) ~[play_2.10.jar:2.2.1]
 	at play.api.DefaultApplication.handleError(Application.scala:399) [play_2.10.jar:2.2.1]
 	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$2$$anonfun$applyOrElse$3.apply(PlayDefaultUpstreamHandler.scala:261) [play_2.10.jar:2.2.1]
@@ -138,12 +174,8 @@ play.api.Application$$anon$1: Execution exception[[ConcurrentModificationExcepti
 	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library.jar:na]
-Caused by: java.util.ConcurrentModificationException: null
-	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:926) ~[na:1.7.0_51]
-	at java.util.HashMap$ValueIterator.next(HashMap.java:954) ~[na:1.7.0_51]
-	at models.PlanoDeCurso.removeCadeira(PlanoDeCurso.java:182) ~[na:na]
-	at models.PlanoDeCurso.removeCadeira(PlanoDeCurso.java:184) ~[na:na]
-	at models.PlanoDeCurso.removeCadeira(PlanoDeCurso.java:184) ~[na:na]
+Caused by: java.lang.Exception: Essa Cadeira não está alocada!
+	at models.PlanoDeCurso.removeCadeira(PlanoDeCurso.java:164) ~[na:na]
 	at controllers.Application.remCadeira(Application.java:49) ~[na:na]
 	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$7$$anonfun$apply$7.apply(routes_routing.scala:121) ~[na:na]
 	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$7$$anonfun$apply$7.apply(routes_routing.scala:121) ~[na:na]
@@ -162,15 +194,15 @@ Caused by: java.util.ConcurrentModificationException: null
 	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:386) ~[akka-actor_2.10.jar:2.2.0]
 	... 4 common frames omitted
 
-2014-02-27 14:57:44,642 - [ERROR] - from play in play-internal-execution-context-4 
-Cannot invoke the action, eventually got an error: javax.transaction.NotSupportedException: Você não pode adicionar essa cadeira junto com seu(s) pré-requisitos
+2014-02-27 15:04:35,560 - [ERROR] - from play in play-internal-execution-context-5 
+Cannot invoke the action, eventually got an error: java.lang.Exception: Essa Cadeira não está alocada!
 
-2014-02-27 14:57:44,650 - [ERROR] - from application in play-internal-execution-context-4 
+2014-02-27 15:04:35,566 - [ERROR] - from application in play-internal-execution-context-5 
 
 
-! @6hd0ad177 - Internal server error, for (POST) [/addCadeira/Teoria%20da%20Computa%C3%A7%C3%A3o/1] ->
+! @6hd0bab3j - Internal server error, for (POST) [/remCadeira/C%C3%A1%C4%BAculo%20I] ->
 
-play.api.Application$$anon$1: Execution exception[[NotSupportedException: Você não pode adicionar essa cadeira junto com seu(s) pré-requisitos]]
+play.api.Application$$anon$1: Execution exception[[Exception: Essa Cadeira não está alocada!]]
 	at play.api.Application$class.handleError(Application.scala:293) ~[play_2.10.jar:2.2.1]
 	at play.api.DefaultApplication.handleError(Application.scala:399) [play_2.10.jar:2.2.1]
 	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$2$$anonfun$applyOrElse$3.apply(PlayDefaultUpstreamHandler.scala:261) [play_2.10.jar:2.2.1]
@@ -195,11 +227,11 @@ play.api.Application$$anon$1: Execution exception[[NotSupportedException: Você 
 	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library.jar:na]
-Caused by: javax.transaction.NotSupportedException: Você não pode adicionar essa cadeira junto com seu(s) pré-requisitos
-	at models.PlanoDeCurso.addCadeira(PlanoDeCurso.java:130) ~[na:na]
-	at controllers.Application.addCadeira(Application.java:38) ~[na:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$6$$anonfun$apply$6.apply(routes_routing.scala:113) ~[na:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$6$$anonfun$apply$6.apply(routes_routing.scala:113) ~[na:na]
+Caused by: java.lang.Exception: Essa Cadeira não está alocada!
+	at models.PlanoDeCurso.removeCadeira(PlanoDeCurso.java:164) ~[na:na]
+	at controllers.Application.remCadeira(Application.java:49) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$7$$anonfun$apply$7.apply(routes_routing.scala:121) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$7$$anonfun$apply$7.apply(routes_routing.scala:121) ~[na:na]
 	at play.core.Router$HandlerInvoker$$anon$7$$anon$2.invocation(Router.scala:183) ~[play_2.10.jar:2.2.1]
 	at play.core.Router$Routes$$anon$1.invocation(Router.scala:377) ~[play_2.10.jar:2.2.1]
 	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:56) ~[play_2.10.jar:2.2.1]
@@ -215,15 +247,15 @@ Caused by: javax.transaction.NotSupportedException: Você não pode adicionar es
 	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:386) ~[akka-actor_2.10.jar:2.2.0]
 	... 4 common frames omitted
 
-2014-02-27 14:57:47,131 - [ERROR] - from play in play-internal-execution-context-5 
-Cannot invoke the action, eventually got an error: javax.transaction.NotSupportedException: Você não pode adicionar essa cadeira junto com seu(s) pré-requisitos
+2014-02-27 15:04:45,231 - [ERROR] - from play in play-internal-execution-context-8 
+Cannot invoke the action, eventually got an error: java.lang.Exception: Essa Cadeira não está alocada!
 
-2014-02-27 14:57:47,136 - [ERROR] - from application in play-internal-execution-context-5 
+2014-02-27 15:04:45,236 - [ERROR] - from application in play-internal-execution-context-8 
 
 
-! @6hd0ad4on - Internal server error, for (POST) [/addCadeira/Teoria%20da%20Computa%C3%A7%C3%A3o/0] ->
+! @6hd0bapbh - Internal server error, for (POST) [/remCadeira/C%C3%A1%C4%BAculo%20I] ->
 
-play.api.Application$$anon$1: Execution exception[[NotSupportedException: Você não pode adicionar essa cadeira junto com seu(s) pré-requisitos]]
+play.api.Application$$anon$1: Execution exception[[Exception: Essa Cadeira não está alocada!]]
 	at play.api.Application$class.handleError(Application.scala:293) ~[play_2.10.jar:2.2.1]
 	at play.api.DefaultApplication.handleError(Application.scala:399) [play_2.10.jar:2.2.1]
 	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$2$$anonfun$applyOrElse$3.apply(PlayDefaultUpstreamHandler.scala:261) [play_2.10.jar:2.2.1]
@@ -248,8 +280,114 @@ play.api.Application$$anon$1: Execution exception[[NotSupportedException: Você 
 	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library.jar:na]
 	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library.jar:na]
-Caused by: javax.transaction.NotSupportedException: Você não pode adicionar essa cadeira junto com seu(s) pré-requisitos
-	at models.PlanoDeCurso.addCadeira(PlanoDeCurso.java:130) ~[na:na]
+Caused by: java.lang.Exception: Essa Cadeira não está alocada!
+	at models.PlanoDeCurso.removeCadeira(PlanoDeCurso.java:164) ~[na:na]
+	at controllers.Application.remCadeira(Application.java:49) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$7$$anonfun$apply$7.apply(routes_routing.scala:121) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$7$$anonfun$apply$7.apply(routes_routing.scala:121) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$7$$anon$2.invocation(Router.scala:183) ~[play_2.10.jar:2.2.1]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:377) ~[play_2.10.jar:2.2.1]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:56) ~[play_2.10.jar:2.2.1]
+	at play.core.j.JavaAction$$anon$3.apply(JavaAction.scala:91) ~[play_2.10.jar:2.2.1]
+	at play.core.j.JavaAction$$anon$3.apply(JavaAction.scala:90) ~[play_2.10.jar:2.2.1]
+	at play.core.j.FPromiseHelper$$anonfun$flatMap$1.apply(FPromiseHelper.scala:82) ~[play_2.10.jar:2.2.1]
+	at play.core.j.FPromiseHelper$$anonfun$flatMap$1.apply(FPromiseHelper.scala:82) ~[play_2.10.jar:2.2.1]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:278) ~[scala-library.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:274) ~[scala-library.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:29) [scala-library.jar:na]
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:37) ~[play_2.10.jar:2.2.1]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:42) ~[akka-actor_2.10.jar:2.2.0]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:386) ~[akka-actor_2.10.jar:2.2.0]
+	... 4 common frames omitted
+
+2014-02-27 15:04:49,680 - [ERROR] - from play in play-internal-execution-context-5 
+Cannot invoke the action, eventually got an error: java.lang.Exception: Essa Cadeira não está alocada!
+
+2014-02-27 15:04:49,685 - [ERROR] - from application in play-internal-execution-context-5 
+
+
+! @6hd0bb60k - Internal server error, for (POST) [/remCadeira/C%C3%A1%C4%BAculo%20I] ->
+
+play.api.Application$$anon$1: Execution exception[[Exception: Essa Cadeira não está alocada!]]
+	at play.api.Application$class.handleError(Application.scala:293) ~[play_2.10.jar:2.2.1]
+	at play.api.DefaultApplication.handleError(Application.scala:399) [play_2.10.jar:2.2.1]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$2$$anonfun$applyOrElse$3.apply(PlayDefaultUpstreamHandler.scala:261) [play_2.10.jar:2.2.1]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$2$$anonfun$applyOrElse$3.apply(PlayDefaultUpstreamHandler.scala:261) [play_2.10.jar:2.2.1]
+	at scala.Option.map(Option.scala:145) [scala-library.jar:na]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$2.applyOrElse(PlayDefaultUpstreamHandler.scala:261) [play_2.10.jar:2.2.1]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$2.applyOrElse(PlayDefaultUpstreamHandler.scala:257) [play_2.10.jar:2.2.1]
+	at scala.runtime.AbstractPartialFunction.apply(AbstractPartialFunction.scala:33) [scala-library.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:411) [scala-library.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:408) [scala-library.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:29) [scala-library.jar:na]
+	at play.api.libs.iteratee.Execution$$anon$1.execute(Execution.scala:43) [play-iteratees_2.10.jar:2.2.1]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:37) [scala-library.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:133) [scala-library.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:58) [scala-library.jar:na]
+	at scala.concurrent.Future$$anonfun$map$1.apply(Future.scala:254) [scala-library.jar:na]
+	at scala.concurrent.Future$$anonfun$map$1.apply(Future.scala:249) [scala-library.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:29) [scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) [scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library.jar:na]
+Caused by: java.lang.Exception: Essa Cadeira não está alocada!
+	at models.PlanoDeCurso.removeCadeira(PlanoDeCurso.java:164) ~[na:na]
+	at controllers.Application.remCadeira(Application.java:49) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$7$$anonfun$apply$7.apply(routes_routing.scala:121) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$7$$anonfun$apply$7.apply(routes_routing.scala:121) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$7$$anon$2.invocation(Router.scala:183) ~[play_2.10.jar:2.2.1]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:377) ~[play_2.10.jar:2.2.1]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:56) ~[play_2.10.jar:2.2.1]
+	at play.core.j.JavaAction$$anon$3.apply(JavaAction.scala:91) ~[play_2.10.jar:2.2.1]
+	at play.core.j.JavaAction$$anon$3.apply(JavaAction.scala:90) ~[play_2.10.jar:2.2.1]
+	at play.core.j.FPromiseHelper$$anonfun$flatMap$1.apply(FPromiseHelper.scala:82) ~[play_2.10.jar:2.2.1]
+	at play.core.j.FPromiseHelper$$anonfun$flatMap$1.apply(FPromiseHelper.scala:82) ~[play_2.10.jar:2.2.1]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:278) ~[scala-library.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:274) ~[scala-library.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:29) [scala-library.jar:na]
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:37) ~[play_2.10.jar:2.2.1]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:42) ~[akka-actor_2.10.jar:2.2.0]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:386) ~[akka-actor_2.10.jar:2.2.0]
+	... 4 common frames omitted
+
+2014-02-27 15:05:14,215 - [ERROR] - from play in play-internal-execution-context-9 
+Cannot invoke the action, eventually got an error: javax.transaction.NotSupportedException: limite de créditos ultrapassado!
+
+2014-02-27 15:05:14,221 - [ERROR] - from application in play-internal-execution-context-9 
+
+
+! @6hd0bcg8b - Internal server error, for (POST) [/addCadeira/Leitura%20e%20Prod.%20de%20Textos/6] ->
+
+play.api.Application$$anon$1: Execution exception[[NotSupportedException: limite de créditos ultrapassado!]]
+	at play.api.Application$class.handleError(Application.scala:293) ~[play_2.10.jar:2.2.1]
+	at play.api.DefaultApplication.handleError(Application.scala:399) [play_2.10.jar:2.2.1]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$2$$anonfun$applyOrElse$3.apply(PlayDefaultUpstreamHandler.scala:261) [play_2.10.jar:2.2.1]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$2$$anonfun$applyOrElse$3.apply(PlayDefaultUpstreamHandler.scala:261) [play_2.10.jar:2.2.1]
+	at scala.Option.map(Option.scala:145) [scala-library.jar:na]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$2.applyOrElse(PlayDefaultUpstreamHandler.scala:261) [play_2.10.jar:2.2.1]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$2.applyOrElse(PlayDefaultUpstreamHandler.scala:257) [play_2.10.jar:2.2.1]
+	at scala.runtime.AbstractPartialFunction.apply(AbstractPartialFunction.scala:33) [scala-library.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:411) [scala-library.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:408) [scala-library.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:29) [scala-library.jar:na]
+	at play.api.libs.iteratee.Execution$$anon$1.execute(Execution.scala:43) [play-iteratees_2.10.jar:2.2.1]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:37) [scala-library.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:133) [scala-library.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:58) [scala-library.jar:na]
+	at scala.concurrent.Future$$anonfun$map$1.apply(Future.scala:254) [scala-library.jar:na]
+	at scala.concurrent.Future$$anonfun$map$1.apply(Future.scala:249) [scala-library.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:29) [scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) [scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library.jar:na]
+Caused by: javax.transaction.NotSupportedException: limite de créditos ultrapassado!
+	at models.PlanoDeCurso.addCadeira(PlanoDeCurso.java:126) ~[na:na]
 	at controllers.Application.addCadeira(Application.java:38) ~[na:na]
 	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$6$$anonfun$apply$6.apply(routes_routing.scala:113) ~[na:na]
 	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$6$$anonfun$apply$6.apply(routes_routing.scala:113) ~[na:na]
