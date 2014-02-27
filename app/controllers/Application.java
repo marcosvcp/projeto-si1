@@ -1,6 +1,12 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import managers.GerenciadorDeCadeiras;
+import models.Cadeira;
 import models.PlanoDeCurso;
+import play.db.ebean.Model.Finder;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -10,20 +16,29 @@ public class Application extends Controller {
 
 	public static Result index() {
 		if (plano == null) {
-			plano = new PlanoDeCurso();
+			PlanoDeCurso planoBD = new Finder<Long, PlanoDeCurso>(Long.class,
+					PlanoDeCurso.class).findUnique();
+			if (planoBD != null) {
+				// se ja houver uma entidade salva no BD carrega ela
+				plano = planoBD;
+				List<Cadeira> cadeirasBD = new Finder<Long, Cadeira>(
+						Long.class, Cadeira.class).all();
+				plano.distribuiCadeiras(cadeirasBD);
+			} else {
+				plano = new PlanoDeCurso();
+				plano.save();
+				plano.distribuiCadeiras(new ArrayList<Cadeira>(
+						GerenciadorDeCadeiras.getMapaDeCadeiras().values()));
+				plano.update();
+			}
 		}
-		return ok(views.html.index.render(plano));
-	}
-
-	public static Result addPeriodo() {
-		plano.addPeriodo();
 		return ok(views.html.index.render(plano));
 	}
 
 	public static Result addCadeira(String cadeira, int periodo)
 			throws NumberFormatException, Exception {
 		plano.addCadeira(cadeira, periodo);
-
+		plano.save();
 		return redirect(routes.Application.index());
 	}
 

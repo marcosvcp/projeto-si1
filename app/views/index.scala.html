@@ -11,11 +11,6 @@
 @main("Plano de Curso") {
 	<center><h2>@Messages("planoDeCurso")</h2></center>
 	
-	<!-- BOTAO ADD PERIODO 
-    <span id="addPeriodo">
-		<a href="/addPeriodo">@Messages("addPeriodo")</a>
-	</span>
-	 -->
 	<h3 style="position:absolute;left:60%;top:50px;">Períodos Do Curso</h3>
 	<div id="periodos">
 	@for(periodo <- plano.getPeriodos()) {

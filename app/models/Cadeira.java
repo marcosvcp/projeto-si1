@@ -3,9 +3,13 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import play.db.ebean.Model;
 
@@ -21,6 +25,7 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	// TODO PADRÃO DE PROJETO: ALTA COESÃO - so haverá informações coerentes com
 	// a classe
 	@Id
@@ -29,9 +34,13 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 	private String nome;
 	private int creditos;
 
-	@OneToMany
-	private List<Cadeira> preRequisitos;
 	private int dificuldade; // dificuldade de 1 - 10
+
+	private int periodoDefault;
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "cadeira_requisito", joinColumns = { @JoinColumn(name = "fk_cadeira") }, inverseJoinColumns = { @JoinColumn(name = "fk_requisito") })
+	private List<Cadeira> preRequisitos;
 
 	// Construtor Default
 	public Cadeira() {
@@ -132,5 +141,13 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 	@Override
 	public int compareTo(Cadeira c) {
 		return getNome().compareTo(c.getNome());
+	}
+
+	public int getPeriodoDefault() {
+		return periodoDefault;
+	}
+
+	public void setPeriodoDefault(int periodoDefault) {
+		this.periodoDefault = periodoDefault;
 	}
 }

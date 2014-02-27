@@ -7,7 +7,7 @@
 		revision="1.0-SNAPSHOT"
 		conf="test"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool"
-		date="20140222121038"/>
+		date="20140226225316"/>
 	<dependencies>
 		<module organisation="com.typesafe.play" name="play-cache_2.10">
 			<revision name="2.2.1" status="release" pubdate="20131030164410" resolver="sbt-chain" artresolver="sbt-chain" downloaded="false" searched="false" default="false" conf="default(compile), compile" position="61">
@@ -1381,13 +1381,13 @@
 			</revision>
 		</module>
 		<module organisation="postgresql" name="postgresql">
-			<revision name="9.1-901-1.jdbc4" status="release" pubdate="20111218215532" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://jdbc.postgresql.org" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="1">
+			<revision name="8.4-702.jdbc4" status="release" pubdate="20101004051834" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://jdbc.postgresql.org" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="1">
 				<license name="BSD License" url="http://jdbc.postgresql.org/license.html"/>
-				<metadata-artifact status="no" details="" size="2351" time="0" location="/home/marcos/Documents/play/framework/../repository/cache/postgresql/postgresql/ivy-9.1-901-1.jdbc4.xml" searched="false" origin-is-local="false" origin-location="http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.pom"/>
-				<caller organisation="default" name="projeto-si1_2.10" conf="test, compile, runtime" rev="9.1-901-1.jdbc4" rev-constraint-default="9.1-901-1.jdbc4" rev-constraint-dynamic="9.1-901-1.jdbc4" callerrev="1.0-SNAPSHOT"/>
+				<metadata-artifact status="no" details="" size="2349" time="0" location="/home/marcos/Documents/play/framework/../repository/cache/postgresql/postgresql/ivy-8.4-702.jdbc4.xml" searched="false" origin-is-local="false" origin-location="http://repo1.maven.org/maven2/postgresql/postgresql/8.4-702.jdbc4/postgresql-8.4-702.jdbc4.pom"/>
+				<caller organisation="default" name="projeto-si1_2.10" conf="test, compile, runtime" rev="8.4-702.jdbc4" rev-constraint-default="8.4-702.jdbc4" rev-constraint-dynamic="8.4-702.jdbc4" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="postgresql" type="jar" ext="jar" status="no" details="" size="551290" time="0" location="/home/marcos/Documents/play/framework/../repository/cache/postgresql/postgresql/jars/postgresql-9.1-901-1.jdbc4.jar">
-						<origin-location is-local="false" location="http://repo1.maven.org/maven2/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.jar"/>
+					<artifact name="postgresql" type="jar" ext="jar" status="no" details="" size="539510" time="0" location="/home/marcos/Documents/play/framework/../repository/cache/postgresql/postgresql/jars/postgresql-8.4-702.jdbc4.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/postgresql/postgresql/8.4-702.jdbc4/postgresql-8.4-702.jdbc4.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>

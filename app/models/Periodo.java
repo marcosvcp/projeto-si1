@@ -4,7 +4,14 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import managers.GerenciadorDeCadeiras;
 import play.db.ebean.Model;
@@ -15,10 +22,14 @@ import play.db.ebean.Model;
 @Entity
 public class Periodo extends Model {
 
+	@Id
+	private Long id;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "periodo_cadeira", joinColumns = { @JoinColumn(name = "fk_periodo") }, inverseJoinColumns = { @JoinColumn(name = "fk_cadeira") })
 	private Map<String, Cadeira> cadeiras;
 	private int numeroDoPeriodo;
 

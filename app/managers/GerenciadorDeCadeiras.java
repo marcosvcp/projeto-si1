@@ -71,6 +71,7 @@ public class GerenciadorDeCadeiras {
 					.getTextContent()));
 		}
 		criandoCadeira.setId(Long.valueOf(idCadeira));
+		//criandoCadeira.setPeriodoDefault(periodo);
 		cadeirasPorId.put(idCadeira, criandoCadeira);
 		if (periodo == PlanoDeCurso.PRIMEIRO_PERIODO) {
 			cadeiraPrimeiro.put(criandoCadeira.getNome(), criandoCadeira);

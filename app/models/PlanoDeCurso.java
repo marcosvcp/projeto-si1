@@ -6,8 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 import javax.transaction.NotSupportedException;
 
@@ -25,9 +30,12 @@ public class PlanoDeCurso extends Model {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	private Long id;
 	// TODO PADRÃO DE PROJETO: ALTA COESÃO - so haverá informações coerentes com
 	// a classe
-	@OneToMany
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "plano_periodo", joinColumns = { @JoinColumn(name = "fk_plano") }, inverseJoinColumns = { @JoinColumn(name = "fk_periodo") })
 	private List<Periodo> periodos;
 
 	@Transient
@@ -44,20 +52,11 @@ public class PlanoDeCurso extends Model {
 		// O plano de curso ficou responsável por criar os períodos.
 		this.periodos = new ArrayList<Periodo>();
 		this.periodos.add(new Periodo(PRIMEIRO_PERIODO));
-		this.mapaDeCadeiras = GerenciadorDeCadeiras.getMapaDeCadeiras();
+		distribuiCadeiras(new ArrayList<Cadeira>(GerenciadorDeCadeiras
+				.getMapaDeCadeiras().values()));
 		for (int i = 2; i <= 10; i++) {
 			periodos.add(new Periodo(i));
 		}
-	}
-
-	/**
-	 * Adiciona um periodo à lista de períodos, de acordo com o tamanho da
-	 * lista.
-	 * 
-	 * Seguindo o padrão creator.
-	 */
-	public void addPeriodo() {
-		this.periodos.add(new Periodo(this.periodos.size() + 1));
 	}
 
 	/**
@@ -210,4 +209,29 @@ public class PlanoDeCurso extends Model {
 		return false;
 	}
 
+	/**
+	 * Distribui as cadeiras recém-retiradas do xml e adiciona em seus
+	 * respectivos períodos
+	 */
+	public void distribuiCadeiras() {
+		for (Cadeira c : mapaDeCadeiras.values()) {
+			if (c.getPeriodoDefault() != 0) {
+				Periodo p = getPeriodo(c.getPeriodoDefault());
+				try {
+					p.addCadeira(c);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public void distribuiCadeiras(List<Cadeira> cadeiras) {
+		Map<String, Cadeira> mapa = new HashMap<String, Cadeira>();
+		for (Cadeira c : cadeiras) {
+			mapa.put(c.getNome(), c);
+		}
+		mapaDeCadeiras = mapa;
+		distribuiCadeiras();
+	}
 }
