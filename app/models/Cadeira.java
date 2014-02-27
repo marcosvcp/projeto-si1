@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -13,6 +14,7 @@ import com.google.common.base.Objects;
 /**
  * Entidade que representa uma Cadeira.
  */
+@Entity
 public class Cadeira extends Model implements Comparable<Cadeira> {
 
 	/**

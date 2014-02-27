@@ -6,20 +6,37 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.transaction.NotSupportedException;
 
 import managers.GerenciadorDeCadeiras;
+import play.db.ebean.Model;
 
 /**
  * Entidade que representa o Plano de Curso do sistema.
  */
-public class PlanoDeCurso {
+@Entity
+public class PlanoDeCurso extends Model {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	// TODO PADRÃO DE PROJETO: ALTA COESÃO - so haverá informações coerentes com
 	// a classe
+	@OneToMany
 	private List<Periodo> periodos;
+
+	@Transient
 	public Map<String, Cadeira> mapaDeCadeiras;
+
+	@Transient
 	public static final int PRIMEIRO_PERIODO = 1;
+
+	@Transient
 	public static final int MAXIMO_CREDITOS = 28;
 
 	public PlanoDeCurso() {
@@ -28,7 +45,7 @@ public class PlanoDeCurso {
 		this.periodos = new ArrayList<Periodo>();
 		this.periodos.add(new Periodo(PRIMEIRO_PERIODO));
 		this.mapaDeCadeiras = GerenciadorDeCadeiras.getMapaDeCadeiras();
-		for (int i = 2; i <= 10; i++){
+		for (int i = 2; i <= 10; i++) {
 			periodos.add(new Periodo(i));
 		}
 	}
@@ -81,12 +98,12 @@ public class PlanoDeCurso {
 		}
 		return disponiveis;
 	}
-	
+
 	/**
 	 * Retorna a lista de cadeira disponíveis para alocação ordenadas em ordem
 	 * alfabética.
 	 */
-	public List<Cadeira> getCadeiraDispniveisOrdenadas(){
+	public List<Cadeira> getCadeiraDispniveisOrdenadas() {
 		List<Cadeira> cadeirasOrdenadas = new ArrayList<Cadeira>();
 		cadeirasOrdenadas.addAll(getMapCadeirasDisponiveis().values());
 		Collections.sort(cadeirasOrdenadas);

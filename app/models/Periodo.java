@@ -4,13 +4,21 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.Entity;
+
 import managers.GerenciadorDeCadeiras;
+import play.db.ebean.Model;
 
 /**
  * Entidade que representa um período
  */
-public class Periodo {
+@Entity
+public class Periodo extends Model {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Map<String, Cadeira> cadeiras;
 	private int numeroDoPeriodo;
 
