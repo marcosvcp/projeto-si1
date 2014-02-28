@@ -1,10 +1,9 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import javax.annotation.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +14,8 @@ import javax.persistence.ManyToMany;
 
 import managers.GerenciadorDeCadeiras;
 import play.db.ebean.Model;
+
+import com.google.common.base.Objects;
 
 /**
  * Entidade que representa um período
@@ -28,17 +29,23 @@ public class Periodo extends Model {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "periodo_cadeira", joinColumns = { @JoinColumn(name = "fk_periodo") }, inverseJoinColumns = { @JoinColumn(name = "fk_cadeira") })
-	private Map<String, Cadeira> cadeiras;
+	private List<Cadeira> cadeiras;
+	
 	private int numeroDoPeriodo;
 
+	public Periodo() {
+		cadeiras = new ArrayList<Cadeira>();
+	}
 	public Periodo(int numeroDoPeriodo) {
 		this.numeroDoPeriodo = numeroDoPeriodo;
-		cadeiras = new HashMap<String, Cadeira>();
-		for(Cadeira cadeira: GerenciadorDeCadeiras.getMapaDeCadeiras().values()) {
-			if(cadeira.getPeriodoDefault() == numeroDoPeriodo) {
-				cadeiras.put(cadeira.getNome(), cadeira);
+		cadeiras = new ArrayList<Cadeira>();
+		for (Cadeira cadeira : GerenciadorDeCadeiras.getMapaDeCadeiras()
+				.values()) {
+			if (cadeira.getPeriodoDefault() == numeroDoPeriodo) {
+				cadeiras.add(cadeira);
 			}
 		}
 	}
@@ -48,23 +55,15 @@ public class Periodo extends Model {
 	}
 
 	public Collection<Cadeira> getCadeiras() {
-		return cadeiras.values();
-	}
-
-	public Map<String, Cadeira> getMapCadeiras() {
 		return cadeiras;
 	}
 
-	public Cadeira getCadeira(String cadeira) {
-		return cadeiras.get(cadeira);
-	}
-
 	public void addCadeira(Cadeira cadeira) {
-		cadeiras.put(cadeira.getNome(), cadeira);
+		cadeiras.add(cadeira);
 	}
 
 	public void removerCadeira(Cadeira cadeira) {
-		cadeiras.remove(cadeira.getNome());
+		cadeiras.remove(cadeira);
 	}
 
 	public int getDificuldadeTotal() {
@@ -82,10 +81,27 @@ public class Periodo extends Model {
 	 */
 	public int getCreditos() {
 		int sum = 0;
-		for (Cadeira c : cadeiras.values()) {
+		for (Cadeira c : cadeiras) {
 			sum += c.getCreditos();
 		}
 		return sum;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(numeroDoPeriodo);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Periodo other = (Periodo) obj;
+		return Objects.equal(this.numeroDoPeriodo, other.getNumero());
 	}
 
 }

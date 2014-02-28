@@ -44,7 +44,7 @@ function drop(ev, e){
 		});
 }
 
-$(document).ready(function(){
+/**$(document).ready(function(){
 	$(".alocadas").hover(function(){
 		  $(this).css("opacity", "0.7")
 		  $(this).children("span").addClass("glyphicon glyphicon-remove");
@@ -55,7 +55,7 @@ $(document).ready(function(){
 		  $(this).children("span").css("visibility", "hidden")
 		});
 
-	});
+	}); **/
 
 function remCadeira(cadeira, flagRequisitos){
 	var r = true;

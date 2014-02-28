@@ -1,7 +1,6 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,15 +47,19 @@ public class PlanoDeCurso extends Model {
 	public static final int MAXIMO_CREDITOS = 28;
 
 	public PlanoDeCurso() {
+		mapaDeCadeiras = GerenciadorDeCadeiras.getMapaDeCadeiras();
+	}
+
+	public PlanoDeCurso(boolean iniciaPeriodos) {
+		this();
 		// TODO Responsabilidade Atribuita seguindo o padrão Creator
 		// O plano de curso ficou responsável por criar os períodos.
-		mapaDeCadeiras = GerenciadorDeCadeiras.getMapaDeCadeiras();
-		this.periodos = new ArrayList<Periodo>();
-		for (int i = 1; i < 11; i++) {
-			this.periodos.add(new Periodo(i));
+		if (iniciaPeriodos) {
+			this.setPeriodos(new ArrayList<Periodo>());
+			for (int i = 1; i < 11; i++) {
+				this.getPeriodos().add(new Periodo(i));
+			}
 		}
-		// distribuiCadeiras(new ArrayList<Cadeira>(GerenciadorDeCadeiras
-		// .getMapaDeCadeiras().values()));
 	}
 
 	/**
@@ -66,22 +69,11 @@ public class PlanoDeCurso extends Model {
 	 *            número relativo ao periodo 1,2,3...
 	 */
 	public Periodo getPeriodo(int numPeriodo) {
-		return this.periodos.get(numPeriodo);
+		return this.getPeriodos().get(numPeriodo);
 	}
 
 	public List<Periodo> getPeriodos() {
 		return this.periodos;
-	}
-
-	/**
-	 * Retorna o Map de cadeiras já alocadas no plano de curso.
-	 */
-	public Map<String, Cadeira> getMapCadeirasAlocadas() {
-		Map<String, Cadeira> alocadas = new HashMap<String, Cadeira>();
-		for (Periodo periodo : periodos) {
-			alocadas.putAll(periodo.getMapCadeiras());
-		}
-		return alocadas;
 	}
 
 	public boolean isAlocadaNoLugarCorreto(Cadeira c, Periodo p) {
@@ -89,42 +81,19 @@ public class PlanoDeCurso extends Model {
 	}
 
 	/**
-	 * Retorna o Map de cadeiras ainda não alocadas no plano de curso.
-	 */
-	public Map<String, Cadeira> getMapCadeirasDisponiveis() {
-		Map<String, Cadeira> disponiveis = new HashMap<String, Cadeira>();
-		Map<String, Cadeira> alocadas = getMapCadeirasAlocadas();
-		for (String nomeCadeira : mapaDeCadeiras.keySet()) {
-			if (!alocadas.containsKey(nomeCadeira)) {
-				disponiveis.put(nomeCadeira, mapaDeCadeiras.get(nomeCadeira));
-			}
-		}
-		return disponiveis;
-	}
-
-	/**
-	 * Retorna a lista de cadeira disponíveis para alocação ordenadas em ordem
-	 * alfabética.
-	 */
-	public List<Cadeira> getCadeiraDispniveisOrdenadas() {
-		List<Cadeira> cadeirasOrdenadas = new ArrayList<Cadeira>();
-		cadeirasOrdenadas.addAll(getMapCadeirasDisponiveis().values());
-		Collections.sort(cadeirasOrdenadas);
-		return cadeirasOrdenadas;
-	}
-
-	/**
 	 * Adiciona uma {@code cadeira} ao {@code periodo}
 	 * 
 	 * @throws Exception
 	 */
-	public void addCadeira(String cadeiraNome, int periodo) throws Exception {
+	public void transfereCadeira(String cadeiraNome, int periodo)
+			throws Exception {
 		// TODO PADRÃO DE PROJETO: CONTROLLER - para manter o baixo acoplamento
 		// essa classe vai ser a responsável por adicionar um cadeira ao periodo
 		Cadeira cadeira = mapaDeCadeiras.get(cadeiraNome);
 		if (getPeriodo(periodo).getCreditos() + cadeira.getCreditos() > MAXIMO_CREDITOS) {
 			throw new NotSupportedException("limite de créditos ultrapassado!");
 		}
+		removeCadeira(cadeira);
 		getPeriodo(periodo).addCadeira(cadeira);
 	}
 
@@ -132,16 +101,10 @@ public class PlanoDeCurso extends Model {
 	 * Verifica se os pre-requisitos de uma certa cadeira já foram concluídos.
 	 */
 	private boolean verificaPreRequisitos(Cadeira cadeira, int periodo) {
-		Map<String, Cadeira> alocadas = getMapCadeirasAlocadas();
-		for (Cadeira cadeiraPeriodo : cadeira.getPreRequisitos()) {
-			if (!alocadas.containsKey(cadeiraPeriodo.getNome())) {
-				return false;
-			}
-		}
 		// verifica se a cadeira tem algum pre-requisito em um periodo posterior
 		// ao que está sendo adicionado
-		for (int i = periodo; i < periodos.size(); i++) {
-			for (Cadeira c : periodos.get(i).getCadeiras()) {
+		for (int i = periodo; i < getPeriodos().size(); i++) {
+			for (Cadeira c : getPeriodos().get(i).getCadeiras()) {
 				if (cadeira.getPreRequisitos().contains(c)) {
 					return false;
 				}
@@ -154,21 +117,17 @@ public class PlanoDeCurso extends Model {
 	 * Remove o período e todos os posteriores
 	 */
 	public void removePeriodo(int periodo) {
-		this.periodos = periodos.subList(0, periodo - 1);
+		this.setPeriodos(getPeriodos().subList(0, periodo - 1));
 	}
 
-	public void removeCadeira(String cadeira) throws Exception {
+	public void removeCadeira(Cadeira cadeira) throws Exception {
 		// TODO PADRÃO DE PROJETO: CONTROLLER - para manter o baixo acoplamento
 		// essa classe vai ser a responsável por remover uma cadeira ao periodo
-		if (getMapCadeirasAlocadas().get(cadeira) == null) {
-			throw new Exception("Essa Cadeira não está alocada!");
-		}
-		Cadeira removida = getMapCadeirasAlocadas().get(cadeira);
 		// procura pela cadeira entre os periodos.
-		for (Periodo periodo : periodos) {
+		for (Periodo periodo : getPeriodos()) {
 			// remove a cadeira
-			if (periodo.getMapCadeiras().get(cadeira) != null) {
-				periodo.removerCadeira(removida);
+			if (periodo.getCadeiras().contains(cadeira)) {
+				periodo.removerCadeira(cadeira);
 			}
 		}
 	}
@@ -180,7 +139,7 @@ public class PlanoDeCurso extends Model {
 	public boolean isPreRequisito(String cad) {
 		Cadeira cadeira = mapaDeCadeiras.get(cad);
 		// procura pela cadeira entre os periodos.
-		for (Periodo periodo : periodos) {
+		for (Periodo periodo : getPeriodos()) {
 			// verifica as cadeiras que tem a cadeira a ser removida como
 			// pre-requisito
 			for (Cadeira cadeiraDoPeriodo : periodo.getCadeiras()) {
@@ -199,12 +158,7 @@ public class PlanoDeCurso extends Model {
 	public void distribuiCadeiras() {
 		for (Cadeira c : mapaDeCadeiras.values()) {
 			Periodo p = getPeriodo(c.getPeriodoDefault());
-			try {
-				System.out.println("QUEBROU AQUI " + c);
-				p.addCadeira(c);
-			} catch (Exception e) {
-				System.out.println("QUEBROU AQUI");
-			}
+			p.addCadeira(c);
 		}
 	}
 
@@ -214,6 +168,10 @@ public class PlanoDeCurso extends Model {
 			mapa.put(c.getNome(), c);
 		}
 		mapaDeCadeiras = mapa;
-		distribuiCadeiras();
+		// distribuiCadeiras();
+	}
+
+	public void setPeriodos(List<Periodo> periodos) {
+		this.periodos = periodos;
 	}
 }

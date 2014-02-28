@@ -32,9 +32,3 @@ overflow-y:auto;overflow-x:hidden; margin-left: 5px;border:4px solid #fff;border
 .periodoActive{border:4px solid rgba(0, 255, 0, .3);}
 .periodoDrag{opacity:0.5; }
 .separator{width:1200px;border:1px solid;opacity:0.4;}
-.close{position:relative;float:right;right:10px;top:10px;z-index:1;}
-.close:hover{cursor: pointer;}
-.remover{width:30px;height:30px;border-radius:30px;position:relative;
-background-color:#f22;opacity:0.8;visibility:visible;z-index:10;}
-.hidden{visibility:hidden;}
-.nome{position:absolute;left:0px;width:190px; font-size:13px;text-align:center;z-index:-2;}

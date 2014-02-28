@@ -32,6 +32,7 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 	private Long id;
 
 	private String nome;
+
 	private int creditos;
 
 	private int dificuldade; // dificuldade de 1 - 10
@@ -79,6 +80,9 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 		return dificuldade;
 	}
 
+	public static Finder<Long, Cadeira> find = new Finder<Long, Cadeira>(
+			Long.class, Cadeira.class);
+
 	public List<Cadeira> getPreRequisitos() {
 		return preRequisitos;
 	}
@@ -103,8 +107,7 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(getId(), getNome(), creditos,
-				getPreRequisitos());
+		return Objects.hashCode(getNome(), creditos, getPreRequisitos());
 	}
 
 	@Override
@@ -149,5 +152,10 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 
 	public void setPeriodoDefault(int periodoDefault) {
 		this.periodoDefault = periodoDefault;
+	}
+
+	@Override
+	public String toString() {
+		return getNome();
 	}
 }

@@ -1,9 +1,7 @@
 package controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import managers.GerenciadorDeCadeiras;
 import models.Cadeira;
 import models.PlanoDeCurso;
 import play.db.ebean.Model.Finder;
@@ -25,7 +23,7 @@ public class Application extends Controller {
 						Long.class, Cadeira.class).all();
 				plano.distribuiCadeiras(cadeirasBD);
 			} else {
-				plano = new PlanoDeCurso();
+				plano = new PlanoDeCurso(true);
 				plano.save();
 				plano.update();
 			}
@@ -35,18 +33,9 @@ public class Application extends Controller {
 
 	public static Result addCadeira(String cadeira, int periodo)
 			throws NumberFormatException, Exception {
-		plano.addCadeira(cadeira, periodo);
+		plano.transfereCadeira(cadeira, periodo);
+		plano.update();
 		plano.save();
-		return redirect(routes.Application.index());
-	}
-
-	public static Result remPeriodo(int periodo) {
-		plano.removePeriodo(periodo);
-		return redirect(routes.Application.index());
-	}
-
-	public static Result remCadeira(String cadeira) throws Exception {
-		plano.removeCadeira(cadeira);
 		return redirect(routes.Application.index());
 	}
 }

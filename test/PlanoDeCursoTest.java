@@ -27,7 +27,7 @@ public class PlanoDeCursoTest {
 		plano.addPeriodo();
 
 		try {
-			plano.addCadeira("Programação II", 2);
+			plano.transfereCadeira("Programação II", 2);
 		} catch (Exception e) {
 			Assert.fail(e.getMessage());
 		}
@@ -52,8 +52,8 @@ public class PlanoDeCursoTest {
 		PlanoDeCurso plano = new PlanoDeCurso();
 		plano.addPeriodo(); // periodo 11
 		plano.addPeriodo(); // periodo 12
-		plano.addCadeira("Cálculo II", 2);
-		plano.addCadeira("Probabilidade e Est.", 3);
+		plano.transfereCadeira("Cálculo II", 2);
+		plano.transfereCadeira("Probabilidade e Est.", 3);
 
 		Assert.assertEquals(true, plano.isPreRequisito("Cálculo II"));
 		Assert.assertEquals(8, plano.getMapCadeirasAlocadas().size());
@@ -74,7 +74,7 @@ public class PlanoDeCursoTest {
 		PlanoDeCurso plano = new PlanoDeCurso();
 
 		plano.addPeriodo(); // add periodo (2º periodo)
-		plano.addCadeira("Programação II", 2);
+		plano.transfereCadeira("Programação II", 2);
 
 		Assert.assertEquals(4, plano.getPeriodo(2).getCreditos());
 	}
@@ -111,7 +111,7 @@ public class PlanoDeCursoTest {
 
 		plano.addPeriodo(); // add periodo (2º periodo)
 		try {
-			plano.addCadeira("Estrutura de Dados", 2); // cadeira e periodo
+			plano.transfereCadeira("Estrutura de Dados", 2); // cadeira e periodo
 		} catch (Exception e) {
 			Assert.assertEquals("Pre Requisito: Programação II não concluido",
 					e.getMessage());
@@ -123,7 +123,7 @@ public class PlanoDeCursoTest {
 		PlanoDeCurso plano = new PlanoDeCurso();
 		plano.addPeriodo();
 		try {
-			plano.addCadeira("Algebra Linear", 2);
+			plano.transfereCadeira("Algebra Linear", 2);
 		} catch (Exception e) {
 			Assert.fail("Não devia ter falhado");
 		}
@@ -141,10 +141,10 @@ public class PlanoDeCursoTest {
 
 		plano.addPeriodo();
 		try {
-			plano.addCadeira("Algebra Linear", 2); // dificuldade 9
+			plano.transfereCadeira("Algebra Linear", 2); // dificuldade 9
 			Assert.assertEquals(9, plano.getPeriodo(2).getDificuldadeTotal());
 
-			plano.addCadeira("Cálculo II", 2); // dificuldade 7
+			plano.transfereCadeira("Cálculo II", 2); // dificuldade 7
 			Assert.assertEquals(16, plano.getPeriodo(2).getDificuldadeTotal());
 		} catch (Exception e) {
 
@@ -160,13 +160,13 @@ public class PlanoDeCursoTest {
 		plano.addPeriodo(); // periodo 3
 
 		try {
-			plano.addCadeira("Cálculo II", 3);
+			plano.transfereCadeira("Cálculo II", 3);
 		} catch (Exception e) {
 			Assert.fail(e.getMessage());
 		}
 
 		try {
-			plano.addCadeira("Probabilidade e Est.", 2);
+			plano.transfereCadeira("Probabilidade e Est.", 2);
 			Assert.fail("Devia ter falhado");
 			// cálculo 2 é seu pre-requisito
 		} catch (Exception e) {
