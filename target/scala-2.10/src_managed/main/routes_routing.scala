@@ -1,6 +1,6 @@
-// @SOURCE:/home/marcos/Documents/projeto-si1/conf/routes
-// @HASH:6642a619be2be74461d8a59dbed137ab4aee4f95
-// @DATE:Sat Feb 22 12:10:53 BRT 2014
+// @SOURCE:D:/Universidade/2013.2/PSI1/conf/routes
+// @HASH:7697d15de40578e760793c1fa428ed0ec9de3f35
+// @DATE:Fri Feb 28 16:19:04 GMT-03:00 2014
 
 
 import play.core._
@@ -37,29 +37,9 @@ private[this] lazy val controllers_Assets_at1 = Route("GET", PathPattern(List(St
         
 
 // @LINE:11
-private[this] lazy val controllers_Application_addPeriodo2 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("addPeriodo"))))
+private[this] lazy val controllers_Application_addCadeira2 = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("addCadeira/"),DynamicPart("cadeira", """[^/]+""",true),StaticPart("/"),DynamicPart("periodo", """[^/]+""",true))))
         
-
-// @LINE:12
-private[this] lazy val controllers_Application_addPeriodo3 = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("addPeriodo"))))
-        
-
-// @LINE:13
-private[this] lazy val controllers_Application_remPeriodo4 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("remPeriodo/"),DynamicPart("periodo", """[^/]+""",true))))
-        
-
-// @LINE:14
-private[this] lazy val controllers_Application_addCadeira5 = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("addCadeira/"),DynamicPart("cadeira", """[^/]+""",true),StaticPart("/"),DynamicPart("periodo", """[^/]+""",true))))
-        
-
-// @LINE:15
-private[this] lazy val controllers_Application_remCadeira6 = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("remCadeira/"),DynamicPart("cadeira", """[^/]+""",true))))
-        
-
-// @LINE:16
-private[this] lazy val controllers_Application_remCadeira7 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("remCadeira/"),DynamicPart("cadeira", """[^/]+""",true))))
-        
-def documentation = List(("""GET""", prefix,"""controllers.Application.index()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """addPeriodo""","""controllers.Application.addPeriodo()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """addPeriodo""","""controllers.Application.addPeriodo()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """remPeriodo/$periodo<[^/]+>""","""controllers.Application.remPeriodo(periodo:Int)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """addCadeira/$cadeira<[^/]+>/$periodo<[^/]+>""","""controllers.Application.addCadeira(cadeira:String, periodo:Int)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """remCadeira/$cadeira<[^/]+>""","""controllers.Application.remCadeira(cadeira:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """remCadeira/$cadeira<[^/]+>""","""controllers.Application.remCadeira(cadeira:String)""")).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
+def documentation = List(("""GET""", prefix,"""controllers.Application.index()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """addCadeira/$cadeira<[^/]+>/$periodo<[^/]+>""","""controllers.Application.addCadeira(cadeira:String, periodo:Int)""")).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
   case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
   case l => s ++ l.asInstanceOf[List[(String,String,String)]] 
 }}
@@ -84,49 +64,9 @@ case controllers_Assets_at1(params) => {
         
 
 // @LINE:11
-case controllers_Application_addPeriodo2(params) => {
-   call { 
-        invokeHandler(controllers.Application.addPeriodo(), HandlerDef(this, "controllers.Application", "addPeriodo", Nil,"GET", """""", Routes.prefix + """addPeriodo"""))
-   }
-}
-        
-
-// @LINE:12
-case controllers_Application_addPeriodo3(params) => {
-   call { 
-        invokeHandler(controllers.Application.addPeriodo(), HandlerDef(this, "controllers.Application", "addPeriodo", Nil,"POST", """""", Routes.prefix + """addPeriodo"""))
-   }
-}
-        
-
-// @LINE:13
-case controllers_Application_remPeriodo4(params) => {
-   call(params.fromPath[Int]("periodo", None)) { (periodo) =>
-        invokeHandler(controllers.Application.remPeriodo(periodo), HandlerDef(this, "controllers.Application", "remPeriodo", Seq(classOf[Int]),"GET", """""", Routes.prefix + """remPeriodo/$periodo<[^/]+>"""))
-   }
-}
-        
-
-// @LINE:14
-case controllers_Application_addCadeira5(params) => {
+case controllers_Application_addCadeira2(params) => {
    call(params.fromPath[String]("cadeira", None), params.fromPath[Int]("periodo", None)) { (cadeira, periodo) =>
         invokeHandler(controllers.Application.addCadeira(cadeira, periodo), HandlerDef(this, "controllers.Application", "addCadeira", Seq(classOf[String], classOf[Int]),"POST", """""", Routes.prefix + """addCadeira/$cadeira<[^/]+>/$periodo<[^/]+>"""))
-   }
-}
-        
-
-// @LINE:15
-case controllers_Application_remCadeira6(params) => {
-   call(params.fromPath[String]("cadeira", None)) { (cadeira) =>
-        invokeHandler(controllers.Application.remCadeira(cadeira), HandlerDef(this, "controllers.Application", "remCadeira", Seq(classOf[String]),"POST", """""", Routes.prefix + """remCadeira/$cadeira<[^/]+>"""))
-   }
-}
-        
-
-// @LINE:16
-case controllers_Application_remCadeira7(params) => {
-   call(params.fromPath[String]("cadeira", None)) { (cadeira) =>
-        invokeHandler(controllers.Application.remCadeira(cadeira), HandlerDef(this, "controllers.Application", "remCadeira", Seq(classOf[String]),"GET", """""", Routes.prefix + """remCadeira/$cadeira<[^/]+>"""))
    }
 }
         

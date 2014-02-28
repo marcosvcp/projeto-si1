@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 import javax.transaction.NotSupportedException;
 
 import managers.GerenciadorDeCadeiras;
+import models.exceptions.LimiteDeCreditosUltrapassadoException;
 import play.db.ebean.Model;
 
 /**
@@ -91,7 +92,7 @@ public class PlanoDeCurso extends Model {
 		// essa classe vai ser a responsável por adicionar um cadeira ao periodo
 		Cadeira cadeira = mapaDeCadeiras.get(cadeiraNome);
 		if (getPeriodo(periodo).getCreditos() + cadeira.getCreditos() > MAXIMO_CREDITOS) {
-			throw new NotSupportedException("limite de créditos ultrapassado!");
+			throw new LimiteDeCreditosUltrapassadoException("limite de créditos ultrapassado!");
 		}
 		removeCadeira(cadeira);
 		getPeriodo(periodo).addCadeira(cadeira);
