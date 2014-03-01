@@ -27,7 +27,7 @@ function drop(ev, e){
 	var data=ev.dataTransfer.getData("Text");
 	$.ajax({
 		  type: "POST",
-		  url: "/addCadeira/"+data+"/"+(e.id-1),
+		  url: "/addCadeira/"+data+"/"+(e.id),
 		  data: "",
 		  success: function(){
 		        alert( "Cadeira Adicionada");

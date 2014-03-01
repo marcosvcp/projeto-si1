@@ -7,7 +7,8 @@
 	<classpathentry kind="lib" path="lib/guava-15.0.jar"/>
 	<classpathentry kind="lib" path="lib/gson-2.2.4-javadoc.jar"/>
 	<classpathentry kind="lib" path="lib/gson-2.2.4.jar"/>
-	<classpathentry kind="lib" path="/home/marcos/Documents/projeto-si1/target/scala-2.10/classes_managed"/>
+	<classpathentry kind="lib" path="/home/marcos/Documents/si1-project/target/scala-2.10/classes_managed"/>
+	<classpathentry kind="lib" path="/home/marcos/Documents/play/repository/cache/postgresql/postgresql/jars/postgresql-8.4-702.jdbc4.jar"/>
 	<classpathentry kind="lib" path="/home/marcos/Documents/play/repository/local/com.typesafe.play/play-java-jdbc_2.10/2.2.1/jars/play-java-jdbc_2.10.jar"/>
 	<classpathentry kind="lib" path="/home/marcos/Documents/play/repository/local/com.typesafe.play/play-jdbc_2.10/2.2.1/jars/play-jdbc_2.10.jar"/>
 	<classpathentry kind="lib" path="/home/marcos/Documents/play/repository/local/com.typesafe.play/play_2.10/2.2.1/jars/play_2.10.jar"/>

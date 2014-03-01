@@ -5,16 +5,17 @@
 
 create table cadeira (
   id                        bigint not null,
-  nome                      varchar(255),
+  nome                      varchar(255) not null,
   creditos                  integer,
   dificuldade               integer,
   periodo_default           integer,
+  constraint uq_cadeira_nome unique (nome),
   constraint pk_cadeira primary key (id))
 ;
 
 create table periodo (
   id                        bigint not null,
-  numero_do_periodo         integer,
+  numero                    integer,
   constraint pk_periodo primary key (id))
 ;
 
@@ -24,22 +25,22 @@ create table plano_de_curso (
 ;
 
 
-create table cadeira_requisito (
-  fk_cadeira                     bigint not null,
-  fk_requisito                   bigint not null,
-  constraint pk_cadeira_requisito primary key (fk_cadeira, fk_requisito))
+create table CADEIRA_REQUISITO (
+  CD_CADEIRA_1                   bigint not null,
+  CD_CADEIRA_2                   bigint not null,
+  constraint pk_CADEIRA_REQUISITO primary key (CD_CADEIRA_1, CD_CADEIRA_2))
 ;
 
-create table periodo_cadeira (
-  fk_periodo                     bigint not null,
-  fk_cadeira                     bigint not null,
-  constraint pk_periodo_cadeira primary key (fk_periodo, fk_cadeira))
+create table TB_PERIODO_CADEIRA (
+  CD_PERIODO_CADEIRA             bigint not null,
+  CD_CADEIRA                     bigint not null,
+  constraint pk_TB_PERIODO_CADEIRA primary key (CD_PERIODO_CADEIRA, CD_CADEIRA))
 ;
 
-create table plano_periodo (
-  fk_plano                       bigint not null,
-  fk_periodo                     bigint not null,
-  constraint pk_plano_periodo primary key (fk_plano, fk_periodo))
+create table TB_PLANO_PERIODO (
+  CD_PLANO_PERIODO               bigint not null,
+  CD_PERIODO                     bigint not null,
+  constraint pk_TB_PLANO_PERIODO primary key (CD_PLANO_PERIODO, CD_PERIODO))
 ;
 create sequence cadeira_seq;
 
@@ -50,35 +51,31 @@ create sequence plano_de_curso_seq;
 
 
 
-alter table cadeira_requisito add constraint fk_cadeira_requisito_cadeira_01 foreign key (fk_cadeira) references cadeira (id) on delete restrict on update restrict;
+alter table CADEIRA_REQUISITO add constraint fk_CADEIRA_REQUISITO_cadeira_01 foreign key (CD_CADEIRA_1) references cadeira (id);
 
-alter table cadeira_requisito add constraint fk_cadeira_requisito_cadeira_02 foreign key (fk_requisito) references cadeira (id) on delete restrict on update restrict;
+alter table CADEIRA_REQUISITO add constraint fk_CADEIRA_REQUISITO_cadeira_02 foreign key (CD_CADEIRA_2) references cadeira (id);
 
-alter table periodo_cadeira add constraint fk_periodo_cadeira_periodo_01 foreign key (fk_periodo) references periodo (id) on delete restrict on update restrict;
+alter table TB_PERIODO_CADEIRA add constraint fk_TB_PERIODO_CADEIRA_periodo_01 foreign key (CD_PERIODO_CADEIRA) references periodo (id);
 
-alter table periodo_cadeira add constraint fk_periodo_cadeira_cadeira_02 foreign key (fk_cadeira) references cadeira (id) on delete restrict on update restrict;
+alter table TB_PERIODO_CADEIRA add constraint fk_TB_PERIODO_CADEIRA_cadeira_02 foreign key (CD_CADEIRA) references cadeira (id);
 
-alter table plano_periodo add constraint fk_plano_periodo_plano_de_cur_01 foreign key (fk_plano) references plano_de_curso (id) on delete restrict on update restrict;
+alter table TB_PLANO_PERIODO add constraint fk_TB_PLANO_PERIODO_plano_de__01 foreign key (CD_PLANO_PERIODO) references plano_de_curso (id);
 
-alter table plano_periodo add constraint fk_plano_periodo_periodo_02 foreign key (fk_periodo) references periodo (id) on delete restrict on update restrict;
+alter table TB_PLANO_PERIODO add constraint fk_TB_PLANO_PERIODO_periodo_02 foreign key (CD_PERIODO) references periodo (id);
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
+drop table if exists cadeira cascade;
 
-drop table if exists cadeira;
+drop table if exists CADEIRA_REQUISITO cascade;
 
-drop table if exists cadeira_requisito;
+drop table if exists periodo cascade;
 
-drop table if exists periodo;
+drop table if exists TB_PERIODO_CADEIRA cascade;
 
-drop table if exists periodo_cadeira;
+drop table if exists plano_de_curso cascade;
 
-drop table if exists plano_de_curso;
-
-drop table if exists plano_periodo;
-
-SET REFERENTIAL_INTEGRITY TRUE;
+drop table if exists TB_PLANO_PERIODO cascade;
 
 drop sequence if exists cadeira_seq;
 

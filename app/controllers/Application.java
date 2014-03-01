@@ -1,10 +1,8 @@
 package controllers;
 
-import java.util.List;
-
 import models.Cadeira;
 import models.PlanoDeCurso;
-import play.db.ebean.Model.Finder;
+import models.exceptions.LimiteDeCreditosUltrapassadoException;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -14,28 +12,28 @@ public class Application extends Controller {
 
 	public static Result index() {
 		if (plano == null) {
-			PlanoDeCurso planoBD = new Finder<Long, PlanoDeCurso>(Long.class,
-					PlanoDeCurso.class).findUnique();
-			if (planoBD != null) {
-				// se ja houver uma entidade salva no BD carrega ela
-				plano = planoBD;
-				List<Cadeira> cadeirasBD = new Finder<Long, Cadeira>(
-						Long.class, Cadeira.class).all();
-				plano.distribuiCadeiras(cadeirasBD);
+			if (!PlanoDeCurso.find.all().isEmpty()) {
+				plano = PlanoDeCurso.find.all().get(0);
+				plano.atualizaMapaCadeira(plano.getCadeirasAlocadas());
 			} else {
-				plano = new PlanoDeCurso(true);
+				plano = new PlanoDeCurso();
+				plano.distribuiCaderas(Cadeira.find.all());
 				plano.save();
-				plano.update();
 			}
 		}
 		return ok(views.html.index.render(plano));
 	}
 
 	public static Result addCadeira(String cadeira, int periodo)
-			throws NumberFormatException, Exception {
-		plano.transfereCadeira(cadeira, periodo);
+			throws LimiteDeCreditosUltrapassadoException {
+		plano.addCadeira(cadeira, periodo);
 		plano.update();
-		plano.save();
+		return redirect(routes.Application.index());
+	}
+
+	public static Result remCadeira(String cadeira) {
+		plano.removeCadeira(cadeira);
+		plano.update();
 		return redirect(routes.Application.index());
 	}
 }
