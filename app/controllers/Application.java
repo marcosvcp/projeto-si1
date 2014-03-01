@@ -30,10 +30,4 @@ public class Application extends Controller {
 		plano.update();
 		return redirect(routes.Application.index());
 	}
-
-	public static Result remCadeira(String cadeira) {
-		plano.removeCadeira(cadeira);
-		plano.update();
-		return redirect(routes.Application.index());
-	}
 }

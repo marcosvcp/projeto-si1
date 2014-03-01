@@ -12,7 +12,7 @@ import org.junit.Test;
  * 
  */
 public class PlanoDeCursoTest {
-
+/**
 	@Test
 	public void testaListarPrimeiroPeriodo() {
 		Periodo periodo = new Periodo(1);
@@ -173,5 +173,5 @@ public class PlanoDeCursoTest {
 			Assert.assertEquals("Pre Requisito: Cálculo II não concluido",
 					e.getMessage());
 		}
-	}
+	}**/
 }
