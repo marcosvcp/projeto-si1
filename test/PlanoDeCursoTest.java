@@ -3,6 +3,7 @@ import models.Periodo;
 import models.PlanoDeCurso;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -12,6 +13,47 @@ import org.junit.Test;
  * 
  */
 public class PlanoDeCursoTest {
+	
+	private PlanoDeCurso plano;
+	
+	@Before
+	public void start(){
+		plano = new PlanoDeCurso();
+	}
+	
+	@Test
+	public void deveAtualizarCreditosDoPeriodo(){
+		
+	}
+	
+	@Test 
+	public void deveAtualizarDificuldadeDoPeriodo(){
+		System.out.println(plano.getCadeiraDispniveisOrdenadas());
+		System.out.println(plano.getCadeirasAlocadas());
+		System.out.println(plano.getMapaCadeira());
+
+	}
+	
+	@Test
+	public void deveIniciarPlanoDeCursoComTodasDisciplinasAlocadas(){
+
+	}
+	
+	@Test
+	public void deveVerificarOsPreRequisitos(){
+		
+	}
+	
+	@Test
+	public void naoDeveExcederLimiteDeCreditosPorPeriodo(){
+		
+	}
+	
+	@Test
+	public void naoDevePermitirRemoverUmPreRequisito(){
+		
+	}
+	
 /**
 	@Test
 	public void testaListarPrimeiroPeriodo() {

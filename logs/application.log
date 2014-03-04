@@ -1,9 +1,21 @@
-2014-03-01 13:16:34,932 - [INFO] - from play in pool-4-thread-4 
+2014-03-04 00:52:06,584 - [INFO] - from play in pool-4-thread-2 
 Listening for HTTP on /0:0:0:0:0:0:0:0:9000
 
-2014-03-01 13:17:29,467 - [INFO] - from play in play-internal-execution-context-1 
+2014-03-04 00:52:17,148 - [INFO] - from play in play-internal-execution-context-1 
 database [default] connected at jdbc:postgresql://localhost:5432/sidb
 
-2014-03-01 13:17:30,511 - [INFO] - from play in play-internal-execution-context-1 
+2014-03-04 00:52:19,510 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-03-04 00:53:52,686 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost:5432/sidb
+
+2014-03-04 00:53:52,901 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-03-04 01:07:36,500 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost:5432/sidb
+
+2014-03-04 01:07:36,713 - [INFO] - from play in play-internal-execution-context-1 
 Application started (Dev)
 

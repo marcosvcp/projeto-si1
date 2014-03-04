@@ -23,7 +23,7 @@ import play.db.ebean.Model;
 @Entity
 public class PlanoDeCurso extends Model {
 
-	// TODO PADRÃO DE PROJETO: ALTA COESÃO - so haverá informações coerentes com
+	// PADRÃO DE PROJETO: ALTA COESÃO - so haverá informações coerentes com
 	// a classe
 
 	private static final long serialVersionUID = 1L;
@@ -39,8 +39,11 @@ public class PlanoDeCurso extends Model {
 
 	public static final int MAXIMO_CREDITOS = 28;
 
+	/**
+	 * Construtor
+	 */
 	public PlanoDeCurso() {
-		// TODO Responsabilidade Atribuita seguindo o padrão Creator
+		// Responsabilidade Atribuita seguindo o padrão Creator
 		// O plano de curso ficou responsável por criar os períodos.
 		this.periodos = new ArrayList<Periodo>();
 		for (int i = 1; i <= 10; i++) {
@@ -53,6 +56,10 @@ public class PlanoDeCurso extends Model {
 		distribuiCadeiras();
 	}
 
+	/**
+	 * 
+	 * @return id do plano de curso
+	 */
 	public Long getId() {
 		return id;
 	}
@@ -60,14 +67,26 @@ public class PlanoDeCurso extends Model {
 	public static Finder<Long, PlanoDeCurso> find = new Finder<Long, PlanoDeCurso>(
 			Long.class, PlanoDeCurso.class);
 
+	/**
+	 * cria plano de curso na tabela
+	 * @param p
+	 */
 	public static void create(PlanoDeCurso p) {
 		p.save();
 	}
 
+	/**
+	 * deleta o plano a partir de sua id
+	 * @param id
+	 */
 	public static void delete(Long id) {
 		find.ref(id).delete();
 	}
 
+	/**
+	 * atualiza o plano
+	 * @param id
+	 */
 	public static void atualizar(Long id) {
 		PlanoDeCurso p = find.ref(id);
 		p.update();
@@ -116,10 +135,18 @@ public class PlanoDeCurso extends Model {
 		this.periodos.add(new Periodo(this.periodos.size() + 1));
 	}
 
+	/**
+	 * adiciona um periodo, especificando qual o seu numero
+	 * @param num_periodo
+	 */
 	public void addPeriodo(int num_periodo) {
 		this.periodos.add(new Periodo(num_periodo));
 	}
 
+	/**
+	 * 
+	 * @return um mapa de cadeira do curso
+	 */
 	public Map<String, Cadeira> getMapaCadeira() {
 		return mapaDeCadeiras;
 	}
@@ -134,6 +161,10 @@ public class PlanoDeCurso extends Model {
 		return this.periodos.get(numPeriodo - 1);
 	}
 
+	/**
+	 * 
+	 * @return lista com todos os periodos
+	 */
 	public List<Periodo> getPeriodos() {
 		return this.periodos;
 	}
@@ -183,7 +214,7 @@ public class PlanoDeCurso extends Model {
 	 */
 	public void addCadeira(String cadeiraNome, int periodo)
 			throws LimiteDeCreditosUltrapassadoException {
-		// TODO PADRÃO DE PROJETO: CONTROLLER - para manter o baixo acoplamento
+		// PADRÃO DE PROJETO: CONTROLLER - para manter o baixo acoplamento
 		// essa classe vai ser a responsável por adicionar um cadeira ao periodo
 		Cadeira cadeira = mapaDeCadeiras.get(cadeiraNome);
 		if (getPeriodo(periodo).getCreditos() + cadeira.getCreditos() > MAXIMO_CREDITOS) {
@@ -202,6 +233,12 @@ public class PlanoDeCurso extends Model {
 		getPeriodo(periodo).addCadeira(cadeira);
 	}
 
+	/**
+	 * Verifica se uma cadeira esta alocada corretamentes
+	 * @param c
+	 * @param p
+	 * @return
+	 */
 	public boolean isAlocadaNoLugarCorreto(Cadeira c, Periodo p) {
 		return verificaPreRequisitos(c, p.getNumero());
 	}
@@ -271,8 +308,12 @@ public class PlanoDeCurso extends Model {
 		return false;
 	}
 
+	/**
+	 * remove uma cadeira
+	 * @param cadeira
+	 */
 	public void removeCadeira(String cadeira) {
-		// TODO PADRÃO DE PROJETO: CONTROLLER - para manter o baixo acoplamento
+		// PADRÃO DE PROJETO: CONTROLLER - para manter o baixo acoplamento
 		// essa classe vai ser a responsável por remover uma cadeira ao periodo
 		// if (getMapCadeirasAlocadas().get(cadeira) == null) {
 		// throw new Exception("Essa Cadeira não está alocada!");

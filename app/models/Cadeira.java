@@ -25,7 +25,7 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 
 	private static final long serialVersionUID = 1L;
 
-	// TODO PADRÃO DE PROJETO: ALTA COESÃO - so haverá informações coerentes com
+	// PADRÃO DE PROJETO: ALTA COESÃO - so haverá informações coerentes com
 	// a classe
 
 	@Id
@@ -46,20 +46,11 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 	@Column(name = "periodo_default")
 	private int periodo;
 
+	/**
+	 * Construtor
+	 */
 	public Cadeira() {
 		setPreRequisitos(new ArrayList<Cadeira>());
-	}
-
-	public Cadeira(String nome, int dificuldade) {
-		this.setNome(nome);
-		this.creditos = 4;
-		this.dificuldade = dificuldade;
-		setPreRequisitos(new ArrayList<Cadeira>());
-	}
-
-	public Cadeira(String nome, int dificuldade, int creditos) {
-		this(nome, dificuldade);
-		this.creditos = creditos;
 	}
 
 	/**
@@ -71,51 +62,95 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 		return this.getPreRequisitos().contains(c);
 	}
 
-	// TODO PADRÃO DE PROJETO: INFORMATION EXPERT - a classe cadeira é a
+	// PADRÃO DE PROJETO: INFORMATION EXPERT - a classe cadeira é a
 	// responsável por guardar e adicionar pre-requisitos
+	/**
+	 * Adiciona um pre Requisito a cadeira
+	 * @param c
+	 */
 	public void addPreRequisito(Cadeira... c) {
 		Cadeira[] lista = c;
 		for (Cadeira cadeira : lista) {
 			getPreRequisitos().add(cadeira);
 		}
 	}
-
-	public void setCreditos(int creditos) {
-		this.creditos = creditos;
-	}
-
-	public int getCreditos() {
-		return this.creditos;
-	}
-
-	public String getNome() {
-		return this.nome;
-	}
-
-	public void setDificuldade(int dificuldade) {
-		this.dificuldade = dificuldade;
-	}
-
-	public int getDificuldade() {
-		return dificuldade;
-	}
-
+	
+	/**
+	 * 
+	 * @return lista de objeto Cadeira que sao pre requisitos da cadeira
+	 */
 	public List<Cadeira> getPreRequisitos() {
 		return preRequisitos;
 	}
 
+	/**
+	 * 
+	 * @return nome da cadeira
+	 */
+	public String getNome() {
+		return this.nome;
+	}
+	
+	/**
+	 * seta a qt de creditos da cadeira
+	 * @param creditos
+	 */
+	public void setCreditos(int creditos) {
+		this.creditos = creditos;
+	}
+
+	/**
+	 * 
+	 * @return qt de creditos da cadeira
+	 */
+	public int getCreditos() {
+		return this.creditos;
+	}
+
+	/**
+	 * seta dificuldade da cadeira
+	 * @param dificuldade
+	 */
+	public void setDificuldade(int dificuldade) {
+		this.dificuldade = dificuldade;
+	}
+
+	/**
+	 * 
+	 * @return a dificuldade da cadeira
+	 */
+	public int getDificuldade() {
+		return dificuldade;
+	}
+
+	/**
+	 * seta nome da cadeira
+	 * @param nome
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * seta os pre requisitos da cadeira
+	 * @param lista dos novos preRequisitos a ser setado
+	 */
 	public void setPreRequisitos(List<Cadeira> preRequisitos) {
 		this.preRequisitos = preRequisitos;
 	}
 
+	/**
+	 * 
+	 * @return periodo da cadeira
+	 */
 	public int getPeriodo() {
 		return periodo;
 	}
 
+	/**
+	 * seta o periodo da cadeira
+	 * @param periodo
+	 */
 	public void setPeriodo(int periodo) {
 		this.periodo = periodo;
 	}
@@ -123,29 +158,50 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 	public static Finder<Long, Cadeira> find = new Finder<Long, Cadeira>(
 			Long.class, Cadeira.class);
 
+	/**
+	 * cria cadeira na tabela
+	 * @param c
+	 */
 	public static void create(Cadeira c) {
 		c.save();
 	}
 
+	/**
+	 * deleta cadeira a partir de sua id
+	 * @param id
+	 */
 	public static void delete(Long id) {
 		find.ref(id).delete();
 	}
 
+	/**
+	 * atualiza dados da cadeira
+	 * @param id
+	 */
 	public static void atualizar(Long id) {
 		Cadeira p = find.ref(id);
 		p.update();
 	}
-
+	
+	/**
+	 * Compara cadeiras
+	 */
 	@Override
 	public int compareTo(Cadeira c) {
 		return getNome().compareTo(c.getNome());
 	}
-
+	
+	/**
+	 * 
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hashCode(getNome(), creditos);
 	}
 
+	/**
+	 * Verifica se duas cadeiras sao iguais
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -158,17 +214,35 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 		return Objects.equal(this.getCreditos(), other.getCreditos())
 				&& Objects.equal(this.getNome(), other.getNome());
 	}
-
+	
+	/**
+	 * toString da cadeira que mostra nome, creditos e seus pre requisitos
+	 */
 	@Override
 	public String toString() {
-		return "Cadeira [id=" + getId() + ", nome=" + nome + ", periodo="
-				+ periodo + "]";
+		String nomesPreRequisitos = "";
+		if(preRequisitos.size() == 0){
+			nomesPreRequisitos += "Nenhum";
+		}else{
+			for(Cadeira c : preRequisitos){
+				nomesPreRequisitos += c.getNome() + ";";
+			}
+		}
+		return "Nome: " + this.nome + ", Creditos: " + this.creditos + ", Pre-Requisitos: " + nomesPreRequisitos;
 	}
 
+	/**
+	 * 
+	 * @return id da cadeira
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * seta id da cadeira
+	 * @param id
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
