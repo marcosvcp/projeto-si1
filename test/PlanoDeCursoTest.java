@@ -1,10 +1,16 @@
 import models.Cadeira;
 import models.Periodo;
 import models.PlanoDeCurso;
+import models.exceptions.LimiteDeCreditosUltrapassadoException;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import controllers.Application;
+
+import static play.test.Helpers.*;
+
 
 /**
  * 
@@ -17,26 +23,43 @@ public class PlanoDeCursoTest {
 	private PlanoDeCurso plano;
 	
 	@Before
-	public void start(){
+	public void setUp(){
+        start(fakeApplication(inMemoryDatabase()));
 		plano = new PlanoDeCurso();
+		plano.distribuiCaderas(Cadeira.find.all());
+
 	}
 	
 	@Test
 	public void deveAtualizarCreditosDoPeriodo(){
-		
+		Assert.assertEquals(24, plano.getPeriodo(1).getCreditos());
+		Assert.assertEquals(26, plano.getPeriodo(2).getCreditos());
+		Assert.assertEquals(28, plano.getPeriodo(3).getCreditos());
+		try {
+			plano.addCadeira("Cálculo II", 1);
+		} catch (LimiteDeCreditosUltrapassadoException e) {
+			System.out.println(e.getMessage());
+		}
+		Assert.assertEquals(28, plano.getPeriodo(1).getCreditos());
+		Assert.assertEquals(22, plano.getPeriodo(2).getCreditos());
+		Assert.assertEquals(28, plano.getPeriodo(3).getCreditos());
 	}
 	
 	@Test 
 	public void deveAtualizarDificuldadeDoPeriodo(){
-		System.out.println(plano.getCadeiraDispniveisOrdenadas());
-		System.out.println(plano.getCadeirasAlocadas());
-		System.out.println(plano.getMapaCadeira());
-
-	}
+		Assert.assertEquals(25, plano.getPeriodo(1).getDificuldadeTotal());
+		Assert.assertEquals(37, plano.getPeriodo(2).getDificuldadeTotal());
+		try {
+			plano.addCadeira("Cálculo II", 1);
+		} catch (LimiteDeCreditosUltrapassadoException e) {
+			System.out.println(e.getMessage());
+		}
+		Assert.assertEquals(32, plano.getPeriodo(1).getDificuldadeTotal());
+		Assert.assertEquals(30, plano.getPeriodo(2).getDificuldadeTotal());	}
 	
 	@Test
 	public void deveIniciarPlanoDeCursoComTodasDisciplinasAlocadas(){
-
+		Assert.assertEquals(55, plano.getCadeirasAlocadas().size());
 	}
 	
 	@Test
@@ -46,7 +69,19 @@ public class PlanoDeCursoTest {
 	
 	@Test
 	public void naoDeveExcederLimiteDeCreditosPorPeriodo(){
-		
+		Assert.assertEquals(24, plano.getPeriodo(1).getCreditos());
+		try {
+			plano.addCadeira("Cálculo II", 1);
+		} catch (LimiteDeCreditosUltrapassadoException e) {
+			System.out.println(e.getMessage());
+		}
+		Assert.assertEquals(28, plano.getPeriodo(1).getCreditos());
+		try {
+			plano.addCadeira("Programação II", 1);
+		} catch (LimiteDeCreditosUltrapassadoException e) {
+			System.out.println(e.getMessage());
+		}
+		Assert.assertEquals(28, plano.getPeriodo(1).getCreditos());
 	}
 	
 	@Test
@@ -54,8 +89,8 @@ public class PlanoDeCursoTest {
 		
 	}
 	
-/**
-	@Test
+
+/**	@Test
 	public void testaListarPrimeiroPeriodo() {
 		Periodo periodo = new Periodo(1);
 		Assert.assertEquals(6, periodo.getCadeiras().size());
