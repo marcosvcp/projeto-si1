@@ -66,6 +66,7 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 	// responsável por guardar e adicionar pre-requisitos
 	/**
 	 * Adiciona um pre Requisito a cadeira
+	 * 
 	 * @param c
 	 */
 	public void addPreRequisito(Cadeira... c) {
@@ -74,7 +75,7 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 			getPreRequisitos().add(cadeira);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @return lista de objeto Cadeira que sao pre requisitos da cadeira
@@ -90,9 +91,10 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 	public String getNome() {
 		return this.nome;
 	}
-	
+
 	/**
 	 * seta a qt de creditos da cadeira
+	 * 
 	 * @param creditos
 	 */
 	public void setCreditos(int creditos) {
@@ -109,6 +111,7 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 
 	/**
 	 * seta dificuldade da cadeira
+	 * 
 	 * @param dificuldade
 	 */
 	public void setDificuldade(int dificuldade) {
@@ -125,6 +128,7 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 
 	/**
 	 * seta nome da cadeira
+	 * 
 	 * @param nome
 	 */
 	public void setNome(String nome) {
@@ -133,7 +137,9 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 
 	/**
 	 * seta os pre requisitos da cadeira
-	 * @param lista dos novos preRequisitos a ser setado
+	 * 
+	 * @param lista
+	 *            dos novos preRequisitos a ser setado
 	 */
 	public void setPreRequisitos(List<Cadeira> preRequisitos) {
 		this.preRequisitos = preRequisitos;
@@ -149,6 +155,7 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 
 	/**
 	 * seta o periodo da cadeira
+	 * 
 	 * @param periodo
 	 */
 	public void setPeriodo(int periodo) {
@@ -160,6 +167,7 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 
 	/**
 	 * cria cadeira na tabela
+	 * 
 	 * @param c
 	 */
 	public static void create(Cadeira c) {
@@ -168,6 +176,7 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 
 	/**
 	 * deleta cadeira a partir de sua id
+	 * 
 	 * @param id
 	 */
 	public static void delete(Long id) {
@@ -176,13 +185,14 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 
 	/**
 	 * atualiza dados da cadeira
+	 * 
 	 * @param id
 	 */
 	public static void atualizar(Long id) {
 		Cadeira p = find.ref(id);
 		p.update();
 	}
-	
+
 	/**
 	 * Compara cadeiras
 	 */
@@ -190,7 +200,7 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 	public int compareTo(Cadeira c) {
 		return getNome().compareTo(c.getNome());
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -214,21 +224,22 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 		return Objects.equal(this.getCreditos(), other.getCreditos())
 				&& Objects.equal(this.getNome(), other.getNome());
 	}
-	
+
 	/**
 	 * toString da cadeira que mostra nome, creditos e seus pre requisitos
 	 */
 	@Override
 	public String toString() {
 		String nomesPreRequisitos = "";
-		if(preRequisitos.size() == 0){
+		if (preRequisitos.size() == 0) {
 			nomesPreRequisitos += "Nenhum";
-		}else{
-			for(Cadeira c : preRequisitos){
+		} else {
+			for (Cadeira c : preRequisitos) {
 				nomesPreRequisitos += c.getNome() + ";";
 			}
 		}
-		return "Nome: " + this.nome + ", Creditos: " + this.creditos + ", Pre-Requisitos: " + nomesPreRequisitos;
+		return "Nome: " + this.nome + ", Creditos: " + this.creditos
+				+ ", Pre-Requisitos: " + nomesPreRequisitos;
 	}
 
 	/**
@@ -241,6 +252,7 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 
 	/**
 	 * seta id da cadeira
+	 * 
 	 * @param id
 	 */
 	public void setId(Long id) {

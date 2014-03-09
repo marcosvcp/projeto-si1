@@ -1,8 +1,12 @@
 package controllers;
 
 import models.Cadeira;
+import models.Periodo;
 import models.PlanoDeCurso;
 import models.exceptions.LimiteDeCreditosUltrapassadoException;
+import models.validators.ValidadorMaximoCreditos;
+import models.validators.ValidadorMaximoMinimoCreditos;
+import models.validators.ValidadorMinimoCreditos;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -21,6 +25,11 @@ public class Application extends Controller {
 				plano.save();
 			}
 		}
+		for (Periodo periodo : plano.getPeriodos()) {
+			periodo.setValidador(new ValidadorMaximoCreditos());
+		}
+		plano.getPeriodo(PlanoDeCurso.ULTIMO_PERIODO).setValidador(
+				new ValidadorMaximoMinimoCreditos());
 		return ok(views.html.index.render(plano));
 	}
 

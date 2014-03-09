@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 import models.exceptions.LimiteDeCreditosUltrapassadoException;
 import play.db.ebean.Model;
@@ -37,7 +38,14 @@ public class PlanoDeCurso extends Model {
 
 	private Map<String, Cadeira> mapaDeCadeiras;
 
+	@Transient
 	public static final int MAXIMO_CREDITOS = 28;
+
+	@Transient
+	public static final int MINIMO_CREDITOS = 14;
+
+	@Transient
+	public static final int ULTIMO_PERIODO = 10;
 
 	/**
 	 * Construtor
@@ -46,6 +54,7 @@ public class PlanoDeCurso extends Model {
 		// Responsabilidade Atribuita seguindo o padrão Creator
 		// O plano de curso ficou responsável por criar os períodos.
 		this.periodos = new ArrayList<Periodo>();
+
 		for (int i = 1; i <= 10; i++) {
 			periodos.add(new Periodo(i));
 		}
@@ -67,8 +76,11 @@ public class PlanoDeCurso extends Model {
 	public static Finder<Long, PlanoDeCurso> find = new Finder<Long, PlanoDeCurso>(
 			Long.class, PlanoDeCurso.class);
 
+	private Periodo periodo;
+
 	/**
 	 * cria plano de curso na tabela
+	 * 
 	 * @param p
 	 */
 	public static void create(PlanoDeCurso p) {
@@ -77,6 +89,7 @@ public class PlanoDeCurso extends Model {
 
 	/**
 	 * deleta o plano a partir de sua id
+	 * 
 	 * @param id
 	 */
 	public static void delete(Long id) {
@@ -85,6 +98,7 @@ public class PlanoDeCurso extends Model {
 
 	/**
 	 * atualiza o plano
+	 * 
 	 * @param id
 	 */
 	public static void atualizar(Long id) {
@@ -137,6 +151,7 @@ public class PlanoDeCurso extends Model {
 
 	/**
 	 * adiciona um periodo, especificando qual o seu numero
+	 * 
 	 * @param num_periodo
 	 */
 	public void addPeriodo(int num_periodo) {
@@ -217,7 +232,10 @@ public class PlanoDeCurso extends Model {
 		// PADRÃO DE PROJETO: CONTROLLER - para manter o baixo acoplamento
 		// essa classe vai ser a responsável por adicionar um cadeira ao periodo
 		Cadeira cadeira = mapaDeCadeiras.get(cadeiraNome);
-		if (getPeriodo(periodo).getCreditos() + cadeira.getCreditos() > MAXIMO_CREDITOS) {
+		Periodo periodoCorrente = getPeriodo(periodo);
+		int creditosTotais = periodoCorrente.getCreditos()
+				+ cadeira.getCreditos();
+		if (!periodoCorrente.getValidador().validaPeriodo(creditosTotais)) {
 			throw new LimiteDeCreditosUltrapassadoException(
 					"Limite de Créditos Ultrapassado!");
 		}
@@ -235,6 +253,7 @@ public class PlanoDeCurso extends Model {
 
 	/**
 	 * Verifica se uma cadeira esta alocada corretamentes
+	 * 
 	 * @param c
 	 * @param p
 	 * @return
@@ -244,43 +263,13 @@ public class PlanoDeCurso extends Model {
 	}
 
 	/**
-	 * Varifica se a cadeira tem pre-requisitos alocados erradamente.
-	 * 
-	 * @param cadeira
-	 *            a ser verificada
-	 */
-	public boolean verificaPrerequisito(String cadeira) {
-		Cadeira cad = mapaDeCadeiras.get(cadeira); // cadeira a ser verificada
-		int periodo_cad = 0; // periodo da cadeira a ser verificada
-		for (Periodo p : periodos) {
-			if (p.getCadeiras().contains(cad)) {
-				periodo_cad = p.getNumero();
-			}
-		}
-		for (Periodo p : periodos) {
-			for (Cadeira c : p.getCadeiras()) {
-				if (cad.isPreRequisito(c) && p.getNumero() >= periodo_cad) {
-					return true;
-				}
-			}
-		}
-		// verifica também recursivamente em seus pre-requisitos
-		for (Cadeira c : cad.getPreRequisitos()) {
-			if (verificaPrerequisito(c.getNome())) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
 	 * Verifica se os pre-requisitos de uma certa cadeira já foram concluídos.
 	 */
 	private boolean verificaPreRequisitos(Cadeira cadeira, int periodo) {
 		// verifica se a cadeira tem algum pre-requisito em um periodo posterior
 		// ao que está sendo adicionado
-		for (int i = periodo; i < getPeriodos().size(); i++) {
-			for (Cadeira c : getPeriodos().get(i).getCadeiras()) {
+		for (int i = periodo; i <= getPeriodos().size(); i++) {
+			for (Cadeira c : getPeriodo(i).getCadeiras()) {
 				if (cadeira.getPreRequisitos().contains(c)) {
 					return false;
 				}
@@ -310,6 +299,7 @@ public class PlanoDeCurso extends Model {
 
 	/**
 	 * remove uma cadeira
+	 * 
 	 * @param cadeira
 	 */
 	public void removeCadeira(String cadeira) {

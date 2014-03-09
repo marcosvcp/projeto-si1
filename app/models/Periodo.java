@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -13,6 +14,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
+import models.validators.ValidadorDePeriodo;
+import models.validators.ValidadorMaximoCreditos;
+import models.validators.ValidadorMinimoCreditos;
 import play.db.ebean.Model;
 
 /**
@@ -36,22 +40,27 @@ public class Periodo extends Model {
 	public static Finder<Long, Periodo> find = new Finder<Long, Periodo>(
 			Long.class, Periodo.class);
 
+	@Transient
+	private ValidadorDePeriodo validador;
+
 	/**
 	 * Construtor default
 	 */
 	public Periodo() {
 		cadeiras = new ArrayList<Cadeira>();
 	}
-	
+
 	/**
 	 * Construtor que recebe o numero do periodo
+	 * 
 	 * @param numeroDoPeriodo
 	 */
 	public Periodo(int numeroDoPeriodo) {
+		this();
 		this.numero = numeroDoPeriodo;
 		cadeiras = new ArrayList<Cadeira>();
 	}
-	
+
 	/**
 	 * 
 	 * @return id do periodo
@@ -62,6 +71,7 @@ public class Periodo extends Model {
 
 	/**
 	 * cria periodo na tabela
+	 * 
 	 * @param p
 	 */
 	public static void create(Periodo p) {
@@ -70,6 +80,7 @@ public class Periodo extends Model {
 
 	/**
 	 * deleta periodo a partir de sua id
+	 * 
 	 * @param id
 	 */
 	public static void delete(Long id) {
@@ -78,6 +89,7 @@ public class Periodo extends Model {
 
 	/**
 	 * atualiza periodo
+	 * 
 	 * @param id
 	 */
 	public static void atualizar(Long id) {
@@ -87,6 +99,7 @@ public class Periodo extends Model {
 
 	/**
 	 * adiciona uma cadeira ao periodo
+	 * 
 	 * @param cadeira
 	 */
 	public void addCadeira(Cadeira cadeira) {
@@ -95,6 +108,7 @@ public class Periodo extends Model {
 
 	/**
 	 * remove uma cadeira do periodo
+	 * 
 	 * @param cadeira
 	 */
 	public void removerCadeira(Cadeira cadeira) {
@@ -137,7 +151,9 @@ public class Periodo extends Model {
 
 	/**
 	 * altera as cadeiras do periodo
-	 * @param lista de cadeiras que vao substituir as antigas cadeiras do periodo
+	 * 
+	 * @param lista
+	 *            de cadeiras que vao substituir as antigas cadeiras do periodo
 	 */
 	public void setCadeiras(List<Cadeira> cadeiras) {
 		this.cadeiras = cadeiras;
@@ -153,6 +169,7 @@ public class Periodo extends Model {
 
 	/**
 	 * seta numero do periodo
+	 * 
 	 * @param numero
 	 */
 	public void setNumero(int numero) {
@@ -169,6 +186,7 @@ public class Periodo extends Model {
 
 	/**
 	 * busca uma cadeira no periodo
+	 * 
 	 * @param cadeira
 	 * @return
 	 */
@@ -187,5 +205,13 @@ public class Periodo extends Model {
 	@Override
 	public String toString() {
 		return "Periodo " + getNumero();
+	}
+
+	public ValidadorDePeriodo getValidador() {
+		return validador;
+	}
+
+	public void setValidador(ValidadorDePeriodo validador) {
+		this.validador = validador;
 	}
 }
