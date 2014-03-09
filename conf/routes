@@ -7,5 +7,6 @@ GET     /                           controllers.Application.index()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
-
+GET		/remCadeira/:cadeira 		controllers.Application.remCadeira(cadeira:String)
+POST	/remCadeira/:cadeira 		controllers.Application.remCadeira(cadeira:String)
 POST    /addCadeira/:cadeira/:periodo  controllers.Application.addCadeira(cadeira:String,periodo:Int)

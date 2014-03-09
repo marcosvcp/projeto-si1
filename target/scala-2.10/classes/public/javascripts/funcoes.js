@@ -44,7 +44,7 @@ function drop(ev, e){
 		});
 }
 
-/**$(document).ready(function(){
+$(document).ready(function(){
 	$(".alocadas").hover(function(){
 		  $(this).css("opacity", "0.7")
 		  $(this).children("span").addClass("glyphicon glyphicon-remove");
@@ -54,8 +54,17 @@ function drop(ev, e){
 		  $(this).children("span").removeClass("glyphicon glyphicon-remove");
 		  $(this).children("span").css("visibility", "hidden")
 		});
+	$(".alocadas-errada").hover(function(){
+		  $(this).css("opacity", "0.7")
+		  $(this).children("span").addClass("glyphicon glyphicon-remove");
+		  $(this).children("span").css("visibility", "visible")
+		  },function(){
+		  $(this).css("opacity", "1")
+		  $(this).children("span").removeClass("glyphicon glyphicon-remove");
+		  $(this).children("span").css("visibility", "hidden")
+		});
 
-	}); **/
+	}); 
 
 function remCadeira(cadeira, flagRequisitos){
 	var r = true;

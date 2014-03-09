@@ -312,12 +312,16 @@ public class PlanoDeCurso extends Model {
 		// procura pela cadeira entre os periodos.
 		getPeriodo(removida.getPeriodo()).removerCadeira(removida);
 		// removida.setPeriodo(0);
+		List<Cadeira> paraRemover = new ArrayList<Cadeira>();
 		for (Periodo p : periodos) {
 			for (Cadeira c : p.getCadeiras()) {
 				if (c.isPreRequisito(removida)) {
-					removeCadeira(c.getNome());
+					paraRemover.add(c);
 				}
 			}
+		}
+		for (Cadeira c : paraRemover) {
+			removeCadeira(c.getNome());
 		}
 	}
 }

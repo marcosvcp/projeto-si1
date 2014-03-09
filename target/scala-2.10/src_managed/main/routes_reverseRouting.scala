@@ -1,6 +1,6 @@
 // @SOURCE:/home/marcos/Documents/projeto-atualizado/conf/routes
-// @HASH:e677bda4fbe279adf49f89fe53e29703e97a7d3d
-// @DATE:Sun Mar 09 16:12:37 BRT 2014
+// @HASH:a6559e7ada4b92d8da966e1dc7ebb31b39741277
+// @DATE:Sun Mar 09 18:28:04 BRT 2014
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._
@@ -13,7 +13,9 @@ import play.libs.F
 import Router.queryString
 
 
+// @LINE:12
 // @LINE:11
+// @LINE:10
 // @LINE:9
 // @LINE:6
 package controllers {
@@ -31,14 +33,30 @@ def at(file:String): Call = {
 }
                           
 
+// @LINE:12
 // @LINE:11
+// @LINE:10
 // @LINE:6
 class ReverseApplication {
     
 
-// @LINE:11
+// @LINE:12
 def addCadeira(cadeira:String, periodo:Int): Call = {
    Call("POST", _prefix + { _defaultPrefix } + "addCadeira/" + implicitly[PathBindable[String]].unbind("cadeira", dynamicString(cadeira)) + "/" + implicitly[PathBindable[Int]].unbind("periodo", periodo))
+}
+                                                
+
+// @LINE:11
+// @LINE:10
+def remCadeira(cadeira:String): Call = {
+   (cadeira: @unchecked) match {
+// @LINE:10
+case (cadeira) if true => Call("GET", _prefix + { _defaultPrefix } + "remCadeira/" + implicitly[PathBindable[String]].unbind("cadeira", dynamicString(cadeira)))
+                                                        
+// @LINE:11
+case (cadeira) if true => Call("POST", _prefix + { _defaultPrefix } + "remCadeira/" + implicitly[PathBindable[String]].unbind("cadeira", dynamicString(cadeira)))
+                                                        
+   }
 }
                                                 
 
@@ -54,7 +72,9 @@ def index(): Call = {
                   
 
 
+// @LINE:12
 // @LINE:11
+// @LINE:10
 // @LINE:9
 // @LINE:6
 package controllers.javascript {
@@ -77,17 +97,36 @@ def at : JavascriptReverseRoute = JavascriptReverseRoute(
 }
               
 
+// @LINE:12
 // @LINE:11
+// @LINE:10
 // @LINE:6
 class ReverseApplication {
     
 
-// @LINE:11
+// @LINE:12
 def addCadeira : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Application.addCadeira",
    """
       function(cadeira,periodo) {
       return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "addCadeira/" + (""" + implicitly[PathBindable[String]].javascriptUnbind + """)("cadeira", encodeURIComponent(cadeira)) + "/" + (""" + implicitly[PathBindable[Int]].javascriptUnbind + """)("periodo", periodo)})
+      }
+   """
+)
+                        
+
+// @LINE:11
+// @LINE:10
+def remCadeira : JavascriptReverseRoute = JavascriptReverseRoute(
+   "controllers.Application.remCadeira",
+   """
+      function(cadeira) {
+      if (true) {
+      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "remCadeira/" + (""" + implicitly[PathBindable[String]].javascriptUnbind + """)("cadeira", encodeURIComponent(cadeira))})
+      }
+      if (true) {
+      return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "remCadeira/" + (""" + implicitly[PathBindable[String]].javascriptUnbind + """)("cadeira", encodeURIComponent(cadeira))})
+      }
       }
    """
 )
@@ -110,7 +149,9 @@ def index : JavascriptReverseRoute = JavascriptReverseRoute(
         
 
 
+// @LINE:12
 // @LINE:11
+// @LINE:10
 // @LINE:9
 // @LINE:6
 package controllers.ref {
@@ -129,14 +170,22 @@ def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.
 }
                           
 
+// @LINE:12
 // @LINE:11
+// @LINE:10
 // @LINE:6
 class ReverseApplication {
     
 
-// @LINE:11
+// @LINE:12
 def addCadeira(cadeira:String, periodo:Int): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.Application.addCadeira(cadeira, periodo), HandlerDef(this, "controllers.Application", "addCadeira", Seq(classOf[String], classOf[Int]), "POST", """""", _prefix + """addCadeira/$cadeira<[^/]+>/$periodo<[^/]+>""")
+)
+                      
+
+// @LINE:10
+def remCadeira(cadeira:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
+   controllers.Application.remCadeira(cadeira), HandlerDef(this, "controllers.Application", "remCadeira", Seq(classOf[String]), "GET", """""", _prefix + """remCadeira/$cadeira<[^/]+>""")
 )
                       
 

@@ -33,6 +33,11 @@ public class Application extends Controller {
 		return ok(views.html.index.render(plano));
 	}
 
+	public static Result remCadeira(String cadeira) {
+		plano.removeCadeira(cadeira);
+		plano.update();
+		return redirect(routes.Application.index());
+	}
 	public static Result addCadeira(String cadeira, int periodo)
 			throws LimiteDeCreditosUltrapassadoException {
 		plano.addCadeira(cadeira, periodo);
