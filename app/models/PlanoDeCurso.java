@@ -37,7 +37,8 @@ public class PlanoDeCurso extends Model {
 	private List<Periodo> periodos;
 
 	private Map<String, Cadeira> mapaDeCadeiras;
-
+	
+	
 	@Transient
 	public static final int MAXIMO_CREDITOS = 28;
 

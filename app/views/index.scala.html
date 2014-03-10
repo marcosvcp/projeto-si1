@@ -11,7 +11,27 @@
 @main("Plano de Curso") {
 	<center><h2>@Messages("planoDeCurso")</h2></center>
 	
+	<div class="separator"> </div>
+
+	
+	<div class="periodo">
+	<span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:0px;"> Cadeiras disponiveis</span>
+	<ul style="list-style:none;"> 
+		@for(cadeira <- plano.getCadeiraDispniveisOrdenadas()) {
+		<div class="disponiveis" id="@cadeira.getNome()"	draggable="true" 
+		ondragstart="drag(event)" ondragend="dragEnd()">
+	  		<center><label class="nome">@cadeira.getNome()</label></center>
+		  	<label class="creditos">@cadeira.getCreditos() @Messages("creditos")</label>
+		  	<label class="dificuldade"> dificuldade: @cadeira.getDificuldade()</label>
+	  	</div>
+	} 
+	
+	</ul>
+	<span class="periodoCreditos">Arraste para alocar</span>
+	</div>
+	
 	<div >
+	
 	@for(periodo <- plano.getPeriodos()) {
 		<div id="@periodo.getNumero()" class="periodo" ondrop="drop(event, this)"
 			ondragover="allowDrop(event,this)" ondragleave="leave(event, this)">
