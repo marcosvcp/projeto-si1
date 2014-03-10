@@ -276,6 +276,12 @@ public class PlanoDeCurso extends Model {
 				}
 			}
 		}
+		for (Cadeira c : cadeira.getPreRequisitos()) {
+			if(this.getCadeiraDispniveisOrdenadas().contains(c)){
+				return false;
+			}
+		}
+		
 		return true;
 	}
 
