@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
 import models.exceptions.LimiteDeCreditosUltrapassadoException;
+import models.validators.ValidadorMaximoCreditos;
 import play.db.ebean.Model;
 
 /**
@@ -236,6 +237,7 @@ public class PlanoDeCurso extends Model {
 		Periodo periodoCorrente = getPeriodo(periodo);
 		int creditosTotais = periodoCorrente.getCreditos()
 				+ cadeira.getCreditos();
+		periodoCorrente.setValidador(new ValidadorMaximoCreditos());
 		if (!periodoCorrente.getValidador().validaPeriodo(creditosTotais)) {
 			throw new LimiteDeCreditosUltrapassadoException(
 					"Limite de Créditos Ultrapassado!");
