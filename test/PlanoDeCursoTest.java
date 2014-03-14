@@ -73,7 +73,7 @@ public class PlanoDeCursoTest {
 	}
 	
 	@Test
-	public void devePermitirRemoverUmPreRequisito(){
+	public void devePermitirRemoverUmPreRequisito() throws LimiteDeCreditosUltrapassadoException{
 		Assert.assertEquals(55, plano.getCadeirasAlocadas().size());
 		Assert.assertEquals(0, plano.getCadeiraDispniveisOrdenadas().size());
 
@@ -92,6 +92,38 @@ public class PlanoDeCursoTest {
 		Assert.assertEquals(34, plano.getCadeirasAlocadas().size());
 		Assert.assertEquals(21, plano.getCadeiraDispniveisOrdenadas().size());
 		
+		plano.addCadeira("Cálculo I", 1);
+		
+		Assert.assertEquals(24, plano.getPeriodo(1).getCreditos());
+		Assert.assertEquals(6, plano.getPeriodo(1).getCadeiras().size());
+		
+		Assert.assertEquals(35, plano.getCadeirasAlocadas().size());
+		Assert.assertEquals(20, plano.getCadeiraDispniveisOrdenadas().size());
+
+		plano.removeCadeira("Cálculo I");
+
+		Assert.assertEquals(34, plano.getCadeirasAlocadas().size());
+		Assert.assertEquals(21, plano.getCadeiraDispniveisOrdenadas().size());
+		
+		Assert.assertEquals(20, plano.getPeriodo(1).getCreditos());
+		Assert.assertEquals(5, plano.getPeriodo(1).getCadeiras().size());
+		
+		plano.addCadeira("Cálculo II", 1);
+		
+		Assert.assertEquals(24, plano.getPeriodo(1).getCreditos());
+		Assert.assertEquals(6, plano.getPeriodo(1).getCadeiras().size());
+		
+		Assert.assertEquals(35, plano.getCadeirasAlocadas().size());
+		Assert.assertEquals(20, plano.getCadeiraDispniveisOrdenadas().size());
+
+		plano.removeCadeira("Cálculo II");
+
+		Assert.assertEquals(34, plano.getCadeirasAlocadas().size());
+		Assert.assertEquals(21, plano.getCadeiraDispniveisOrdenadas().size());
+		
+		Assert.assertEquals(20, plano.getPeriodo(1).getCreditos());
+		Assert.assertEquals(5, plano.getPeriodo(1).getCadeiras().size());
+
 	}
 	
 }
