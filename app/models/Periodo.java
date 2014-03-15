@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -15,8 +14,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
 import models.validators.ValidadorDePeriodo;
-import models.validators.ValidadorMaximoCreditos;
-import models.validators.ValidadorMinimoCreditos;
 import play.db.ebean.Model;
 
 /**
@@ -188,7 +185,7 @@ public class Periodo extends Model {
 	 * busca uma cadeira no periodo
 	 * 
 	 * @param cadeira
-	 * @return
+	 * @return cadeira referente a String buscada
 	 */
 	public Cadeira getCadeira(String cadeira) {
 		for (Cadeira c : cadeiras) {
@@ -206,11 +203,19 @@ public class Periodo extends Model {
 	public String toString() {
 		return "Periodo " + getNumero();
 	}
-
+	
+	/**
+	 * 
+	 * @return a estrategia atual do validador
+	 */
 	public ValidadorDePeriodo getValidador() {
 		return validador;
 	}
-
+	/**
+	 * Modifica a estrategia do validador
+	 * 
+	 * @param validador estrategia a ser usada
+	 */
 	public void setValidador(ValidadorDePeriodo validador) {
 		this.validador = validador;
 	}

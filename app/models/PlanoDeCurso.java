@@ -38,7 +38,8 @@ public class PlanoDeCurso extends Model {
 	@JoinTable(name = "TB_PLANO_PERIODO", joinColumns = { @JoinColumn(name = "CD_PLANO_PERIODO") }, inverseJoinColumns = { @JoinColumn(name = "CD_PERIODO") })
 	private List<Periodo> periodos;
 
-	@OneToOne
+	 @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	    // @JoinColumn(name="USER_ID", nullable=false)
 	List<Cadeira> cadeirasDisponiveis;
 
 	private Map<String, Cadeira> mapaDeCadeiras;
@@ -85,7 +86,7 @@ public class PlanoDeCurso extends Model {
 	/**
 	 * cria plano de curso na tabela
 	 * 
-	 * @param p
+	 * @param plano de curso p a ser criado
 	 */
 	public static void create(PlanoDeCurso p) {
 		p.save();
@@ -94,7 +95,7 @@ public class PlanoDeCurso extends Model {
 	/**
 	 * deleta o plano a partir de sua id
 	 * 
-	 * @param id
+	 * @param id do plano a ser deletado
 	 */
 	public static void delete(Long id) {
 		find.ref(id).delete();
@@ -103,7 +104,7 @@ public class PlanoDeCurso extends Model {
 	/**
 	 * atualiza o plano
 	 * 
-	 * @param id
+	 * @param id do plano de curso a set atualizado
 	 */
 	public static void atualizar(Long id) {
 		PlanoDeCurso p = find.ref(id);
@@ -125,6 +126,8 @@ public class PlanoDeCurso extends Model {
 	/**
 	 * Distribui Cadeiras entre os periodos quando o plano é iniciado pela
 	 * primeira vez.
+	 * 
+	 * @param cadeiras que serao alocadas nos seus respectivos periodos
 	 */
 	public void distribuiCaderas(List<Cadeira> cadeiras) {
 		atualizaMapaCadeira(cadeiras);
@@ -134,6 +137,8 @@ public class PlanoDeCurso extends Model {
 	/**
 	 * Atualiza o mapadecadeiras das disciplinas com base em uma lista de todas
 	 * as cadeiras existentes.
+	 * 
+	 * @param cadeiras que serao colocadas no mapa
 	 */
 	public void atualizaMapaCadeira(List<Cadeira> cadeiras) {
 		Map<String, Cadeira> mapa = new HashMap<String, Cadeira>();
@@ -161,12 +166,14 @@ public class PlanoDeCurso extends Model {
 	public void addPeriodo(int num_periodo) {
 		this.periodos.add(new Periodo(num_periodo));
 	}
-
+	
 	/**
 	 * Retorna o período passado como argumento.
 	 * 
 	 * @param numPeriodo
 	 *            número relativo ao periodo 1,2,3...
+	 *            
+	 * @return Periodo associado ao seu numero
 	 */
 	public Periodo getPeriodo(int numPeriodo) {
 		return this.periodos.get(numPeriodo - 1);
@@ -243,6 +250,7 @@ public class PlanoDeCurso extends Model {
 			throw new LimiteDeCreditosUltrapassadoException(
 					"Limite de Créditos Ultrapassado!");
 		}
+		cadeira.setPeriodo(periodo);
 		// verificaPreRequisitos(cadeira, periodo);
 
 		// remove cadeira do periodo ou da lista de disciplinas disponiveis

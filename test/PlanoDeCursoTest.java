@@ -1,15 +1,13 @@
+import static play.test.Helpers.fakeApplication;
+import static play.test.Helpers.inMemoryDatabase;
+import static play.test.Helpers.start;
 import models.Cadeira;
-import models.Periodo;
 import models.PlanoDeCurso;
 import models.exceptions.LimiteDeCreditosUltrapassadoException;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import controllers.Application;
-
-import static play.test.Helpers.*;
 
 
 /**
