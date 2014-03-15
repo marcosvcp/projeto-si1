@@ -18,7 +18,7 @@ public class Application extends Controller {
 		if (plano == null) {
 			if (!PlanoDeCurso.find.all().isEmpty()) {
 				plano = PlanoDeCurso.find.all().get(0);
-				plano.atualizaMapaCadeira(plano.getCadeirasAlocadas());
+				plano.atualizaMapaCadeira(Cadeira.find.all());
 			} else {
 				plano = new PlanoDeCurso();
 				plano.distribuiCaderas(Cadeira.find.all());

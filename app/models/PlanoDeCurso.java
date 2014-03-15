@@ -38,10 +38,6 @@ public class PlanoDeCurso extends Model {
 	@JoinTable(name = "TB_PLANO_PERIODO", joinColumns = { @JoinColumn(name = "CD_PLANO_PERIODO") }, inverseJoinColumns = { @JoinColumn(name = "CD_PERIODO") })
 	private List<Periodo> periodos;
 
-	 @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	    // @JoinColumn(name="USER_ID", nullable=false)
-	List<Cadeira> cadeirasDisponiveis;
-
 	private Map<String, Cadeira> mapaDeCadeiras;
 
 	@Transient
@@ -63,7 +59,6 @@ public class PlanoDeCurso extends Model {
 		// Responsabilidade Atribuita seguindo o padrão Creator
 		// O plano de curso ficou responsável por criar os períodos.
 		this.periodos = new ArrayList<Periodo>();
-		this.cadeirasDisponiveis =  new ArrayList<Cadeira>();
 
 		for (int i = 1; i <= ULTIMO_PERIODO; i++) {
 			periodos.add(new Periodo(i));
@@ -213,7 +208,7 @@ public class PlanoDeCurso extends Model {
 		Map<String, Cadeira> disponiveis = new HashMap<String, Cadeira>();
 		List<Cadeira> alocadas = getCadeirasAlocadas();
 		for (Cadeira c : mapaDeCadeiras.values()) {
-			if (!alocadas.contains(c) && !(this.cadeirasDisponiveis.contains(c))) {
+			if (!alocadas.contains(c)) {
 				disponiveis.put(c.getNome(), c);
 			}
 		}
@@ -225,9 +220,10 @@ public class PlanoDeCurso extends Model {
 	 * alfabética.
 	 */
 	public List<Cadeira> getCadeiraDispniveisOrdenadas() {
-		cadeirasDisponiveis.addAll(getMapCadeirasDisponiveis().values());
-		Collections.sort(cadeirasDisponiveis);
-		return cadeirasDisponiveis;
+		List<Cadeira> cadeirasOrdenadas = new ArrayList<Cadeira>();
+		cadeirasOrdenadas.addAll(getMapCadeirasDisponiveis().values());
+		Collections.sort(cadeirasOrdenadas);
+		return cadeirasOrdenadas;
 	}
 
 	/**
@@ -254,9 +250,7 @@ public class PlanoDeCurso extends Model {
 		// verificaPreRequisitos(cadeira, periodo);
 
 		// remove cadeira do periodo ou da lista de disciplinas disponiveis
-		if (cadeirasDisponiveis.contains(cadeira)) {
-			cadeirasDisponiveis.remove(cadeira);
-		}
+
 		for (Periodo p : periodos) {
 			if (p.getCadeiras().contains(cadeira)) {
 				p.removerCadeira(cadeira);
