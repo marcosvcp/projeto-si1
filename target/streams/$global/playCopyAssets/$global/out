@@ -1,11 +1,11 @@
 [0m[[0mdebug[0m] [0mCopy play resource mappings: [0m
-[0m[[0mdebug[0m] [0m	(/home/celiorcbf/projeto-si1/public/javascripts/funcoes.js,/home/celiorcbf/projeto-si1/target/scala-2.10/classes/public/javascripts/funcoes.js)[0m
-[0m[[0mdebug[0m] [0m	(/home/celiorcbf/projeto-si1/public/javascripts/jquery-1.9.0.min.js,/home/celiorcbf/projeto-si1/target/scala-2.10/classes/public/javascripts/jquery-1.9.0.min.js)[0m
-[0m[[0mdebug[0m] [0m	(/home/celiorcbf/projeto-si1/public/images/stripe17.png,/home/celiorcbf/projeto-si1/target/scala-2.10/classes/public/images/stripe17.png)[0m
-[0m[[0mdebug[0m] [0m	(/home/celiorcbf/projeto-si1/public/images/bg-body.gif,/home/celiorcbf/projeto-si1/target/scala-2.10/classes/public/images/bg-body.gif)[0m
-[0m[[0mdebug[0m] [0m	(/home/celiorcbf/projeto-si1/public/images/LISTRAS_4.png,/home/celiorcbf/projeto-si1/target/scala-2.10/classes/public/images/LISTRAS_4.png)[0m
-[0m[[0mdebug[0m] [0m	(/home/celiorcbf/projeto-si1/public/images/bg-1.jpg,/home/celiorcbf/projeto-si1/target/scala-2.10/classes/public/images/bg-1.jpg)[0m
-[0m[[0mdebug[0m] [0m	(/home/celiorcbf/projeto-si1/public/images/favicon.png,/home/celiorcbf/projeto-si1/target/scala-2.10/classes/public/images/favicon.png)[0m
-[0m[[0mdebug[0m] [0m	(/home/celiorcbf/projeto-si1/public/images/borda-Cut.png,/home/celiorcbf/projeto-si1/target/scala-2.10/classes/public/images/borda-Cut.png)[0m
-[0m[[0mdebug[0m] [0m	(/home/celiorcbf/projeto-si1/public/stylesheets/pure.css,/home/celiorcbf/projeto-si1/target/scala-2.10/classes/public/stylesheets/pure.css)[0m
-[0m[[0mdebug[0m] [0m	(/home/celiorcbf/projeto-si1/public/stylesheets/main.css,/home/celiorcbf/projeto-si1/target/scala-2.10/classes/public/stylesheets/main.css)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\public\images\bg-1.jpg,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\public\images\bg-1.jpg)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\public\images\bg-body.gif,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\public\images\bg-body.gif)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\public\images\borda-Cut.png,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\public\images\borda-Cut.png)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\public\images\favicon.png,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\public\images\favicon.png)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\public\images\LISTRAS_4.png,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\public\images\LISTRAS_4.png)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\public\images\stripe17.png,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\public\images\stripe17.png)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\public\javascripts\funcoes.js,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\public\javascripts\funcoes.js)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\public\javascripts\jquery-1.9.0.min.js,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\public\javascripts\jquery-1.9.0.min.js)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\public\stylesheets\main.css,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\public\stylesheets\main.css)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\public\stylesheets\pure.css,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\public\stylesheets\pure.css)[0m

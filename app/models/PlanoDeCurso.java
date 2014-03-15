@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import models.exceptions.LimiteDeCreditosUltrapassadoException;
@@ -37,9 +38,11 @@ public class PlanoDeCurso extends Model {
 	@JoinTable(name = "TB_PLANO_PERIODO", joinColumns = { @JoinColumn(name = "CD_PLANO_PERIODO") }, inverseJoinColumns = { @JoinColumn(name = "CD_PERIODO") })
 	private List<Periodo> periodos;
 
+	@OneToOne
+	List<Cadeira> cadeirasDisponiveis;
+
 	private Map<String, Cadeira> mapaDeCadeiras;
-	
-	
+
 	@Transient
 	public static final int MAXIMO_CREDITOS = 28;
 
@@ -49,6 +52,9 @@ public class PlanoDeCurso extends Model {
 	@Transient
 	public static final int ULTIMO_PERIODO = 10;
 
+	@Transient
+	public static Finder<Long, PlanoDeCurso> find = new Finder<Long, PlanoDeCurso>(
+			Long.class, PlanoDeCurso.class);
 	/**
 	 * Construtor
 	 */
@@ -56,8 +62,9 @@ public class PlanoDeCurso extends Model {
 		// Responsabilidade Atribuita seguindo o padrão Creator
 		// O plano de curso ficou responsável por criar os períodos.
 		this.periodos = new ArrayList<Periodo>();
+		this.cadeirasDisponiveis =  new ArrayList<Cadeira>();
 
-		for (int i = 1; i <= 10; i++) {
+		for (int i = 1; i <= ULTIMO_PERIODO; i++) {
 			periodos.add(new Periodo(i));
 		}
 		// seta o mapa de cadeiras com as cadeiras do xml
@@ -74,11 +81,6 @@ public class PlanoDeCurso extends Model {
 	public Long getId() {
 		return id;
 	}
-
-	public static Finder<Long, PlanoDeCurso> find = new Finder<Long, PlanoDeCurso>(
-			Long.class, PlanoDeCurso.class);
-
-	private Periodo periodo;
 
 	/**
 	 * cria plano de curso na tabela
@@ -161,14 +163,6 @@ public class PlanoDeCurso extends Model {
 	}
 
 	/**
-	 * 
-	 * @return um mapa de cadeira do curso
-	 */
-	public Map<String, Cadeira> getMapaCadeira() {
-		return mapaDeCadeiras;
-	}
-
-	/**
 	 * Retorna o período passado como argumento.
 	 * 
 	 * @param numPeriodo
@@ -177,7 +171,7 @@ public class PlanoDeCurso extends Model {
 	public Periodo getPeriodo(int numPeriodo) {
 		return this.periodos.get(numPeriodo - 1);
 	}
-
+	
 	/**
 	 * 
 	 * @return lista com todos os periodos
@@ -185,9 +179,17 @@ public class PlanoDeCurso extends Model {
 	public List<Periodo> getPeriodos() {
 		return this.periodos;
 	}
+	
+	/**
+	 * 
+	 * @return um mapa de cadeira do curso
+	 */
+	public Map<String, Cadeira> getMapaCadeira() {
+		return mapaDeCadeiras;
+	}
 
 	/**
-	 * Retorna o Map de cadeiras já alocadas no plano de curso.
+	 * Retorna uma lista de cadeiras já alocadas nos periodoss.
 	 */
 	public List<Cadeira> getCadeirasAlocadas() {
 		List<Cadeira> alocadas = new ArrayList<Cadeira>();
@@ -204,7 +206,7 @@ public class PlanoDeCurso extends Model {
 		Map<String, Cadeira> disponiveis = new HashMap<String, Cadeira>();
 		List<Cadeira> alocadas = getCadeirasAlocadas();
 		for (Cadeira c : mapaDeCadeiras.values()) {
-			if (!alocadas.contains(c)) {
+			if (!alocadas.contains(c) && !(this.cadeirasDisponiveis.contains(c))) {
 				disponiveis.put(c.getNome(), c);
 			}
 		}
@@ -216,10 +218,9 @@ public class PlanoDeCurso extends Model {
 	 * alfabética.
 	 */
 	public List<Cadeira> getCadeiraDispniveisOrdenadas() {
-		List<Cadeira> cadeirasOrdenadas = new ArrayList<Cadeira>();
-		cadeirasOrdenadas.addAll(getMapCadeirasDisponiveis().values());
-		Collections.sort(cadeirasOrdenadas);
-		return cadeirasOrdenadas;
+		cadeirasDisponiveis.addAll(getMapCadeirasDisponiveis().values());
+		Collections.sort(cadeirasDisponiveis);
+		return cadeirasDisponiveis;
 	}
 
 	/**
@@ -244,66 +245,18 @@ public class PlanoDeCurso extends Model {
 		}
 		// verificaPreRequisitos(cadeira, periodo);
 
-		// remove cadeira do periodo
+		// remove cadeira do periodo ou da lista de disciplinas disponiveis
+		if (cadeirasDisponiveis.contains(cadeira)) {
+			cadeirasDisponiveis.remove(cadeira);
+		}
 		for (Periodo p : periodos) {
 			if (p.getCadeiras().contains(cadeira)) {
 				p.removerCadeira(cadeira);
 			}
 		}
+
 		// adiciona essa cadeira no periodo escolhido
 		getPeriodo(periodo).addCadeira(cadeira);
-	}
-
-	/**
-	 * Verifica se uma cadeira esta alocada corretamentes
-	 * 
-	 * @param c
-	 * @param p
-	 * @return
-	 */
-	public boolean isAlocadaNoLugarCorreto(Cadeira c, Periodo p) {
-		return verificaPreRequisitos(c, p.getNumero());
-	}
-
-	/**
-	 * Verifica se os pre-requisitos de uma certa cadeira já foram concluídos.
-	 */
-	private boolean verificaPreRequisitos(Cadeira cadeira, int periodo) {
-		// verifica se a cadeira tem algum pre-requisito em um periodo posterior
-		// ao que está sendo adicionado
-		for (int i = periodo; i <= getPeriodos().size(); i++) {
-			for (Cadeira c : getPeriodo(i).getCadeiras()) {
-				if (cadeira.getPreRequisitos().contains(c)) {
-					return false;
-				}
-			}
-		}
-		for (Cadeira c : cadeira.getPreRequisitos()) {
-			if(this.getCadeiraDispniveisOrdenadas().contains(c)){
-				return false;
-			}
-		}
-		
-		return true;
-	}
-
-	/**
-	 * Retorna true caso a {@code cadeira} seja pre-requisito de alguma outra
-	 * nos {@code periodos}.
-	 */
-	public boolean isPreRequisito(String cad) {
-		Cadeira cadeira = mapaDeCadeiras.get(cad);
-		// procura pela cadeira entre os periodos.
-		for (Periodo periodo : periodos) {
-			// verifica as cadeiras que tem a cadeira a ser removida como
-			// pre-requisito
-			for (Cadeira cadeiraDoPeriodo : periodo.getCadeiras()) {
-				if (cadeiraDoPeriodo.getPreRequisitos().contains(cadeira)) {
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
 	/**
@@ -332,5 +285,57 @@ public class PlanoDeCurso extends Model {
 		for (Cadeira c : paraRemover) {
 			removeCadeira(c.getNome());
 		}
+	}
+	
+	/**
+	 * Verifica se uma cadeira esta alocada corretamentes
+	 * 
+	 * @param c
+	 * @param p
+	 * @return
+	 */
+	public boolean isAlocadaNoLugarCorreto(Cadeira c, Periodo p) {
+		return verificaPreRequisitos(c, p.getNumero());
+	}
+
+	/**
+	 * Verifica se os pre-requisitos de uma certa cadeira já foram concluídos.
+	 */
+	private boolean verificaPreRequisitos(Cadeira cadeira, int periodo) {
+		// verifica se a cadeira tem algum pre-requisito em um periodo posterior
+		// ao que está sendo adicionado
+		for (int i = periodo; i <= getPeriodos().size(); i++) {
+			for (Cadeira c : getPeriodo(i).getCadeiras()) {
+				if (cadeira.getPreRequisitos().contains(c)) {
+					return false;
+				}
+			}
+		}
+		for (Cadeira c : cadeira.getPreRequisitos()) {
+			if (this.getCadeiraDispniveisOrdenadas().contains(c)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Retorna true caso a {@code cadeira} seja pre-requisito de alguma outra
+	 * nos {@code periodos}.
+	 */
+	public boolean isPreRequisito(String cad) {
+		Cadeira cadeira = mapaDeCadeiras.get(cad);
+		// procura pela cadeira entre os periodos.
+		for (Periodo periodo : periodos) {
+			// verifica as cadeiras que tem a cadeira a ser removida como
+			// pre-requisito
+			for (Cadeira cadeiraDoPeriodo : periodo.getCadeiras()) {
+				if (cadeiraDoPeriodo.getPreRequisitos().contains(cadeira)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
