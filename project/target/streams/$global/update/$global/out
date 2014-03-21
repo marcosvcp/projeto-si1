@@ -2938,7 +2938,7 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-sbt#apply-macro;0.13.0!apply-macro.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#jline;2.10.2!jline.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.fusesource.jansi#jansi;1.4!jansi.jar[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 7820ms :: artifacts dl 148ms[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 11446ms :: artifacts dl 364ms[0m
 [0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT compile produced in C:\Users\Dinho\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-compile.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT runtime produced in C:\Users\Dinho\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-runtime.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT test produced in C:\Users\Dinho\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-test.xml[0m
@@ -2952,5 +2952,5 @@
 [0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT docs produced in C:\Users\Dinho\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-docs.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT pom produced in C:\Users\Dinho\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-pom.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT scala-tool produced in C:\Users\Dinho\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-scala-tool.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (7820ms resolve - 148ms download)[0m
+[0m[[0mdebug[0m] [0m	resolve done (11446ms resolve - 364ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m

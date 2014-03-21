@@ -10,3 +10,9 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET		/remCadeira/:cadeira 		controllers.Application.remCadeira(cadeira:String)
 POST	/remCadeira/:cadeira 		controllers.Application.remCadeira(cadeira:String)
 POST    /addCadeira/:cadeira/:periodo  controllers.Application.addCadeira(cadeira:String,periodo:Int)
+
+#Login
+GET     /login                  controllers.Application.login()
+POST    /login                      controllers.Application.authenticate()
+GET     /logout                     controllers.Application.logout()
+

@@ -24,6 +24,13 @@ create table plano_de_curso (
   constraint pk_plano_de_curso primary key (id))
 ;
 
+create table account (
+  email                     varchar(255) not null,
+  name                      varchar(255),
+  password                  varchar(255),
+  constraint pk_account primary key (email))
+;
+
 
 create table CADEIRA_REQUISITO (
   CD_CADEIRA_1                   bigint not null,
@@ -47,6 +54,8 @@ create sequence cadeira_seq;
 create sequence periodo_seq;
 
 create sequence plano_de_curso_seq;
+
+create sequence account_seq;
 
 
 
@@ -77,9 +86,13 @@ drop table if exists plano_de_curso cascade;
 
 drop table if exists TB_PLANO_PERIODO cascade;
 
+drop table if exists account cascade;
+
 drop sequence if exists cadeira_seq;
 
 drop sequence if exists periodo_seq;
 
 drop sequence if exists plano_de_curso_seq;
+
+drop sequence if exists account_seq;
 
