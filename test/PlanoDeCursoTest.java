@@ -37,6 +37,7 @@ public class PlanoDeCursoTest {
 		Assert.assertEquals(28, plano.getPeriodo(1).getCreditos());
 		Assert.assertEquals(22, plano.getPeriodo(2).getCreditos());
 		Assert.assertEquals(28, plano.getPeriodo(3).getCreditos());
+		
 	}
 	
 	@Test 
@@ -122,6 +123,31 @@ public class PlanoDeCursoTest {
 		Assert.assertEquals(20, plano.getPeriodo(1).getCreditos());
 		Assert.assertEquals(5, plano.getPeriodo(1).getCadeiras().size());
 
+	}
+	
+	
+	@Test
+	public void deveCalcularOsConjuntosDeCreditos(){
+		Assert.assertEquals(plano.getCreditosPeriodoAtual(), 24);
+		Assert.assertEquals(plano.getCreditosPeriodosFuturos(), 190);
+		Assert.assertEquals(plano.getCreditosPeriodosPassados(), 0);
+		Assert.assertEquals(plano.getCreditosQueFaltamParaSeFormar(), 214);
+		Assert.assertEquals(plano.totalCreditosCadeirasNaoAlocadas(), 0);
+		plano.setPeriodoAtual(4);
+		
+		Assert.assertEquals(plano.getCreditosPeriodoAtual(), 26);
+		Assert.assertEquals(plano.getCreditosPeriodosFuturos(), 110);
+		Assert.assertEquals(plano.getCreditosPeriodosPassados(), 78);
+		Assert.assertEquals(plano.totalCreditosCadeirasNaoAlocadas(), 0);
+		Assert.assertEquals(plano.getCreditosQueFaltamParaSeFormar(), 136);
+		
+		plano.removeCadeira("Cálculo I");
+		
+		Assert.assertEquals(plano.getCreditosPeriodoAtual(), 10);
+		Assert.assertEquals(plano.getCreditosPeriodosFuturos(), 60);
+		Assert.assertEquals(plano.getCreditosPeriodosPassados(), 58);
+		Assert.assertEquals(plano.totalCreditosCadeirasNaoAlocadas(), 86);
+		Assert.assertEquals(plano.getCreditosQueFaltamParaSeFormar(), 156);
 	}
 	
 }

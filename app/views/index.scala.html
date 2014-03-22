@@ -12,6 +12,31 @@
 	<center><h2>@Messages("planoDeCurso")</h2></center>
 	
 	<div class="separator"> </div>
+	
+		<div class="periodo">
+			<span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:0px;"> Informacoes Uteis</span>
+			<ul style="list-style:none;"> 
+			<nome>Periodo Atual</nome>
+			<select class="selectpicker" data-width="100px" name="periodo" >
+				@for(periodo <- plano.getPeriodos()){
+					<option value=@periodo.getNumero() name="periodo" >@periodo.getNumero()</option><br>
+				}
+			</select><button type="submit" class="btn btn-primary" type="button">Alterar periodo</button>
+				
+			</ul>
+			<strong><span class="periodoCreditos">Periodo Atual: @plano.getPeriodoAtual()</span></strong><br>
+			<span class="periodoCreditos">Creditos disciplinas nao alocadas: @plano.totalCreditosCadeirasNaoAlocadas()</span><br>
+			<span class="periodoCreditos">Creditos periodos passados: @plano.getCreditosPeriodosPassados()</span><br>
+			<span class="periodoCreditos">Creditos periodo atual: @plano.getCreditosPeriodoAtual()</span><br>
+			<span class="periodoCreditos">Creditos periodos Planejados: @plano.getCreditosPeriodosFuturos()</span><br>
+			<span class="periodoCreditos">Creditos minimos que faltam para me formar: @plano.getCreditosQueFaltamParaSeFormar()</span><br>
+	
+			<strong><nome>Periodos abaixo do minimo de creditos:</nome></strong><br>
+			@for(periodo <- plano.periodosComMenosQueMinimoDeCreditos()){
+				<strong><span class="periodoCreditos"> @periodo.toString()</span></strong><br>
+			}
+		</div>
+	
 
 	
 	<div class="periodo">

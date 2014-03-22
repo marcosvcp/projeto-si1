@@ -1,9 +1,9 @@
-2014-03-22 00:15:47,197 - [INFO] - from play in pool-4-thread-4 
+2014-03-22 04:40:10,968 - [INFO] - from play in pool-4-thread-1 
 Listening for HTTP on /0:0:0:0:0:0:0:0:9000
 
-2014-03-22 00:16:44,322 - [INFO] - from play in play-internal-execution-context-1 
+2014-03-22 04:40:31,693 - [INFO] - from play in play-internal-execution-context-1 
 database [default] connected at jdbc:h2:mem:play
 
-2014-03-22 00:16:45,476 - [INFO] - from play in play-internal-execution-context-1 
+2014-03-22 04:40:33,131 - [INFO] - from play in play-internal-execution-context-1 
 Application started (Dev)
 

@@ -38,6 +38,7 @@ public class PlanoDeCurso extends Model {
 	private List<Periodo> periodos;
 
 	private Map<String, Cadeira> mapaDeCadeiras;
+	int periodoAtual;
 
 	@Transient
 	public static final int MAXIMO_CREDITOS = 28;
@@ -68,6 +69,8 @@ public class PlanoDeCurso extends Model {
 
 		// irá distribuir as cadeiras entre os periodos
 		distribuiCadeiras();
+		
+		periodoAtual = 1;
 	}
 
 	/**
@@ -247,11 +250,11 @@ public class PlanoDeCurso extends Model {
 		int creditosTotais = periodoCorrente.getCreditos()
 				+ cadeira.getCreditos();
 		periodoCorrente.setValidador(new ValidadorMaximoCreditos());
-		if (!periodoCorrente.getValidador().validaPeriodo(creditosTotais)) {
+		if (!periodoCorrente.getValidador().validaPeriodo(creditosTotais) && periodo != this.getPeriodos().size()) {
 			throw new LimiteDeCreditosUltrapassadoException(
 					"Limite de Créditos Ultrapassado!");
 		}
-
+		cadeira.setPeriodo(periodo);
 		// remove cadeira do periodo ou da lista de disciplinas disponiveis
 
 		for (Periodo p : periodos) {
@@ -343,4 +346,55 @@ public class PlanoDeCurso extends Model {
 		}
 		return false;
 	}
+	
+	public int totalCreditosCadeirasNaoAlocadas(){
+		int total = 0;
+		for (int i = 0; i < this.getCadeiraDispniveisOrdenadas().size(); i++) {
+			total += this.getCadeiraDispniveisOrdenadas().get(i).getCreditos();
+		}
+		return total;
+	}
+	
+	public int getCreditosPeriodoAtual(){
+		return this.getPeriodo(this.getPeriodoAtual()).getCreditos();
+	}
+	
+	public int getCreditosPeriodosPassados(){
+		int total = 0;
+		for (int i = 1; i < this.getPeriodoAtual(); i++) {
+			total += this.getPeriodo(i).getCreditos();
+		}
+		return total;
+	}
+	
+	public int getCreditosPeriodosFuturos(){
+		int total = 0;
+		for (int i = this.getPeriodoAtual()+1; i <= this.getPeriodos().size(); i++) {
+			total += this.getPeriodo(i).getCreditos();
+		}
+		return total;
+	}
+	
+	public int getCreditosQueFaltamParaSeFormar(){
+		return this.getCreditosPeriodosFuturos() + this.totalCreditosCadeirasNaoAlocadas() + this.getCreditosPeriodoAtual();
+	}
+	
+	public int getPeriodoAtual() {
+		return periodoAtual;
+	}
+
+	public void setPeriodoAtual(int periodoAtual) {
+		this.periodoAtual = periodoAtual;
+	}
+	
+	public List<Periodo> periodosComMenosQueMinimoDeCreditos(){
+		List<Periodo> menosQueMinimo = new ArrayList<Periodo>();
+		for (int i = this.getPeriodoAtual(); i <= this.getPeriodos().size(); i++) {
+			if (this.getPeriodo(i).getCreditos() < MINIMO_CREDITOS) {
+				menosQueMinimo.add(this.getPeriodo(i));
+			}
+		}
+		return menosQueMinimo;
+	}
+	
 }
