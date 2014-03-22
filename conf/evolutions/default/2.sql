@@ -2,6 +2,16 @@
 
 # --- !Ups
 
+
+insert into account values('marcos@gmail.com', 'Marcos Candeia', '970688592',null);
+insert into account values('igor@gmail.com', 'igor', '16157008', null);
+insert into account values('erik@gmail.com', 'erik', '1818354398', null);
+insert into account values('julio@gmail.com', 'julio', '1588493712', null);
+insert into account values('celio@gmail.com', 'celio', '-1785668112', null);
+
+
+
+
 -- (id, nome, creditos, dificuldade, periodo_original)
 
 -- periodo 1
@@ -140,3 +150,4 @@ insert into cadeira_requisito values(50,45);
 
 delete from cadeira;
 delete from cadeira_requisito;
+delete from account;

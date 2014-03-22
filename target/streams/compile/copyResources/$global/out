@@ -1,9 +1,9 @@
 [0m[[0mdebug[0m] [0mCopy resource mappings: [0m
-[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\conf\application.conf,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\application.conf)[0m
-[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\conf\evolutions,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\evolutions)[0m
-[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\conf\messages.pt,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\messages.pt)[0m
-[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\conf\routes,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\routes)[0m
-[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\conf\evolutions\default,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\evolutions\default)[0m
-[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\conf\evolutions\default\1.sql,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\evolutions\default\1.sql)[0m
-[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\conf\evolutions\default\2.sql,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\evolutions\default\2.sql)[0m
-[0m[[0mdebug[0m] [0m	(C:\Users\Dinho\si1\projeto-si1\conf\evolutions\default\2.sql~,C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\evolutions\default\2.sql~)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/putoProjeto/conf/application.conf,/home/marcos/Documents/putoProjeto/target/scala-2.10/classes/application.conf)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/putoProjeto/conf/messages.pt,/home/marcos/Documents/putoProjeto/target/scala-2.10/classes/messages.pt)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/putoProjeto/conf/routes,/home/marcos/Documents/putoProjeto/target/scala-2.10/classes/routes)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/putoProjeto/conf/evolutions,/home/marcos/Documents/putoProjeto/target/scala-2.10/classes/evolutions)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/putoProjeto/conf/evolutions/default,/home/marcos/Documents/putoProjeto/target/scala-2.10/classes/evolutions/default)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/putoProjeto/conf/evolutions/default/2.sql~,/home/marcos/Documents/putoProjeto/target/scala-2.10/classes/evolutions/default/2.sql~)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/putoProjeto/conf/evolutions/default/1.sql,/home/marcos/Documents/putoProjeto/target/scala-2.10/classes/evolutions/default/1.sql)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/putoProjeto/conf/evolutions/default/2.sql,/home/marcos/Documents/putoProjeto/target/scala-2.10/classes/evolutions/default/2.sql)[0m

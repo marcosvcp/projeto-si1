@@ -20,13 +20,13 @@ import play.api.data.Field
 import play.mvc.Http.Context.Implicit._
 import views.html._
 /**/
-object main extends BaseScalaTemplate[play.api.templates.HtmlFormat.Appendable,Format[play.api.templates.HtmlFormat.Appendable]](play.api.templates.HtmlFormat) with play.api.templates.Template2[String,Html,play.api.templates.HtmlFormat.Appendable] {
+object main extends BaseScalaTemplate[play.api.templates.HtmlFormat.Appendable,Format[play.api.templates.HtmlFormat.Appendable]](play.api.templates.HtmlFormat) with play.api.templates.Template3[String,User,Html,play.api.templates.HtmlFormat.Appendable] {
 
     /**/
-    def apply/*1.2*/(title: String)(content: Html):play.api.templates.HtmlFormat.Appendable = {
+    def apply/*1.2*/(title: String, user: User)(content: Html):play.api.templates.HtmlFormat.Appendable = {
         _display_ {
 
-Seq[Any](format.raw/*1.32*/("""
+Seq[Any](format.raw/*1.44*/("""
 
 <!DOCTYPE html>
 
@@ -52,7 +52,7 @@ Seq[Any](format.raw/*1.32*/("""
         <header>
    
     <dl id="user">
-        <dt>User</dt>
+        <dt>"""),_display_(Seq[Any](/*27.14*/user/*27.18*/.getEmail())),format.raw/*27.29*/("""</dt>
         <dd>
             <a href=""""),_display_(Seq[Any](/*29.23*/routes/*29.29*/.Application.logout())),format.raw/*29.50*/("""">Logout</a>
         </dd>
@@ -68,20 +68,20 @@ Seq[Any](format.raw/*1.32*/("""
 """))}
     }
     
-    def render(title:String,content:Html): play.api.templates.HtmlFormat.Appendable = apply(title)(content)
+    def render(title:String,user:User,content:Html): play.api.templates.HtmlFormat.Appendable = apply(title,user)(content)
     
-    def f:((String) => (Html) => play.api.templates.HtmlFormat.Appendable) = (title) => (content) => apply(title)(content)
+    def f:((String,User) => (Html) => play.api.templates.HtmlFormat.Appendable) = (title,user) => (content) => apply(title,user)(content)
     
     def ref: this.type = this
 
 }
                 /*
                     -- GENERATED --
-                    DATE: Fri Mar 21 00:10:45 GMT-03:00 2014
-                    SOURCE: C:/Users/Dinho/si1/projeto-si1/app/views/main.scala.html
-                    HASH: 61183ab9d7f7805ace9cc929449663cfaa1ddad8
-                    MATRIX: 778->1|902->31|996->90|1022->95|1120->158|1134->164|1189->198|1286->260|1300->266|1353->298|1415->324|1430->330|1497->375|1632->474|1647->480|1708->519|1801->576|1816->582|1882->625|1975->682|1990->688|2062->737|2155->794|2170->800|2238->845|2310->881|2325->887|2389->929|2483->987|2498->993|2558->1031|2787->1224|2802->1230|2845->1251|2941->1311|2970->1318
-                    LINES: 26->1|29->1|35->7|35->7|36->8|36->8|36->8|37->9|37->9|37->9|38->10|38->10|38->10|40->12|40->12|40->12|41->13|41->13|41->13|42->14|42->14|42->14|43->15|43->15|43->15|45->17|45->17|45->17|46->18|46->18|46->18|57->29|57->29|57->29|61->33|61->33
+                    DATE: Fri Mar 21 23:57:00 BRT 2014
+                    SOURCE: /home/marcos/Documents/putoProjeto/app/views/main.scala.html
+                    HASH: 96edfcff4c67197156da97afb2cc11b1b4ecbe77
+                    MATRIX: 783->1|919->43|1007->96|1033->101|1130->163|1144->169|1199->203|1295->264|1309->270|1362->302|1423->327|1438->333|1505->378|1638->475|1653->481|1714->520|1806->576|1821->582|1887->625|1979->681|1994->687|2066->736|2158->792|2173->798|2241->843|2311->877|2326->883|2390->925|2483->982|2498->988|2558->1026|2732->1164|2745->1168|2778->1179|2855->1220|2870->1226|2913->1247|3005->1303|3034->1310
+                    LINES: 26->1|29->1|35->7|35->7|36->8|36->8|36->8|37->9|37->9|37->9|38->10|38->10|38->10|40->12|40->12|40->12|41->13|41->13|41->13|42->14|42->14|42->14|43->15|43->15|43->15|45->17|45->17|45->17|46->18|46->18|46->18|55->27|55->27|55->27|57->29|57->29|57->29|61->33|61->33
                     -- GENERATED --
                 */
             

@@ -1,6 +1,6 @@
-// @SOURCE:C:/Users/Dinho/si1/projeto-si1/conf/routes
-// @HASH:b2afa8d9a0198d4b712f7b435c655d610cfb9651
-// @DATE:Thu Mar 20 23:30:49 GMT-03:00 2014
+// @SOURCE:/home/marcos/Documents/putoProjeto/conf/routes
+// @HASH:0d25093a7e5ed08d54ec08b0bf4729b429f5f7bd
+// @DATE:Fri Mar 21 23:56:57 BRT 2014
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._
@@ -13,6 +13,8 @@ import play.libs.F
 import Router.queryString
 
 
+// @LINE:19
+// @LINE:18
 // @LINE:17
 // @LINE:16
 // @LINE:15
@@ -36,6 +38,8 @@ def at(file:String): Call = {
 }
                           
 
+// @LINE:19
+// @LINE:18
 // @LINE:17
 // @LINE:16
 // @LINE:15
@@ -46,15 +50,27 @@ def at(file:String): Call = {
 class ReverseApplication {
     
 
+// @LINE:16
+def cadastroPage(): Call = {
+   Call("GET", _prefix + { _defaultPrefix } + "cadastro")
+}
+                                                
+
 // @LINE:12
 def addCadeira(cadeira:String, periodo:Int): Call = {
    Call("POST", _prefix + { _defaultPrefix } + "addCadeira/" + implicitly[PathBindable[String]].unbind("cadeira", dynamicString(cadeira)) + "/" + implicitly[PathBindable[Int]].unbind("periodo", periodo))
 }
                                                 
 
-// @LINE:17
+// @LINE:19
 def logout(): Call = {
    Call("GET", _prefix + { _defaultPrefix } + "logout")
+}
+                                                
+
+// @LINE:17
+def cadastro(): Call = {
+   Call("POST", _prefix + { _defaultPrefix } + "cadastro")
 }
                                                 
 
@@ -72,7 +88,7 @@ case (cadeira) if true => Call("POST", _prefix + { _defaultPrefix } + "remCadeir
 }
                                                 
 
-// @LINE:16
+// @LINE:18
 def authenticate(): Call = {
    Call("POST", _prefix + { _defaultPrefix } + "login")
 }
@@ -96,6 +112,8 @@ def login(): Call = {
                   
 
 
+// @LINE:19
+// @LINE:18
 // @LINE:17
 // @LINE:16
 // @LINE:15
@@ -124,6 +142,8 @@ def at : JavascriptReverseRoute = JavascriptReverseRoute(
 }
               
 
+// @LINE:19
+// @LINE:18
 // @LINE:17
 // @LINE:16
 // @LINE:15
@@ -133,6 +153,17 @@ def at : JavascriptReverseRoute = JavascriptReverseRoute(
 // @LINE:6
 class ReverseApplication {
     
+
+// @LINE:16
+def cadastroPage : JavascriptReverseRoute = JavascriptReverseRoute(
+   "controllers.Application.cadastroPage",
+   """
+      function() {
+      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "cadastro"})
+      }
+   """
+)
+                        
 
 // @LINE:12
 def addCadeira : JavascriptReverseRoute = JavascriptReverseRoute(
@@ -145,12 +176,23 @@ def addCadeira : JavascriptReverseRoute = JavascriptReverseRoute(
 )
                         
 
-// @LINE:17
+// @LINE:19
 def logout : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Application.logout",
    """
       function() {
       return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "logout"})
+      }
+   """
+)
+                        
+
+// @LINE:17
+def cadastro : JavascriptReverseRoute = JavascriptReverseRoute(
+   "controllers.Application.cadastro",
+   """
+      function() {
+      return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "cadastro"})
       }
    """
 )
@@ -173,7 +215,7 @@ def remCadeira : JavascriptReverseRoute = JavascriptReverseRoute(
 )
                         
 
-// @LINE:16
+// @LINE:18
 def authenticate : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Application.authenticate",
    """
@@ -212,6 +254,8 @@ def login : JavascriptReverseRoute = JavascriptReverseRoute(
         
 
 
+// @LINE:19
+// @LINE:18
 // @LINE:17
 // @LINE:16
 // @LINE:15
@@ -236,6 +280,8 @@ def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.
 }
                           
 
+// @LINE:19
+// @LINE:18
 // @LINE:17
 // @LINE:16
 // @LINE:15
@@ -246,15 +292,27 @@ def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.
 class ReverseApplication {
     
 
+// @LINE:16
+def cadastroPage(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
+   controllers.Application.cadastroPage(), HandlerDef(this, "controllers.Application", "cadastroPage", Seq(), "GET", """""", _prefix + """cadastro""")
+)
+                      
+
 // @LINE:12
 def addCadeira(cadeira:String, periodo:Int): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.Application.addCadeira(cadeira, periodo), HandlerDef(this, "controllers.Application", "addCadeira", Seq(classOf[String], classOf[Int]), "POST", """""", _prefix + """addCadeira/$cadeira<[^/]+>/$periodo<[^/]+>""")
 )
                       
 
-// @LINE:17
+// @LINE:19
 def logout(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.Application.logout(), HandlerDef(this, "controllers.Application", "logout", Seq(), "GET", """""", _prefix + """logout""")
+)
+                      
+
+// @LINE:17
+def cadastro(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
+   controllers.Application.cadastro(), HandlerDef(this, "controllers.Application", "cadastro", Seq(), "POST", """""", _prefix + """cadastro""")
 )
                       
 
@@ -264,7 +322,7 @@ def remCadeira(cadeira:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.Ha
 )
                       
 
-// @LINE:16
+// @LINE:18
 def authenticate(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.Application.authenticate(), HandlerDef(this, "controllers.Application", "authenticate", Seq(), "POST", """""", _prefix + """login""")
 )

@@ -203,7 +203,7 @@ public class Periodo extends Model {
 	public String toString() {
 		return "Periodo " + getNumero();
 	}
-	
+
 	/**
 	 * 
 	 * @return a estrategia atual do validador
@@ -211,10 +211,12 @@ public class Periodo extends Model {
 	public ValidadorDePeriodo getValidador() {
 		return validador;
 	}
+
 	/**
 	 * Modifica a estrategia do validador
 	 * 
-	 * @param validador estrategia a ser usada
+	 * @param validador
+	 *            estrategia a ser usada
 	 */
 	public void setValidador(ValidadorDePeriodo validador) {
 		this.validador = validador;

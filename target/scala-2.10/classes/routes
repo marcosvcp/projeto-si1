@@ -13,6 +13,8 @@ POST    /addCadeira/:cadeira/:periodo  controllers.Application.addCadeira(cadeir
 
 #Login
 GET     /login                  controllers.Application.login()
+GET     /cadastro                     controllers.Application.cadastroPage()
+POST     /cadastro                     controllers.Application.cadastro()
 POST    /login                      controllers.Application.authenticate()
 GET     /logout                     controllers.Application.logout()
 

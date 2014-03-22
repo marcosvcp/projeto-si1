@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import models.exceptions.LimiteDeCreditosUltrapassadoException;
@@ -52,6 +51,7 @@ public class PlanoDeCurso extends Model {
 	@Transient
 	public static Finder<Long, PlanoDeCurso> find = new Finder<Long, PlanoDeCurso>(
 			Long.class, PlanoDeCurso.class);
+
 	/**
 	 * Construtor
 	 */
@@ -81,7 +81,8 @@ public class PlanoDeCurso extends Model {
 	/**
 	 * cria plano de curso na tabela
 	 * 
-	 * @param plano de curso p a ser criado
+	 * @param plano
+	 *            de curso p a ser criado
 	 */
 	public static void create(PlanoDeCurso p) {
 		p.save();
@@ -90,7 +91,8 @@ public class PlanoDeCurso extends Model {
 	/**
 	 * deleta o plano a partir de sua id
 	 * 
-	 * @param id do plano a ser deletado
+	 * @param id
+	 *            do plano a ser deletado
 	 */
 	public static void delete(Long id) {
 		find.ref(id).delete();
@@ -99,7 +101,8 @@ public class PlanoDeCurso extends Model {
 	/**
 	 * atualiza o plano
 	 * 
-	 * @param id do plano de curso a set atualizado
+	 * @param id
+	 *            do plano de curso a set atualizado
 	 */
 	public static void atualizar(Long id) {
 		PlanoDeCurso p = find.ref(id);
@@ -122,7 +125,8 @@ public class PlanoDeCurso extends Model {
 	 * Distribui Cadeiras entre os periodos quando o plano é iniciado pela
 	 * primeira vez.
 	 * 
-	 * @param cadeiras que serao alocadas nos seus respectivos periodos
+	 * @param cadeiras
+	 *            que serao alocadas nos seus respectivos periodos
 	 */
 	public void distribuiCaderas(List<Cadeira> cadeiras) {
 		atualizaMapaCadeira(cadeiras);
@@ -133,7 +137,8 @@ public class PlanoDeCurso extends Model {
 	 * Atualiza o mapadecadeiras das disciplinas com base em uma lista de todas
 	 * as cadeiras existentes.
 	 * 
-	 * @param cadeiras que serao colocadas no mapa
+	 * @param cadeiras
+	 *            que serao colocadas no mapa
 	 */
 	public void atualizaMapaCadeira(List<Cadeira> cadeiras) {
 		Map<String, Cadeira> mapa = new HashMap<String, Cadeira>();
@@ -161,19 +166,19 @@ public class PlanoDeCurso extends Model {
 	public void addPeriodo(int num_periodo) {
 		this.periodos.add(new Periodo(num_periodo));
 	}
-	
+
 	/**
 	 * Retorna o período passado como argumento.
 	 * 
 	 * @param numPeriodo
 	 *            número relativo ao periodo 1,2,3...
-	 *            
+	 * 
 	 * @return Periodo associado ao seu numero
 	 */
 	public Periodo getPeriodo(int numPeriodo) {
 		return this.periodos.get(numPeriodo - 1);
 	}
-	
+
 	/**
 	 * 
 	 * @return lista com todos os periodos
@@ -181,7 +186,7 @@ public class PlanoDeCurso extends Model {
 	public List<Periodo> getPeriodos() {
 		return this.periodos;
 	}
-	
+
 	/**
 	 * 
 	 * @return um mapa de cadeira do curso
@@ -246,8 +251,6 @@ public class PlanoDeCurso extends Model {
 			throw new LimiteDeCreditosUltrapassadoException(
 					"Limite de Créditos Ultrapassado!");
 		}
-		cadeira.setPeriodo(periodo);
-		// verificaPreRequisitos(cadeira, periodo);
 
 		// remove cadeira do periodo ou da lista de disciplinas disponiveis
 
@@ -288,7 +291,7 @@ public class PlanoDeCurso extends Model {
 			removeCadeira(c.getNome());
 		}
 	}
-	
+
 	/**
 	 * Verifica se uma cadeira esta alocada corretamentes
 	 * 

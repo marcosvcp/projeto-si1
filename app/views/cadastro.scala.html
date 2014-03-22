@@ -1,8 +1,8 @@
-@(form: Form[Application.Login])
+@(form: Form[Application.Cadastro])
 
 <html>
     <head>
-        <title>Login</title>
+        <title>Sign Up</title>
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
         <body style='background-image:url(@routes.Assets.at("images/bg-1.jpg"));'>
@@ -20,31 +20,34 @@
     
     <br></br><br></br><br></br><br></br>
   
-    @helper.form(routes.Application.authenticate) {
-   <center><h1>Sign in</h1></center>
-
+    @helper.form(routes.Application.cadastro) {
 	@if(form.hasGlobalErrors) {
     <center><p class="error">
         @form.globalError.message
     </p></center>
 }
-		<center>
-		<dd>
-           <a href="@routes.Application.cadastro()">Cadastro</a>
-        </dd></center>
+
 	@if(flash.contains("success")) {
     <center><p class="success">
         @flash.get("success")
     </p></center>
-}	
+}		<center>
+		<dd>
+           <a href="@routes.Application.login()">Voltar</a>
+        </dd></center>
+
    <p>
        <center><input type="email" name="email" placeholder="Email" value="@form("email").value"></center>
+   </p>
+   
+     <p>
+       <center><input name="Nome" placeholder="Nome" value="@form("nome").value"></center>
    </p>
    <p>
        <center><input type="password" name="password" placeholder="Password"></center>
    </p>
    <p>
-       <center><button type="submit">Login</button></center>
+       <center><button type="submit">Cadastrar</button></center>
    </p>
 }
 

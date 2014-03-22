@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String, user: User)(content: Html)
 
 <!DOCTYPE html>
 
@@ -24,7 +24,7 @@
         <header>
    
     <dl id="user">
-        <dt>User</dt>
+        <dt>@user.getEmail()</dt>
         <dd>
             <a href="@routes.Application.logout()">Logout</a>
         </dd>

@@ -28,6 +28,7 @@ create table account (
   email                     varchar(255) not null,
   name                      varchar(255),
   password                  varchar(255),
+  plano_id                  bigint,
   constraint pk_account primary key (email))
 ;
 
@@ -57,36 +58,42 @@ create sequence plano_de_curso_seq;
 
 create sequence account_seq;
 
+alter table account add constraint fk_account_plano_1 foreign key (plano_id) references plano_de_curso (id) on delete restrict on update restrict;
+create index ix_account_plano_1 on account (plano_id);
 
 
 
-alter table CADEIRA_REQUISITO add constraint fk_CADEIRA_REQUISITO_cadeira_01 foreign key (CD_CADEIRA_1) references cadeira (id);
+alter table CADEIRA_REQUISITO add constraint fk_CADEIRA_REQUISITO_cadeira_01 foreign key (CD_CADEIRA_1) references cadeira (id) on delete restrict on update restrict;
 
-alter table CADEIRA_REQUISITO add constraint fk_CADEIRA_REQUISITO_cadeira_02 foreign key (CD_CADEIRA_2) references cadeira (id);
+alter table CADEIRA_REQUISITO add constraint fk_CADEIRA_REQUISITO_cadeira_02 foreign key (CD_CADEIRA_2) references cadeira (id) on delete restrict on update restrict;
 
-alter table TB_PERIODO_CADEIRA add constraint fk_TB_PERIODO_CADEIRA_periodo_01 foreign key (CD_PERIODO_CADEIRA) references periodo (id);
+alter table TB_PERIODO_CADEIRA add constraint fk_TB_PERIODO_CADEIRA_periodo_01 foreign key (CD_PERIODO_CADEIRA) references periodo (id) on delete restrict on update restrict;
 
-alter table TB_PERIODO_CADEIRA add constraint fk_TB_PERIODO_CADEIRA_cadeira_02 foreign key (CD_CADEIRA) references cadeira (id);
+alter table TB_PERIODO_CADEIRA add constraint fk_TB_PERIODO_CADEIRA_cadeira_02 foreign key (CD_CADEIRA) references cadeira (id) on delete restrict on update restrict;
 
-alter table TB_PLANO_PERIODO add constraint fk_TB_PLANO_PERIODO_plano_de__01 foreign key (CD_PLANO_PERIODO) references plano_de_curso (id);
+alter table TB_PLANO_PERIODO add constraint fk_TB_PLANO_PERIODO_plano_de__01 foreign key (CD_PLANO_PERIODO) references plano_de_curso (id) on delete restrict on update restrict;
 
-alter table TB_PLANO_PERIODO add constraint fk_TB_PLANO_PERIODO_periodo_02 foreign key (CD_PERIODO) references periodo (id);
+alter table TB_PLANO_PERIODO add constraint fk_TB_PLANO_PERIODO_periodo_02 foreign key (CD_PERIODO) references periodo (id) on delete restrict on update restrict;
 
 # --- !Downs
 
-drop table if exists cadeira cascade;
+SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists CADEIRA_REQUISITO cascade;
+drop table if exists cadeira;
 
-drop table if exists periodo cascade;
+drop table if exists CADEIRA_REQUISITO;
 
-drop table if exists TB_PERIODO_CADEIRA cascade;
+drop table if exists periodo;
 
-drop table if exists plano_de_curso cascade;
+drop table if exists TB_PERIODO_CADEIRA;
 
-drop table if exists TB_PLANO_PERIODO cascade;
+drop table if exists plano_de_curso;
 
-drop table if exists account cascade;
+drop table if exists TB_PLANO_PERIODO;
+
+drop table if exists account;
+
+SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists cadeira_seq;
 
