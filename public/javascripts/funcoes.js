@@ -1,5 +1,9 @@
 //funções do DRAG e DROP!
 
+function getSelectedValue(){
+	return $( "#periodoSelect" ).val();
+}
+
 //Funcção para quando o elemento estiver sobre a div de Periodo
 function allowDrop(ev,e)
 {

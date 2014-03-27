@@ -38,7 +38,7 @@ public class PlanoDeCurso extends Model {
 	private List<Periodo> periodos;
 
 	private Map<String, Cadeira> mapaDeCadeiras;
-	int periodoAtual;
+	public int periodoAtual;
 
 	@Transient
 	public static final int MAXIMO_CREDITOS = 28;
@@ -380,11 +380,17 @@ public class PlanoDeCurso extends Model {
 	}
 	
 	public int getPeriodoAtual() {
+		System.out.println("ATUAL->" + periodoAtual);
 		return periodoAtual;
 	}
 
 	public void setPeriodoAtual(int periodoAtual) {
 		this.periodoAtual = periodoAtual;
+	}
+	
+	public void atualizaPeriodo() {
+		System.out.println("periodo ATUAL " + periodoAtual);
+		this.atualizar(id);
 	}
 	
 	public List<Periodo> periodosComMenosQueMinimoDeCreditos(){
