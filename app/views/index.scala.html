@@ -17,12 +17,12 @@
 		<form action="@routes.Application.atualizaPeriodo" method="post">
 			<ul style="list-style:none;">
             	<label for="periodo">Periodo Atual</label>
-            	<input type="number" name="periodo" value="@plano.periodoAtual" >
-                <input type="submit" class="btn btn-primary" value="Alterar periodo">
+            	<input type="number" name="periodo" title="Periodo entre 1 e 10" required value="@plano.periodoAtual" >
+                <input type="submit" class="btn btn-primary" title="Periodo entre 1 e 10"  value="Alterar periodo">
 			</ul>
 		</form>
 
-           <span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:0px;"> Informacoes Uteis</span>
+           <span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:0px;"> Informacoes Uteis</span><br></br>
                         			<strong><span class="periodoCreditos">Periodo Atual: @plano.getPeriodoAtual()</span></strong><br>
 			<span class="periodoCreditos">Creditos disciplinas nao alocadas: @plano.totalCreditosCadeirasNaoAlocadas()</span><br>
 			<span class="periodoCreditos">Creditos periodos passados: @plano.getCreditosPeriodosPassados()</span><br>

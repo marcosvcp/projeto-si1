@@ -1,4 +1,4 @@
-[0m[[0mdebug[0m] [0mInvalidating C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\controllers\Application.class: stamp changed from lastModified(1395879267889) to lastModified(1395879316339)[0m
+[0m[[0mdebug[0m] [0mInvalidating C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes\controllers\Application.class: stamp changed from lastModified(1395888679715) to lastModified(1395888687284)[0m
 [0m[[0mdebug[0m] [0m[0m
 [0m[[0mdebug[0m] [0mInitial source changes: [0m
 [0m[[0mdebug[0m] [0m	removed:Set()[0m
@@ -17,10 +17,10 @@
 [0m[[0minfo[0m] [0mCompiling 1 Java source to C:\Users\Dinho\si1\projeto-si1\target\scala-2.10\classes...[0m
 [0m[[0mdebug[0m] [0mAttempting to call javac directly...[0m
 [0m[[0mdebug[0m] [0mcom.sun.tools.javac.Main not found with appropriate method signature; forking javac instead[0m
-[0m[[0mdebug[0m] [0mForking javac: javac @C:/Users/Dinho/AppData/Local/Temp/sbt_69fee8c8/argfile[0m
+[0m[[0mdebug[0m] [0mForking javac: javac @C:/Users/Dinho/AppData/Local/Temp/sbt_98577deb/argfile[0m
 [0m[[0mdebug[0m] [0mjavac returned exit code: 0[0m
-[0m[[0mdebug[0m] [0mJava compilation took 1.199963696 s[0m
-[0m[[0mdebug[0m] [0mJava analysis took 0.036045652 s[0m
+[0m[[0mdebug[0m] [0mJava compilation took 1.381114326 s[0m
+[0m[[0mdebug[0m] [0mJava analysis took 0.07081807 s[0m
 [0m[[0mdebug[0m] [0mInvalidated by transitive public inheritance: Set()[0m
 [0m[[0mdebug[0m] [0mInvalidated by direct dependency: Set()[0m
 [0m[[0mdebug[0m] [0mNew invalidations:[0m

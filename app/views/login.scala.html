@@ -21,7 +21,7 @@
     <br></br><br></br><br></br><br></br>
   
     @helper.form(routes.Application.authenticate) {
-   <center><h1>Sign in</h1></center>
+   <center><h1>Login in</h1></center>
 
 	@if(form.hasGlobalErrors) {
     <center><p class="error">
@@ -30,7 +30,7 @@
 }
 		<center>
 		<dd>
-           <a href="@routes.Application.cadastro()">Cadastro</a>
+           <a href="@routes.Application.cadastro()">Cadastrar Usuario</a>
         </dd></center>
 	@if(flash.contains("success")) {
     <center><p class="success">

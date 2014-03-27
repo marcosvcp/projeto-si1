@@ -16,6 +16,7 @@ import com.google.common.base.Objects;
 public class Application extends Controller {
 
 	static PlanoDeCurso plano;
+	
 	public static Result index() {
 		//Caso exista alguém logado
 		if (session("plano_ID") == null) {
@@ -71,12 +72,10 @@ public class Application extends Controller {
 	}
 
 	public static class Cadastro {
-
 		public String email;
 		public String password;
 		public String nome;
 		public int periodo;
-
 	}
 
 	public static Result logout() {
@@ -138,16 +137,16 @@ public class Application extends Controller {
 			return true;
 		}
 		return false;
-
 	}
 
 	public static Result atualizaPeriodo(){
 		Form<Cadastro> cadastroForm = Form.form(Cadastro.class)
 				.bindFromRequest();
 		int periodo = cadastroForm.get().periodo;
-		System.out.println("AA"+periodo);
-		plano.setPeriodoAtual(periodo);
-		plano.update();
+		if(!(periodo < 1 || periodo > 10)){
+			plano.setPeriodoAtual(periodo);
+			plano.update();	
+		}
 		return index();
 	}
 	private static boolean isPasswordValido(Form<Login> loginForm, User user) {
@@ -155,5 +154,4 @@ public class Application extends Controller {
 				Objects.hashCode(user.getEmail(), loginForm.get().password))
 				.equals(user.getPassword());
 	}
-
 }

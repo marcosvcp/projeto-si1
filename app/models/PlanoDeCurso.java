@@ -17,6 +17,7 @@ import javax.persistence.Transient;
 
 import models.exceptions.LimiteDeCreditosUltrapassadoException;
 import models.validators.ValidadorMaximoCreditos;
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 /**
@@ -38,6 +39,8 @@ public class PlanoDeCurso extends Model {
 	private List<Periodo> periodos;
 
 	private Map<String, Cadeira> mapaDeCadeiras;
+	
+	@Required
 	public int periodoAtual;
 
 	@Transient
@@ -347,6 +350,10 @@ public class PlanoDeCurso extends Model {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @return a qt de creditos das disciplinas que ainda nao foram alocadas
+	 */
 	public int totalCreditosCadeirasNaoAlocadas(){
 		int total = 0;
 		for (int i = 0; i < this.getCadeiraDispniveisOrdenadas().size(); i++) {
@@ -355,10 +362,18 @@ public class PlanoDeCurso extends Model {
 		return total;
 	}
 	
+	/**
+	 * 
+	 * @return qt de creditos apenas do periodo atual
+	 */
 	public int getCreditosPeriodoAtual(){
 		return this.getPeriodo(this.getPeriodoAtual()).getCreditos();
 	}
 	
+	/**
+	 * 
+	 * @return qt de creditos do primeiro periodo ate o periodo atual
+	 */
 	public int getCreditosPeriodosPassados(){
 		int total = 0;
 		for (int i = 1; i < this.getPeriodoAtual(); i++) {
@@ -367,6 +382,10 @@ public class PlanoDeCurso extends Model {
 		return total;
 	}
 	
+	/**
+	 * 
+	 * @return qt de creditos do periodo atual ate o ultimo periodo
+	 */
 	public int getCreditosPeriodosFuturos(){
 		int total = 0;
 		for (int i = this.getPeriodoAtual()+1; i <= this.getPeriodos().size(); i++) {
@@ -375,24 +394,34 @@ public class PlanoDeCurso extends Model {
 		return total;
 	}
 	
+	/**
+	 * 
+	 * @return a qt de creditos das disciplinas que faltam ser alocadas somadas a qt de credito do periodo atual ate o ultimo periodo
+	 */
 	public int getCreditosQueFaltamParaSeFormar(){
 		return this.getCreditosPeriodosFuturos() + this.totalCreditosCadeirasNaoAlocadas() + this.getCreditosPeriodoAtual();
 	}
 	
+	/**
+	 * 
+	 * @return o numero do periodo atual
+	 */
 	public int getPeriodoAtual() {
-		System.out.println("ATUAL->" + periodoAtual);
 		return periodoAtual;
 	}
 
+	/**
+	 * altera o periodo atual
+	 * @param periodoAtual 
+	 */
 	public void setPeriodoAtual(int periodoAtual) {
-		this.periodoAtual = periodoAtual;
+			this.periodoAtual = periodoAtual;
 	}
-	
-	public void atualizaPeriodo() {
-		System.out.println("periodo ATUAL " + periodoAtual);
-		this.atualizar(id);
-	}
-	
+
+	/**
+	 * 
+	 * @return uma lista de periodos com os periodos que estao com minimo de creditos permitidos
+	 */
 	public List<Periodo> periodosComMenosQueMinimoDeCreditos(){
 		List<Periodo> menosQueMinimo = new ArrayList<Periodo>();
 		for (int i = this.getPeriodoAtual(); i <= this.getPeriodos().size(); i++) {
@@ -402,5 +431,4 @@ public class PlanoDeCurso extends Model {
 		}
 		return menosQueMinimo;
 	}
-	
 }
