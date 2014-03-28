@@ -36,7 +36,6 @@ public class User extends Model {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private PlanoDeCurso plano;
-	// -- Queries
 
 	public static Model.Finder<String, User> find = new Model.Finder<String, User>(
 			String.class, User.class);
@@ -63,48 +62,85 @@ public class User extends Model {
 				.findUnique();
 	}
 
-	// --
-
-	public String toString() {
-		return "User(" + getName() + ")";
-	}
-
+	/**
+	 * 
+	 * @return o plano de curso do usuario
+	 */
 	public PlanoDeCurso getPlano() {
 		return plano;
 	}
 
+	/**
+	 * Altera o plano de curso do usuario
+	 * @param plano
+	 */
 	public void setPlano(PlanoDeCurso plano) {
 		this.plano = plano;
 	}
 
+	/**
+	 * 
+	 * @return o email do usuario
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * altera o email do usuario
+	 * @param email
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * 
+	 * @return nome do usuario
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * altera nome do usuario
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * 
+	 * @return a senha do usuario
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+	/**
+	 * altera a senha do usuario
+	 * @param password
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 		this.password = String.valueOf(this.hashCode());
 	}
+	
+	
+	/**
+	 * toString para usuario
+	 */
+	@Override
+	public String toString() {
+		return "User(" + getName() + ")";
+	}
 
+	/**
+	 * hashCode para usuario
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hashCode(email, password);
 	}
-
 }

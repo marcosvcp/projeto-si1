@@ -17,7 +17,7 @@
 		<form action="@routes.Application.atualizaPeriodo" method="post">
 			<ul style="list-style:none;">
             	<label for="periodo">Periodo Atual</label>
-            	<input type="number" name="periodo" title="Periodo entre 1 e 10" required value="@plano.periodoAtual" >
+            	<input type="number" min="1" max="10" name="periodo" title="Periodo entre 1 e 10" required value="@plano.periodoAtual" >
                 <input type="submit" class="btn btn-primary" title="Periodo entre 1 e 10"  value="Alterar periodo">
 			</ul>
 		</form>
