@@ -35,33 +35,33 @@ Seq[Any](format.raw/*1.35*/("""
 <link rel="stylesheet" href=""""),_display_(Seq[Any](/*7.31*/routes/*7.37*/.Assets.at("stylesheets/main.css"))),format.raw/*7.71*/("""">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
-<body style='background-image:url("""),_display_(Seq[Any](/*10.36*/routes/*10.42*/.Assets.at("images/bg-1.jpg"))),format.raw/*10.71*/(""");'>
+<body>
 """),_display_(Seq[Any](/*11.2*/main("Plano de Curso", user)/*11.30*/ {_display_(Seq[Any](format.raw/*11.32*/("""
 	<center><h2>"""),_display_(Seq[Any](/*12.15*/Messages("planoDeCurso"))),format.raw/*12.39*/("""</h2></center>
 
-	<div class="separator"> </div>
 
 <div class="periodo">
-		<form action=""""),_display_(Seq[Any](/*17.18*/routes/*17.24*/.Application.atualizaPeriodo)),format.raw/*17.52*/("""" method="post">
+		<form action=""""),_display_(Seq[Any](/*16.18*/routes/*16.24*/.Application.atualizaPeriodo)),format.raw/*16.52*/("""" method="post">
 			<ul style="list-style:none;">
-            	<label for="periodo">Periodo Atual</label>
-            	<input type="number" min="1" max="10" name="periodo" title="Periodo entre 1 e 10" required value=""""),_display_(Seq[Any](/*20.113*/plano/*20.118*/.periodoAtual)),format.raw/*20.131*/("""" >
-                <input type="submit" class="btn btn-primary" title="Periodo entre 1 e 10"  value="Alterar periodo">
+            	<span style="float:left;margin-left:0px;font-size:20px;">Periodo Atual:</span>
+            	<input type="number" style="margin-bot:10px;height:25px;width:35px" min="1" max="10" name="periodo" title="Periodo entre 1 e 10" required value=""""),_display_(Seq[Any](/*19.160*/plano/*19.165*/.periodoAtual)),format.raw/*19.178*/("""" ><br/>
+                <input type="submit" style="position:center;margin-top=10px;float:center;" title="Periodo entre 1 e 10"  value="Alterar">
 			</ul>
 		</form>
-
+			<div><br/>
            <span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:0px;"> Informacoes Uteis</span><br></br>
-                        			<strong><span class="periodoCreditos">Periodo Atual: """),_display_(Seq[Any](/*26.82*/plano/*26.87*/.getPeriodoAtual())),format.raw/*26.105*/("""</span></strong><br>
-			<span class="periodoCreditos">Creditos disciplinas nao alocadas: """),_display_(Seq[Any](/*27.70*/plano/*27.75*/.totalCreditosCadeirasNaoAlocadas())),format.raw/*27.110*/("""</span><br>
-			<span class="periodoCreditos">Creditos periodos passados: """),_display_(Seq[Any](/*28.63*/plano/*28.68*/.getCreditosPeriodosPassados())),format.raw/*28.98*/("""</span><br>
-			<span class="periodoCreditos">Creditos periodo atual: """),_display_(Seq[Any](/*29.59*/plano/*29.64*/.getCreditosPeriodoAtual())),format.raw/*29.90*/("""</span><br>
-			<span class="periodoCreditos">Creditos periodos Planejados: """),_display_(Seq[Any](/*30.65*/plano/*30.70*/.getCreditosPeriodosFuturos())),format.raw/*30.99*/("""</span><br>
-			<span class="periodoCreditos">Creditos minimos que faltam para me formar: """),_display_(Seq[Any](/*31.79*/plano/*31.84*/.getCreditosQueFaltamParaSeFormar())),format.raw/*31.119*/("""</span><br>
+                        			<strong><span class="periodoCreditos">Periodo Atual: """),_display_(Seq[Any](/*25.82*/plano/*25.87*/.getPeriodoAtual())),format.raw/*25.105*/("""</span></strong><br>
+			<span class="periodoCreditos">Creditos disciplinas nao alocadas: """),_display_(Seq[Any](/*26.70*/plano/*26.75*/.totalCreditosCadeirasNaoAlocadas())),format.raw/*26.110*/("""</span><br>
+			<span class="periodoCreditos">Creditos periodos passados: """),_display_(Seq[Any](/*27.63*/plano/*27.68*/.getCreditosPeriodosPassados())),format.raw/*27.98*/("""</span><br>
+			<span class="periodoCreditos">Creditos periodo atual: """),_display_(Seq[Any](/*28.59*/plano/*28.64*/.getCreditosPeriodoAtual())),format.raw/*28.90*/("""</span><br>
+			<span class="periodoCreditos">Creditos periodos Planejados: """),_display_(Seq[Any](/*29.65*/plano/*29.70*/.getCreditosPeriodosFuturos())),format.raw/*29.99*/("""</span><br>
+			<span class="periodoCreditos">Creditos minimos que faltam para me formar: """),_display_(Seq[Any](/*30.79*/plano/*30.84*/.getCreditosQueFaltamParaSeFormar())),format.raw/*30.119*/("""</span><br>
 
 			<strong><nome>Periodos abaixo do minimo de creditos:</nome></strong><br>
-			"""),_display_(Seq[Any](/*34.5*/for(periodo <- plano.periodosComMenosQueMinimoDeCreditos()) yield /*34.64*/{_display_(Seq[Any](format.raw/*34.65*/("""
-				<strong><span class="periodoCreditos"> """),_display_(Seq[Any](/*35.45*/periodo/*35.52*/.toString())),format.raw/*35.63*/("""</span></strong><br>
-			""")))})),format.raw/*36.5*/("""
+			"""),_display_(Seq[Any](/*33.5*/for(periodo <- plano.periodosComMenosQueMinimoDeCreditos()) yield /*33.64*/{_display_(Seq[Any](format.raw/*33.65*/("""
+				<strong><span class="periodoCreditos"> """),_display_(Seq[Any](/*34.45*/periodo/*34.52*/.toString())),format.raw/*34.63*/("""</span></strong><br>
+			""")))})),format.raw/*35.5*/("""
+			</div>
 		</div>
 
 
@@ -82,9 +82,9 @@ Seq[Any](format.raw/*1.35*/("""
 	<span class="periodoCreditos">Arraste para alocar</span>
 	</div>
 
-	<div >
-
-	"""),_display_(Seq[Any](/*59.3*/for(periodo <- plano.getPeriodos()) yield /*59.38*/ {_display_(Seq[Any](format.raw/*59.40*/("""
+	<div>
+	"""),_display_(Seq[Any](/*58.3*/for(periodo <- plano.getPeriodos()) yield /*58.38*/ {_display_(Seq[Any](format.raw/*58.40*/("""
+	
 		<div id=""""),_display_(Seq[Any](/*60.13*/periodo/*60.20*/.getNumero())),format.raw/*60.32*/("""" class="periodo" ondrop="drop(event, this)"
 			ondragover="allowDrop(event,this)" ondragleave="leave(event, this)">
 
@@ -98,13 +98,13 @@ Seq[Any](format.raw/*1.35*/("""
 				<div class="alocadas-errada" id=""""),_display_(Seq[Any](/*70.39*/cadeira/*70.46*/.getNome())),format.raw/*70.56*/("""" draggable="true" 
 				ondragstart="drag(event)" ondragend="dragEnd()" onclick="remCadeira('"""),_display_(Seq[Any](/*71.75*/cadeira/*71.82*/.getNome())),format.raw/*71.92*/("""','true')">
 				""")))})),format.raw/*72.6*/("""
-		  		<center><label class="nome"> <span>"""),_display_(Seq[Any](/*73.43*/cadeira/*73.50*/.getNome())),format.raw/*73.60*/("""</span></label></center>
+		  		<center> <span>"""),_display_(Seq[Any](/*73.23*/cadeira/*73.30*/.getNome())),format.raw/*73.40*/("""</span></center>
 		  		<label class="creditos">"""),_display_(Seq[Any](/*74.32*/cadeira/*74.39*/.getCreditos())),format.raw/*74.53*/(""" """),_display_(Seq[Any](/*74.55*/Messages("creditos"))),format.raw/*74.75*/("""</label>
 		  		<label class="dificuldade"> dificuldade: """),_display_(Seq[Any](/*75.49*/cadeira/*75.56*/.getDificuldade())),format.raw/*75.73*/("""</label>
-		  		<span style="margin-top: 20px;" ></span>	
 		  	</div>
 
-		""")))})),format.raw/*79.4*/(""" 
+		""")))})),format.raw/*78.4*/(""" 
+		
 		</ul>
 		<span class="periodoCreditos">"""),_display_(Seq[Any](/*81.34*/periodo/*81.41*/.getCreditos())),format.raw/*81.55*/(""" """),_display_(Seq[Any](/*81.57*/Messages("creditos"))),format.raw/*81.77*/("""</span>
 		<span class="periodoDificuldade">Dificuldade: """),_display_(Seq[Any](/*82.50*/periodo/*82.57*/.getDificuldadeTotal())),format.raw/*82.79*/("""</span>
@@ -124,11 +124,11 @@ Seq[Any](format.raw/*1.35*/("""
 }
                 /*
                     -- GENERATED --
-                    DATE: Thu Mar 27 23:05:31 GMT-03:00 2014
-                    SOURCE: C:/Users/Dinho/si1/projeto-si1/app/views/index.scala.html
-                    HASH: 00210e5aa17384f94a01df3d42396f202d19d0af
-                    MATRIX: 785->1|929->34|959->56|1097->159|1111->165|1168->201|1246->244|1260->250|1315->284|1488->421|1503->427|1554->456|1596->463|1633->491|1673->493|1725->509|1771->533|1900->626|1915->632|1965->660|2223->881|2238->886|2274->899|2672->1261|2686->1266|2727->1284|2854->1375|2868->1380|2926->1415|3037->1490|3051->1495|3103->1525|3210->1596|3224->1601|3272->1627|3385->1704|3399->1709|3450->1738|3577->1829|3591->1834|3649->1869|3780->1965|3855->2024|3894->2025|3976->2071|3992->2078|4025->2089|4082->2115|4315->2313|4384->2366|4424->2368|4494->2402|4510->2409|4542->2419|4685->2526|4701->2533|4733->2543|4818->2592|4834->2599|4870->2613|4908->2615|4950->2635|5043->2692|5059->2699|5098->2716|5153->2740|5284->2836|5335->2871|5375->2873|5425->2887|5441->2894|5475->2906|5760->3155|5777->3162|5812->3174|5851->3176|5894->3196|5943->3210|5996->3247|6036->3249|6078->3256|6138->3307|6178->3309|6249->3344|6265->3351|6297->3361|6428->3456|6444->3463|6476->3473|6512->3492|6525->3497|6564->3498|6640->3538|6656->3545|6688->3555|6819->3650|6835->3657|6867->3667|6916->3685|6996->3729|7012->3736|7044->3746|7137->3803|7153->3810|7189->3824|7227->3826|7269->3846|7363->3904|7379->3911|7418->3928|7526->4005|7607->4050|7623->4057|7659->4071|7697->4073|7739->4093|7833->4151|7849->4158|7893->4180|7945->4201|7988->4213
-                    LINES: 26->1|30->1|32->4|34->6|34->6|34->6|35->7|35->7|35->7|38->10|38->10|38->10|39->11|39->11|39->11|40->12|40->12|45->17|45->17|45->17|48->20|48->20|48->20|54->26|54->26|54->26|55->27|55->27|55->27|56->28|56->28|56->28|57->29|57->29|57->29|58->30|58->30|58->30|59->31|59->31|59->31|62->34|62->34|62->34|63->35|63->35|63->35|64->36|72->44|72->44|72->44|73->45|73->45|73->45|75->47|75->47|75->47|76->48|76->48|76->48|76->48|76->48|77->49|77->49|77->49|79->51|87->59|87->59|87->59|88->60|88->60|88->60|92->64|92->64|92->64|92->64|92->64|93->65|93->65|93->65|94->66|94->66|94->66|95->67|95->67|95->67|96->68|96->68|96->68|97->69|97->69|97->69|98->70|98->70|98->70|99->71|99->71|99->71|100->72|101->73|101->73|101->73|102->74|102->74|102->74|102->74|102->74|103->75|103->75|103->75|107->79|109->81|109->81|109->81|109->81|109->81|110->82|110->82|110->82|112->84|114->86
+                    DATE: Fri Mar 28 04:15:37 BRT 2014
+                    SOURCE: C:/Users/Igor/si1/PSI1/app/views/index.scala.html
+                    HASH: ba8845c8274f0828019215f6efae7c50b1a4b823
+                    MATRIX: 785->1|929->34|959->56|1097->159|1111->165|1168->201|1246->244|1260->250|1315->284|1461->395|1498->423|1538->425|1590->441|1636->465|1732->525|1747->531|1797->559|2138->863|2153->868|2189->881|2627->1283|2641->1288|2682->1306|2809->1397|2823->1402|2881->1437|2992->1512|3006->1517|3058->1547|3165->1618|3179->1623|3227->1649|3340->1726|3354->1731|3405->1760|3532->1851|3546->1856|3604->1891|3735->1987|3810->2046|3849->2047|3931->2093|3947->2100|3980->2111|4037->2137|4281->2346|4350->2399|4390->2401|4460->2435|4476->2442|4508->2452|4651->2559|4667->2566|4699->2576|4784->2625|4800->2632|4836->2646|4874->2648|4916->2668|5009->2725|5025->2732|5064->2749|5119->2773|5247->2866|5298->2901|5338->2903|5391->2920|5407->2927|5441->2939|5726->3188|5743->3195|5778->3207|5817->3209|5860->3229|5909->3243|5962->3280|6002->3282|6044->3289|6104->3340|6144->3342|6215->3377|6231->3384|6263->3394|6394->3489|6410->3496|6442->3506|6478->3525|6491->3530|6530->3531|6606->3571|6622->3578|6654->3588|6785->3683|6801->3690|6833->3700|6882->3718|6942->3742|6958->3749|6990->3759|7075->3808|7091->3815|7127->3829|7165->3831|7207->3851|7301->3909|7317->3916|7356->3933|7415->3961|7500->4010|7516->4017|7552->4031|7590->4033|7632->4053|7726->4111|7742->4118|7786->4140|7838->4161|7881->4173
+                    LINES: 26->1|30->1|32->4|34->6|34->6|34->6|35->7|35->7|35->7|39->11|39->11|39->11|40->12|40->12|44->16|44->16|44->16|47->19|47->19|47->19|53->25|53->25|53->25|54->26|54->26|54->26|55->27|55->27|55->27|56->28|56->28|56->28|57->29|57->29|57->29|58->30|58->30|58->30|61->33|61->33|61->33|62->34|62->34|62->34|63->35|72->44|72->44|72->44|73->45|73->45|73->45|75->47|75->47|75->47|76->48|76->48|76->48|76->48|76->48|77->49|77->49|77->49|79->51|86->58|86->58|86->58|88->60|88->60|88->60|92->64|92->64|92->64|92->64|92->64|93->65|93->65|93->65|94->66|94->66|94->66|95->67|95->67|95->67|96->68|96->68|96->68|97->69|97->69|97->69|98->70|98->70|98->70|99->71|99->71|99->71|100->72|101->73|101->73|101->73|102->74|102->74|102->74|102->74|102->74|103->75|103->75|103->75|106->78|109->81|109->81|109->81|109->81|109->81|110->82|110->82|110->82|112->84|114->86
                     -- GENERATED --
                 */
             

@@ -7,21 +7,20 @@
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
-<body style='background-image:url(@routes.Assets.at("images/bg-1.jpg"));'>
+<body>
 @main("Plano de Curso", user) {
 	<center><h2>@Messages("planoDeCurso")</h2></center>
 
-	<div class="separator"> </div>
 
 <div class="periodo">
 		<form action="@routes.Application.atualizaPeriodo" method="post">
 			<ul style="list-style:none;">
-            	<label for="periodo">Periodo Atual</label>
-            	<input type="number" min="1" max="10" name="periodo" title="Periodo entre 1 e 10" required value="@plano.periodoAtual" >
-                <input type="submit" class="btn btn-primary" title="Periodo entre 1 e 10"  value="Alterar periodo">
+            	<span style="float:left;margin-left:0px;font-size:20px;">Periodo Atual:</span>
+            	<input type="number" style="margin-bot:10px;height:25px;width:35px" min="1" max="10" name="periodo" title="Periodo entre 1 e 10" required value="@plano.periodoAtual" ><br/>
+                <input type="submit" style="position:center;margin-top=10px;float:center;" title="Periodo entre 1 e 10"  value="Alterar">
 			</ul>
 		</form>
-
+			<div><br/>
            <span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:0px;"> Informacoes Uteis</span><br></br>
                         			<strong><span class="periodoCreditos">Periodo Atual: @plano.getPeriodoAtual()</span></strong><br>
 			<span class="periodoCreditos">Creditos disciplinas nao alocadas: @plano.totalCreditosCadeirasNaoAlocadas()</span><br>
@@ -34,6 +33,7 @@
 			@for(periodo <- plano.periodosComMenosQueMinimoDeCreditos()){
 				<strong><span class="periodoCreditos"> @periodo.toString()</span></strong><br>
 			}
+			</div>
 		</div>
 
 
@@ -54,9 +54,9 @@
 	<span class="periodoCreditos">Arraste para alocar</span>
 	</div>
 
-	<div >
-
+	<div>
 	@for(periodo <- plano.getPeriodos()) {
+	
 		<div id="@periodo.getNumero()" class="periodo" ondrop="drop(event, this)"
 			ondragover="allowDrop(event,this)" ondragleave="leave(event, this)">
 
@@ -70,13 +70,13 @@
 				<div class="alocadas-errada" id="@cadeira.getNome()" draggable="true" 
 				ondragstart="drag(event)" ondragend="dragEnd()" onclick="remCadeira('@cadeira.getNome()','true')">
 				}
-		  		<center><label class="nome"> <span>@cadeira.getNome()</span></label></center>
+		  		<center> <span>@cadeira.getNome()</span></center>
 		  		<label class="creditos">@cadeira.getCreditos() @Messages("creditos")</label>
 		  		<label class="dificuldade"> dificuldade: @cadeira.getDificuldade()</label>
-		  		<span style="margin-top: 20px;" ></span>	
 		  	</div>
 
 		} 
+		
 		</ul>
 		<span class="periodoCreditos">@periodo.getCreditos() @Messages("creditos")</span>
 		<span class="periodoDificuldade">Dificuldade: @periodo.getDificuldadeTotal()</span>
