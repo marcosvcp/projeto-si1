@@ -1,6 +1,28 @@
 body{
 	margin: 0 auto;
 }
+.remove:hover{
+color:#0ff;
+}
+
+.remover{
+width:30px;
+height:30px;
+border-radius:30px;
+position:relative;
+background-color:#f22;
+opacity:0.8;
+visibility:visible;
+z-index:10;
+}
+
+.nome{
+position:absolute;
+left:0px;width:180px; 
+font-size:12px;
+text-align:center;
+z-index:-2;
+}
 
 h2{
 	position:relative;
@@ -10,23 +32,23 @@ h2{
 	.disponiveis{}
 	.alocadas-errada{}
 	
-	.alocadas, .disponiveis{
-	width:190px;height:60px;
+.alocadas, .disponiveis{
+	width:180px;height:60px;
 	margin-bottom:10px;
 	margin-top:10px;
-	 block;
-	 border-radius:20px;
+	block;
+	border-radius:5px;
 	position:relative;
-	 left:-28px;
-	 margin-right:15px; 
-	 border:2px solid #000;
-	 background-image:url('/assets/images/bg-body.gif');
-	 background-size:100% 100%;z-index:1;
+	left:-28px;
+	margin-right:15px; 
+	border:1px solid #000;
+	background-image:url('/assets/images/bg-body.gif');
+	background-size:100% 100%;z-index:1;
  }
 
 .alocadas a, .disponiveis a{
 	text-decoration: none;
-	 color: #003;
+	color: #003;
  }
 
 .alocadas:hover{
@@ -48,11 +70,11 @@ h2{
 	margin-bottom:10px;
 	margin-top:10px; 
 	block;
-	border-radius:20px;
+	border-radius:5px;
 	position:relative; 
 	left:-28px;
 	margin-right:15px; 
-	border:2px solid #f00;
+	border:1px solid #f00;
 	background-image:url('/assets/images/bg-body.gif');
 	background-size:100% 100%;z-index:1;
 }
@@ -107,7 +129,7 @@ h2{
 }
 
 .periodo{
-	width: 230px;
+	width: 220px;
 	height:540px;
 	float: left;
 	border-top-left-radius:40px;
@@ -152,7 +174,7 @@ h2{
 	font-size: 12px;
 	 color:#1E90FF;
 	 position:absolute;
-	 left:100px;
+	 left:85px;
 	 bottom:-2px;
 	 z-index:-2;
  }
