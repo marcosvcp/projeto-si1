@@ -9,8 +9,10 @@
 
 <body>
 @main("Plano de Curso", user) {
-	<center><h2>@Messages("planoDeCurso")</h2></center>
-
+	<div>
+	<center><h3>@Messages("planoDeCurso")</h3></center>
+	<br/>
+	</div>
 
 <div class="periodo">
 		<form action="@routes.Application.atualizaPeriodo" method="post">
@@ -72,7 +74,7 @@
 				}
 		  		<center> <span>@cadeira.getNome()</span></center>
 		  		<label class="creditos">@cadeira.getCreditos() @Messages("creditos")</label>
-		  		<label class="dificuldade"> dificuldade: @cadeira.getDificuldade()</label>
+		  		<label class="dificuldade"> Dificuldade: @cadeira.getDificuldade()</label>
 		  	</div>
 
 		} 
