@@ -23,7 +23,7 @@
 			</ul>
 		</form>
 			<div><br/>
-           <span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:0px;"> Informações úteis</span><br></br>
+           <span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:0px;"> Informacoes uteis</span><br></br>
                         			<strong><span class="periodoCreditos">Periodo Atual: @plano.getPeriodoAtual()</span></strong><br>
 			<span class="periodoCreditos">Creditos disciplinas nao alocadas: @plano.totalCreditosCadeirasNaoAlocadas()</span><br>
 			<span class="periodoCreditos">Creditos periodos passados: @plano.getCreditosPeriodosPassados()</span><br>
@@ -44,7 +44,7 @@
 	<span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:0px;"> Cadeiras disponiveis</span>
 	<ul style="list-style:none;"> 
 		@for(cadeira <- plano.getCadeiraDispniveisOrdenadas()) {
-		<div class="disponiveis" id="@cadeira.getNome()"	draggable="true" 
+		<div class="disponiveis" id="@cadeira.getNome()" title="@cadeira.toString()" draggable="true" 
 		ondragstart="drag(event)" ondragend="dragEnd()">
 	  		<center><label>@cadeira.getNome()</label></center>
 		  	<label class="creditos">@cadeira.getCreditos() @Messages("creditos")</label>
@@ -66,7 +66,7 @@
 			<span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:-40px;">@periodo.getNumero() @Messages("nPeriodo") </span>
 			@for(cadeira <- periodo.getCadeiras()) {
 				@if(plano.isAlocadaNoLugarCorreto(cadeira, periodo)) {
-		  		<div class="alocadas" id="@cadeira.getNome()" draggable="true" 
+		  		<div class="alocadas" id="@cadeira.getNome()" draggable="true" title="@cadeira.toString()"
 				ondragstart="drag(event)" ondragend="dragEnd()" onclick="remCadeira('@cadeira.getNome()','true')">
 				} else {
 				<div class="alocadas-errada" id="@cadeira.getNome()" draggable="true" 
