@@ -117,6 +117,7 @@ public class User extends Model {
 	public String getPassword() {
 		return password;
 	}
+	
 
 	/**
 	 * altera a senha do usuario

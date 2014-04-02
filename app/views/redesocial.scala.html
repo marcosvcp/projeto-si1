@@ -1,0 +1,40 @@
+@(plano: PlanoDeCurso, users: List[User])
+
+<!DOCTYPE html>
+
+@import helper._
+
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script type='text/javascript' src="@routes.Assets.at("javascripts/funcoes.js")"></script>
+		<link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		
+		<!-- CSS -->
+ 
+	    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/reset.css")">
+	    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/animate.css")">
+	    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
+
+	     <!-- Basics -->
+ 
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    
+<body>
+	<title>Rede Social</title>
+	<dl id="user" style="background:#27408B">
+        <dt style="color:#ffffff">Bem vindo a Rede Social.</dt>
+        <dd>
+            <a href="@routes.Application.index()">Voltar</a>
+        </dd>
+        
+    </dl>
+	@for(user <- users){
+	
+		<div class="disponiveis" id="@user.getName()" title="@user.toString()">
+	  		<center><label>@user.getName()</label></center>
+	  		<a href="@routes.Application.mostraGradeUsuario(user.getEmail())" class="btn btn-primary pull-right">Visitar perfil</a>
+	  	</div>
+		
+	}
+</body>

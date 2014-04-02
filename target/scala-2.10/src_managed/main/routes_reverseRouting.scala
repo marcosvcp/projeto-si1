@@ -1,6 +1,6 @@
-// @SOURCE:C:/Users/Dinho/si1/projeto-si1/conf/routes
-// @HASH:205b04f2c81f5275cb2c70062d4079eee598004d
-// @DATE:Sun Mar 30 22:02:56 GMT-03:00 2014
+// @SOURCE:C:/Users/Igor/si1/projeto-si1/conf/routes
+// @HASH:488adbe95c8f9e7b34cc9c2f2c29f4e2de27d6d0
+// @DATE:Wed Apr 02 17:13:26 BRT 2014
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._
@@ -13,6 +13,8 @@ import play.libs.F
 import Router.queryString
 
 
+// @LINE:24
+// @LINE:23
 // @LINE:20
 // @LINE:19
 // @LINE:18
@@ -39,6 +41,8 @@ def at(file:String): Call = {
 }
                           
 
+// @LINE:24
+// @LINE:23
 // @LINE:20
 // @LINE:19
 // @LINE:18
@@ -58,9 +62,21 @@ def atualizaPeriodo(): Call = {
 }
                                                 
 
+// @LINE:24
+def mostraGradeUsuario(email:String): Call = {
+   Call("GET", _prefix + { _defaultPrefix } + "gradeUsuario/" + implicitly[PathBindable[String]].unbind("email", dynamicString(email)))
+}
+                                                
+
 // @LINE:17
 def cadastroPage(): Call = {
    Call("GET", _prefix + { _defaultPrefix } + "cadastro")
+}
+                                                
+
+// @LINE:23
+def mostraPlanosDosUsuarios(): Call = {
+   Call("GET", _prefix + { _defaultPrefix } + "mostraPlanosDosUsuarios")
 }
                                                 
 
@@ -120,6 +136,8 @@ def login(): Call = {
                   
 
 
+// @LINE:24
+// @LINE:23
 // @LINE:20
 // @LINE:19
 // @LINE:18
@@ -151,6 +169,8 @@ def at : JavascriptReverseRoute = JavascriptReverseRoute(
 }
               
 
+// @LINE:24
+// @LINE:23
 // @LINE:20
 // @LINE:19
 // @LINE:18
@@ -175,12 +195,34 @@ def atualizaPeriodo : JavascriptReverseRoute = JavascriptReverseRoute(
 )
                         
 
+// @LINE:24
+def mostraGradeUsuario : JavascriptReverseRoute = JavascriptReverseRoute(
+   "controllers.Application.mostraGradeUsuario",
+   """
+      function(email) {
+      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "gradeUsuario/" + (""" + implicitly[PathBindable[String]].javascriptUnbind + """)("email", encodeURIComponent(email))})
+      }
+   """
+)
+                        
+
 // @LINE:17
 def cadastroPage : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Application.cadastroPage",
    """
       function() {
       return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "cadastro"})
+      }
+   """
+)
+                        
+
+// @LINE:23
+def mostraPlanosDosUsuarios : JavascriptReverseRoute = JavascriptReverseRoute(
+   "controllers.Application.mostraPlanosDosUsuarios",
+   """
+      function() {
+      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "mostraPlanosDosUsuarios"})
       }
    """
 )
@@ -275,6 +317,8 @@ def login : JavascriptReverseRoute = JavascriptReverseRoute(
         
 
 
+// @LINE:24
+// @LINE:23
 // @LINE:20
 // @LINE:19
 // @LINE:18
@@ -302,6 +346,8 @@ def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.
 }
                           
 
+// @LINE:24
+// @LINE:23
 // @LINE:20
 // @LINE:19
 // @LINE:18
@@ -321,9 +367,21 @@ def atualizaPeriodo(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
 )
                       
 
+// @LINE:24
+def mostraGradeUsuario(email:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
+   controllers.Application.mostraGradeUsuario(email), HandlerDef(this, "controllers.Application", "mostraGradeUsuario", Seq(classOf[String]), "GET", """""", _prefix + """gradeUsuario/$email<[^/]+>""")
+)
+                      
+
 // @LINE:17
 def cadastroPage(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.Application.cadastroPage(), HandlerDef(this, "controllers.Application", "cadastroPage", Seq(), "GET", """""", _prefix + """cadastro""")
+)
+                      
+
+// @LINE:23
+def mostraPlanosDosUsuarios(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
+   controllers.Application.mostraPlanosDosUsuarios(), HandlerDef(this, "controllers.Application", "mostraPlanosDosUsuarios", Seq(), "GET", """RedeSocial""", _prefix + """mostraPlanosDosUsuarios""")
 )
                       
 

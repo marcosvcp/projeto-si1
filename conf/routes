@@ -13,9 +13,13 @@ POST	/remCadeira/:cadeira 		controllers.Application.remCadeira(cadeira:String)
 POST    /addCadeira/:cadeira/:periodo  controllers.Application.addCadeira(cadeira:String,periodo:Int)
 
 #Login
-GET     /login                  controllers.Application.login()
-GET     /cadastro                     controllers.Application.cadastroPage()
-POST     /cadastro                     controllers.Application.cadastro()
+GET     /login                  	controllers.Application.login()
+GET     /cadastro                   controllers.Application.cadastroPage()
+POST    /cadastro                   controllers.Application.cadastro()
 POST    /login                      controllers.Application.authenticate()
 GET     /logout                     controllers.Application.logout()
+
+#RedeSocial
+GET     /mostraPlanosDosUsuarios    controllers.Application.mostraPlanosDosUsuarios()
+GET 	/gradeUsuario/:email			controllers.Application.mostraGradeUsuario(email: String)
 

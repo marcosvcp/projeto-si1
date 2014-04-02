@@ -39,6 +39,7 @@ public class Application extends Controller {
 		User user = User.findByEmail(session("email"));
 		return ok(views.html.index.render(plano, user));
 	}
+	
 
 	public static Result remCadeira(String cadeira) {
 		plano.removeCadeira(cadeira);
@@ -61,6 +62,19 @@ public class Application extends Controller {
 		return ok(views.html.cadastro.render(Form.form(Cadastro.class)));
 	}
 
+	public static Result mostraPlanosDosUsuarios(){
+		return ok(views.html.redesocial.render(plano,User.findAll()));
+	}
+	
+	public static Result mostraGradeUsuario(String email){
+		User u = User.findByEmail(email);
+		if (u == null){
+			return Application.mostraPlanosDosUsuarios();
+		}
+		return ok(views.html.gradeusuario.render(u));
+
+	}
+	
 	public static class Login {
 
 		public String email;

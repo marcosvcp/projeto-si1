@@ -12,7 +12,7 @@
 	    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/reset.css")">
 	    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/animate.css")">
 	    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
-	     
+	    
 	     <!-- Basics -->
  
 	    <meta charset="utf-8">
@@ -20,12 +20,15 @@
 	</head>        
     <body>
         
-        
     <dl id="user" style="background:#27408B">
         <dt style="color:#ffffff">Bem vindo, @user.getName()</dt>
         <dd>
             <a href="@routes.Application.logout()">Logout</a>
         </dd>
+        <dd>
+            <a href="@routes.Application.mostraPlanosDosUsuarios()">Rede Social</a>
+        </dd>
+        
     </dl>
     
         @content
