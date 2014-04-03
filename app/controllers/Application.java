@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import models.Cadeira;
 import models.Periodo;
 import models.PlanoDeCurso;
@@ -8,27 +11,29 @@ import models.exceptions.LimiteDeCreditosUltrapassadoException;
 import models.validators.ValidadorMaximoCreditos;
 import models.validators.ValidadorMaximoMinimoCreditos;
 import play.data.Form;
+import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import com.avaje.ebean.Expr;
 import com.google.common.base.Objects;
 
 public class Application extends Controller {
 
 	static PlanoDeCurso plano;
-	
+
 	public static Result index() {
-		//Caso exista alguém logado
+		// Caso exista alguém logado
 		if (session("plano_ID") == null) {
 			return redirect(routes.Application.login());
 		}
-		//Pega o plano da seção e carrega do Bd
+		// Pega o plano da seção e carrega do Bd
 		plano = PlanoDeCurso.find.byId(Long.parseLong(session("plano_ID")));
 		if (plano == null) {
 			plano = new PlanoDeCurso();
 			plano.distribuiCaderas(Cadeira.find.all());
 		}
-		//Seta os validadores
+		// Seta os validadores
 		for (Periodo periodo : plano.getPeriodos()) {
 			periodo.setValidador(new ValidadorMaximoCreditos());
 		}
@@ -39,7 +44,6 @@ public class Application extends Controller {
 		User user = User.findByEmail(session("email"));
 		return ok(views.html.index.render(plano, user));
 	}
-	
 
 	public static Result remCadeira(String cadeira) {
 		plano.removeCadeira(cadeira);
@@ -62,25 +66,31 @@ public class Application extends Controller {
 		return ok(views.html.cadastro.render(Form.form(Cadastro.class)));
 	}
 
-	public static Result mostraPlanosDosUsuarios(){
-		return ok(views.html.redesocial.render(plano,User.findAll()));
+	public static Result mostraPlanosDosUsuarios() {
+		return ok(views.html.redesocial.render( User.findAll()));
 	}
-	
-	public static Result mostraGradeUsuario(String email){
+
+	public static Result mostraGradeUsuario(String email) {
 		User u = User.findByEmail(email);
-		if (u == null){
+		if (u == null) {
 			return Application.mostraPlanosDosUsuarios();
+		}
+		if (u.getPlano() == null) {
+			plano = new PlanoDeCurso();
+			plano.distribuiCaderas(Cadeira.find.all());
+			plano.save();
+			u.setPlano(plano);
+			u.save();
 		}
 		return ok(views.html.gradeusuario.render(u));
 
 	}
-	
+
 	public static class Login {
 
 		public String email;
 		public String password;
 
-		
 	}
 
 	public static class Cadastro {
@@ -151,19 +161,35 @@ public class Application extends Controller {
 		return false;
 	}
 
-	public static Result atualizaPeriodo(){
+	public static Result atualizaPeriodo() {
 		Form<Cadastro> cadastroForm = Form.form(Cadastro.class)
 				.bindFromRequest();
 		int periodo = cadastroForm.get().periodo;
-		if(!(periodo < 1 || periodo > 10)){
+		if (!(periodo < 1 || periodo > 10)) {
 			plano.setPeriodoAtual(periodo);
-			plano.update();	
+			plano.update();
 		}
 		return index();
 	}
+
 	private static boolean isPasswordValido(Form<Login> loginForm, User user) {
 		return String.valueOf(
 				Objects.hashCode(user.getEmail(), loginForm.get().password))
 				.equals(user.getPassword());
+	}
+
+	public static Result pesquisa() {
+		DynamicForm df = new DynamicForm().bindFromRequest();
+		String nome = df.get("nome");
+		List<User> listaUsuarios = User.findAll();
+		List<User> users = new ArrayList<User>();
+		
+		for(User usuario : listaUsuarios){
+			if (usuario.getName().contains(nome) ){
+				users.add(usuario);
+			}
+		}
+		return ok(views.html.redesocial.render(users));
+
 	}
 }

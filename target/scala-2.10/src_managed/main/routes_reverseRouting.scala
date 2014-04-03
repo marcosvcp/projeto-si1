@@ -1,6 +1,6 @@
 // @SOURCE:C:/Users/Igor/si1/projeto-si1/conf/routes
-// @HASH:488adbe95c8f9e7b34cc9c2f2c29f4e2de27d6d0
-// @DATE:Wed Apr 02 17:13:26 BRT 2014
+// @HASH:77e3c4a1dea2d69e687fb22a3ff46b9530518b6c
+// @DATE:Thu Apr 03 00:43:47 BRT 2014
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._
@@ -13,6 +13,7 @@ import play.libs.F
 import Router.queryString
 
 
+// @LINE:25
 // @LINE:24
 // @LINE:23
 // @LINE:20
@@ -41,6 +42,7 @@ def at(file:String): Call = {
 }
                           
 
+// @LINE:25
 // @LINE:24
 // @LINE:23
 // @LINE:20
@@ -64,7 +66,7 @@ def atualizaPeriodo(): Call = {
 
 // @LINE:24
 def mostraGradeUsuario(email:String): Call = {
-   Call("GET", _prefix + { _defaultPrefix } + "gradeUsuario/" + implicitly[PathBindable[String]].unbind("email", dynamicString(email)))
+   Call("GET", _prefix + { _defaultPrefix } + "GradeDoUsuario" + queryString(List(Some(implicitly[QueryStringBindable[String]].unbind("email", email)))))
 }
                                                 
 
@@ -76,7 +78,7 @@ def cadastroPage(): Call = {
 
 // @LINE:23
 def mostraPlanosDosUsuarios(): Call = {
-   Call("GET", _prefix + { _defaultPrefix } + "mostraPlanosDosUsuarios")
+   Call("GET", _prefix + { _defaultPrefix } + "RedeSocial")
 }
                                                 
 
@@ -112,6 +114,12 @@ case (cadeira) if true => Call("POST", _prefix + { _defaultPrefix } + "remCadeir
 }
                                                 
 
+// @LINE:25
+def pesquisa(): Call = {
+   Call("POST", _prefix + { _defaultPrefix } + "RedeSocial")
+}
+                                                
+
 // @LINE:19
 def authenticate(): Call = {
    Call("POST", _prefix + { _defaultPrefix } + "login")
@@ -136,6 +144,7 @@ def login(): Call = {
                   
 
 
+// @LINE:25
 // @LINE:24
 // @LINE:23
 // @LINE:20
@@ -169,6 +178,7 @@ def at : JavascriptReverseRoute = JavascriptReverseRoute(
 }
               
 
+// @LINE:25
 // @LINE:24
 // @LINE:23
 // @LINE:20
@@ -200,7 +210,7 @@ def mostraGradeUsuario : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Application.mostraGradeUsuario",
    """
       function(email) {
-      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "gradeUsuario/" + (""" + implicitly[PathBindable[String]].javascriptUnbind + """)("email", encodeURIComponent(email))})
+      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "GradeDoUsuario" + _qS([(""" + implicitly[QueryStringBindable[String]].javascriptUnbind + """)("email", email)])})
       }
    """
 )
@@ -222,7 +232,7 @@ def mostraPlanosDosUsuarios : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Application.mostraPlanosDosUsuarios",
    """
       function() {
-      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "mostraPlanosDosUsuarios"})
+      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "RedeSocial"})
       }
    """
 )
@@ -278,6 +288,17 @@ def remCadeira : JavascriptReverseRoute = JavascriptReverseRoute(
 )
                         
 
+// @LINE:25
+def pesquisa : JavascriptReverseRoute = JavascriptReverseRoute(
+   "controllers.Application.pesquisa",
+   """
+      function() {
+      return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "RedeSocial"})
+      }
+   """
+)
+                        
+
 // @LINE:19
 def authenticate : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Application.authenticate",
@@ -317,6 +338,7 @@ def login : JavascriptReverseRoute = JavascriptReverseRoute(
         
 
 
+// @LINE:25
 // @LINE:24
 // @LINE:23
 // @LINE:20
@@ -346,6 +368,7 @@ def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.
 }
                           
 
+// @LINE:25
 // @LINE:24
 // @LINE:23
 // @LINE:20
@@ -369,7 +392,7 @@ def atualizaPeriodo(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
 
 // @LINE:24
 def mostraGradeUsuario(email:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Application.mostraGradeUsuario(email), HandlerDef(this, "controllers.Application", "mostraGradeUsuario", Seq(classOf[String]), "GET", """""", _prefix + """gradeUsuario/$email<[^/]+>""")
+   controllers.Application.mostraGradeUsuario(email), HandlerDef(this, "controllers.Application", "mostraGradeUsuario", Seq(classOf[String]), "GET", """""", _prefix + """GradeDoUsuario""")
 )
                       
 
@@ -381,7 +404,7 @@ def cadastroPage(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
 
 // @LINE:23
 def mostraPlanosDosUsuarios(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Application.mostraPlanosDosUsuarios(), HandlerDef(this, "controllers.Application", "mostraPlanosDosUsuarios", Seq(), "GET", """RedeSocial""", _prefix + """mostraPlanosDosUsuarios""")
+   controllers.Application.mostraPlanosDosUsuarios(), HandlerDef(this, "controllers.Application", "mostraPlanosDosUsuarios", Seq(), "GET", """RedeSocial""", _prefix + """RedeSocial""")
 )
                       
 
@@ -406,6 +429,12 @@ def cadastro(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
 // @LINE:11
 def remCadeira(cadeira:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.Application.remCadeira(cadeira), HandlerDef(this, "controllers.Application", "remCadeira", Seq(classOf[String]), "GET", """""", _prefix + """remCadeira/$cadeira<[^/]+>""")
+)
+                      
+
+// @LINE:25
+def pesquisa(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
+   controllers.Application.pesquisa(), HandlerDef(this, "controllers.Application", "pesquisa", Seq(), "POST", """""", _prefix + """RedeSocial""")
 )
                       
 

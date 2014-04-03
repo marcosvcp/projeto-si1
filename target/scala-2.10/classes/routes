@@ -20,6 +20,7 @@ POST    /login                      controllers.Application.authenticate()
 GET     /logout                     controllers.Application.logout()
 
 #RedeSocial
-GET     /mostraPlanosDosUsuarios    controllers.Application.mostraPlanosDosUsuarios()
-GET 	/gradeUsuario/:email			controllers.Application.mostraGradeUsuario(email: String)
+GET     /RedeSocial    controllers.Application.mostraPlanosDosUsuarios()
+GET 	/GradeDoUsuario			controllers.Application.mostraGradeUsuario(email: String)
+POST 	/RedeSocial				controllers.Application.pesquisa()
 
