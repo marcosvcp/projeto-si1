@@ -31,7 +31,7 @@ public class Application extends Controller {
 		plano = PlanoDeCurso.find.byId(Long.parseLong(session("plano_ID")));
 		if (plano == null) {
 			plano = new PlanoDeCurso();
-			plano.distribuiCaderas(Cadeira.find.all());
+			plano.distribuiCadeiras(Cadeira.find.all());
 		}
 		// Seta os validadores
 		for (Periodo periodo : plano.getPeriodos()) {
@@ -67,7 +67,7 @@ public class Application extends Controller {
 	}
 
 	public static Result mostraPlanosDosUsuarios() {
-		return ok(views.html.redesocial.render( User.findAll()));
+		return ok(views.html.redesocial.render(User.findAll()));
 	}
 
 	public static Result mostraGradeUsuario(String email) {
@@ -76,9 +76,8 @@ public class Application extends Controller {
 			return Application.mostraPlanosDosUsuarios();
 		}
 		if (u.getPlano() == null) {
-			plano = new PlanoDeCurso();
-			plano.distribuiCaderas(Cadeira.find.all());
-			plano.save();
+			PlanoDeCurso plano = new PlanoDeCurso();
+			plano.distribuiCadeiras(Cadeira.find.all());
 			u.setPlano(plano);
 			u.save();
 		}
@@ -117,7 +116,7 @@ public class Application extends Controller {
 			newUser.setPassword(cadastroForm.get().password);
 			newUser.setName(cadastroForm.get().nome);
 			PlanoDeCurso newPlano = new PlanoDeCurso();
-			newPlano.distribuiCaderas(Cadeira.find.all());
+			newPlano.distribuiCadeiras(Cadeira.find.all());
 			newUser.setPlano(newPlano);
 			newPlano.save();
 			newUser.save();
@@ -143,9 +142,10 @@ public class Application extends Controller {
 
 	private static void criaPlanoParaUsuario(User user) {
 		PlanoDeCurso newPlano = new PlanoDeCurso();
-		newPlano.distribuiCaderas(Cadeira.find.all());
+		newPlano.distribuiCadeiras(Cadeira.find.all());
 		user.setPlano(newPlano);
 		user.save();
+		newPlano.update();
 	}
 
 	private static boolean autenticacaoFalhou(Form<Login> loginForm) {
@@ -183,9 +183,9 @@ public class Application extends Controller {
 		String nome = df.get("nome");
 		List<User> listaUsuarios = User.findAll();
 		List<User> users = new ArrayList<User>();
-		
-		for(User usuario : listaUsuarios){
-			if (usuario.getName().contains(nome) ){
+
+		for (User usuario : listaUsuarios) {
+			if (usuario.getName().toLowerCase().contains(nome.toLowerCase())) {
 				users.add(usuario);
 			}
 		}

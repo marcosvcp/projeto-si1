@@ -235,7 +235,9 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 			nomesPreRequisitos += "Nenhum";
 		} else {
 			for (Cadeira c : preRequisitos) {
-				nomesPreRequisitos += c.getNome() + " ; ";
+				if (c != null) {
+					nomesPreRequisitos += c.getNome() + " ; ";
+				}
 			}
 		}
 		return "Pre-Requisitos: " + nomesPreRequisitos;

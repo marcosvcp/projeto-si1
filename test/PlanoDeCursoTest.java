@@ -24,7 +24,7 @@ public class PlanoDeCursoTest {
 	public void setUp(){
         start(fakeApplication(inMemoryDatabase()));
 		plano = new PlanoDeCurso();
-		plano.distribuiCaderas(Cadeira.find.all());
+		plano.distribuiCadeiras(Cadeira.find.all());
 
 	}
 	

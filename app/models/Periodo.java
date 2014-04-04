@@ -20,7 +20,7 @@ import play.db.ebean.Model;
  * Entidade que representa um período
  */
 @Entity
-public class Periodo extends Model {
+public class Periodo extends Model implements Comparable<Periodo> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -220,5 +220,10 @@ public class Periodo extends Model {
 	 */
 	public void setValidador(ValidadorDePeriodo validador) {
 		this.validador = validador;
+	}
+
+	@Override
+	public int compareTo(Periodo o) {
+		return this.getNumero() - o.getNumero();
 	}
 }

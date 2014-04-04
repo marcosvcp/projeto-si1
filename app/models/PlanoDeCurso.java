@@ -39,7 +39,7 @@ public class PlanoDeCurso extends Model {
 	private List<Periodo> periodos;
 
 	private Map<String, Cadeira> mapaDeCadeiras;
-	
+
 	@Required
 	public int periodoAtual;
 
@@ -72,7 +72,7 @@ public class PlanoDeCurso extends Model {
 
 		// irá distribuir as cadeiras entre os periodos
 		distribuiCadeiras();
-		
+
 		periodoAtual = 1;
 	}
 
@@ -134,7 +134,7 @@ public class PlanoDeCurso extends Model {
 	 * @param cadeiras
 	 *            que serao alocadas nos seus respectivos periodos
 	 */
-	public void distribuiCaderas(List<Cadeira> cadeiras) {
+	public void distribuiCadeiras(List<Cadeira> cadeiras) {
 		atualizaMapaCadeira(cadeiras);
 		distribuiCadeiras();
 	}
@@ -190,6 +190,7 @@ public class PlanoDeCurso extends Model {
 	 * @return lista com todos os periodos
 	 */
 	public List<Periodo> getPeriodos() {
+		Collections.sort(periodos);
 		return this.periodos;
 	}
 
@@ -253,11 +254,11 @@ public class PlanoDeCurso extends Model {
 		int creditosTotais = periodoCorrente.getCreditos()
 				+ cadeira.getCreditos();
 		periodoCorrente.setValidador(new ValidadorMaximoCreditos());
-		if (!periodoCorrente.getValidador().validaPeriodo(creditosTotais) && periodo != this.getPeriodos().size()) {
+		if (!periodoCorrente.getValidador().validaPeriodo(creditosTotais)
+				&& periodo != this.getPeriodos().size()) {
 			throw new LimiteDeCreditosUltrapassadoException(
 					"Limite de Créditos Ultrapassado!");
 		}
-		cadeira.setPeriodo(periodo);
 		// remove cadeira do periodo ou da lista de disciplinas disponiveis
 
 		for (Periodo p : periodos) {
@@ -349,59 +350,62 @@ public class PlanoDeCurso extends Model {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * 
 	 * @return a qt de creditos das disciplinas que ainda nao foram alocadas
 	 */
-	public int totalCreditosCadeirasNaoAlocadas(){
+	public int totalCreditosCadeirasNaoAlocadas() {
 		int total = 0;
 		for (int i = 0; i < this.getCadeiraDispniveisOrdenadas().size(); i++) {
 			total += this.getCadeiraDispniveisOrdenadas().get(i).getCreditos();
 		}
 		return total;
 	}
-	
+
 	/**
 	 * 
 	 * @return qt de creditos apenas do periodo atual
 	 */
-	public int getCreditosPeriodoAtual(){
+	public int getCreditosPeriodoAtual() {
 		return this.getPeriodo(this.getPeriodoAtual()).getCreditos();
 	}
-	
+
 	/**
 	 * 
 	 * @return qt de creditos do primeiro periodo ate o periodo atual
 	 */
-	public int getCreditosPeriodosPassados(){
+	public int getCreditosPeriodosPassados() {
 		int total = 0;
 		for (int i = 1; i < this.getPeriodoAtual(); i++) {
 			total += this.getPeriodo(i).getCreditos();
 		}
 		return total;
 	}
-	
+
 	/**
 	 * 
 	 * @return qt de creditos do periodo atual ate o ultimo periodo
 	 */
-	public int getCreditosPeriodosFuturos(){
+	public int getCreditosPeriodosFuturos() {
 		int total = 0;
-		for (int i = this.getPeriodoAtual()+1; i <= this.getPeriodos().size(); i++) {
+		for (int i = this.getPeriodoAtual() + 1; i <= this.getPeriodos().size(); i++) {
 			total += this.getPeriodo(i).getCreditos();
 		}
 		return total;
 	}
-	
+
 	/**
 	 * 
-	 * @return a qt de creditos das disciplinas que faltam ser alocadas somadas a qt de credito do periodo atual ate o ultimo periodo
+	 * @return a qt de creditos das disciplinas que faltam ser alocadas somadas
+	 *         a qt de credito do periodo atual ate o ultimo periodo
 	 */
-	public int getCreditosQueFaltamParaSeFormar(){
-		return this.getCreditosPeriodosFuturos() + this.totalCreditosCadeirasNaoAlocadas() + this.getCreditosPeriodoAtual();
+	public int getCreditosQueFaltamParaSeFormar() {
+		return this.getCreditosPeriodosFuturos()
+				+ this.totalCreditosCadeirasNaoAlocadas()
+				+ this.getCreditosPeriodoAtual();
 	}
-	
+
 	/**
 	 * 
 	 * @return o numero do periodo atual
@@ -412,17 +416,27 @@ public class PlanoDeCurso extends Model {
 
 	/**
 	 * altera o periodo atual
-	 * @param periodoAtual 
+	 * 
+	 * @param periodoAtual
 	 */
 	public void setPeriodoAtual(int periodoAtual) {
-			this.periodoAtual = periodoAtual;
+		this.periodoAtual = periodoAtual;
+		for (int periodoModificado = 0; periodoModificado < periodoAtual; periodoModificado++) {
+			if (periodoModificado < periodoAtual) {
+				getPeriodo(periodoModificado).setValidador(
+						new ValidadorMaximoCreditos());
+			}
+
+		}
+
 	}
 
 	/**
 	 * 
-	 * @return uma lista de periodos com os periodos que estao com minimo de creditos permitidos
+	 * @return uma lista de periodos com os periodos que estao com minimo de
+	 *         creditos permitidos
 	 */
-	public List<Periodo> periodosComMenosQueMinimoDeCreditos(){
+	public List<Periodo> periodosComMenosQueMinimoDeCreditos() {
 		List<Periodo> menosQueMinimo = new ArrayList<Periodo>();
 		for (int i = this.getPeriodoAtual(); i <= this.getPeriodos().size(); i++) {
 			if (this.getPeriodo(i).getCreditos() < MINIMO_CREDITOS) {
