@@ -421,7 +421,7 @@ public class PlanoDeCurso extends Model {
 	 */
 	public void setPeriodoAtual(int periodoAtual) {
 		this.periodoAtual = periodoAtual;
-		for (int periodoModificado = 0; periodoModificado < periodoAtual; periodoModificado++) {
+		for (int periodoModificado = 1; periodoModificado <= periodoAtual; periodoModificado++) {
 			if (periodoModificado < periodoAtual) {
 				getPeriodo(periodoModificado).setValidador(
 						new ValidadorMaximoCreditos());
