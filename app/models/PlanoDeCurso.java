@@ -260,13 +260,12 @@ public class PlanoDeCurso extends Model {
 					"Limite de Créditos Ultrapassado!");
 		}
 		// remove cadeira do periodo ou da lista de disciplinas disponiveis
-
 		for (Periodo p : periodos) {
 			if (p.getCadeiras().contains(cadeira)) {
 				p.removerCadeira(cadeira);
 			}
 		}
-
+		cadeira.setPeriodo(periodo);
 		// adiciona essa cadeira no periodo escolhido
 		getPeriodo(periodo).addCadeira(cadeira);
 	}
