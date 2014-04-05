@@ -13,7 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
-import models.validators.ValidadorDePeriodo;
+import models.validators.*;
 import play.db.ebean.Model;
 
 /**
@@ -56,6 +56,7 @@ public class Periodo extends Model implements Comparable<Periodo> {
 		this();
 		this.numero = numeroDoPeriodo;
 		cadeiras = new ArrayList<Cadeira>();
+		this.validador = new ValidadorDeCreditos();
 	}
 
 	/**

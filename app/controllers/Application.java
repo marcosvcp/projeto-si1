@@ -32,12 +32,11 @@ public class Application extends Controller {
 		if (plano == null) {
 			plano = new PlanoDeCurso();
 			plano.distribuiCadeiras(Cadeira.find.all());
+			plano.setPeriodoAtual(1);
 		}
 		// Seta os validadores
-		for (Periodo periodo : plano.getPeriodos()) {
-			periodo.setValidador(new ValidadorMaximoCreditos());
-		}
 		plano.atualizaMapaCadeira(Cadeira.find.all());
+		plano.atualizaValidadores();
 		plano.getPeriodo(PlanoDeCurso.ULTIMO_PERIODO).setValidador(
 				new ValidadorMaximoMinimoCreditos());
 		plano.save();
@@ -45,7 +44,8 @@ public class Application extends Controller {
 		return ok(views.html.index.render(plano, user));
 	}
 
-	public static Result remCadeira(String cadeira) {
+	public static Result remCadeira(String cadeira)
+			throws LimiteDeCreditosUltrapassadoException {
 		plano.removeCadeira(cadeira);
 		plano.save();
 		return redirect(routes.Application.index());

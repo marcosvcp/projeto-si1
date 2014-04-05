@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
 import models.exceptions.LimiteDeCreditosUltrapassadoException;
+import models.validators.ValidadorDeCreditos;
 import models.validators.ValidadorMaximoCreditos;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -238,6 +239,20 @@ public class PlanoDeCurso extends Model {
 		return cadeirasOrdenadas;
 	}
 
+	public void atualizaValidadores() {
+		for (int periodoModificado = 1; periodoModificado < this.periodos
+				.size(); periodoModificado++) {
+			if (periodoModificado < periodoAtual) {
+				getPeriodo(periodoModificado).setValidador(
+						new ValidadorMaximoCreditos());
+			} else {
+				getPeriodo(periodoModificado).setValidador(
+						new ValidadorDeCreditos());
+			}
+
+		}
+	}
+
 	/**
 	 * Adiciona uma {@code cadeira} ao {@code periodo}
 	 * 
@@ -253,9 +268,9 @@ public class PlanoDeCurso extends Model {
 		Periodo periodoCorrente = getPeriodo(periodo);
 		int creditosTotais = periodoCorrente.getCreditos()
 				+ cadeira.getCreditos();
-		periodoCorrente.setValidador(new ValidadorMaximoCreditos());
-		if (!periodoCorrente.getValidador().validaPeriodo(creditosTotais)
-				&& periodo != this.getPeriodos().size()) {
+		if ((!(periodoCorrente.getCreditos() <= MINIMO_CREDITOS))
+				&& !periodoCorrente.getValidador()
+						.validaPeriodo(creditosTotais)) {
 			throw new LimiteDeCreditosUltrapassadoException(
 					"Limite de Créditos Ultrapassado!");
 		}
@@ -263,6 +278,12 @@ public class PlanoDeCurso extends Model {
 
 		for (Periodo p : periodos) {
 			if (p.getCadeiras().contains(cadeira)) {
+				int creditosQueFicarao = p.getCreditos()
+						- cadeira.getCreditos();
+				if (!p.getValidador().validaPeriodo(creditosQueFicarao)) {
+					throw new LimiteDeCreditosUltrapassadoException(
+							"Limite de Créditos Ultrapassado!");
+				}
 				p.removerCadeira(cadeira);
 			}
 		}
@@ -276,13 +297,20 @@ public class PlanoDeCurso extends Model {
 	 * 
 	 * @param cadeira
 	 */
-	public void removeCadeira(String cadeira) {
+	public void removeCadeira(String cadeira)
+			throws LimiteDeCreditosUltrapassadoException {
 		// PADRÃO DE PROJETO: CONTROLLER - para manter o baixo acoplamento
 		// essa classe vai ser a responsável por remover uma cadeira ao periodo
 		// if (getMapCadeirasAlocadas().get(cadeira) == null) {
 		// throw new Exception("Essa Cadeira não está alocada!");
 		// }
 		Cadeira removida = mapaDeCadeiras.get(cadeira);
+		Periodo periodoCadeira = this.getPeriodo(removida.getPeriodo());
+		if (!periodoCadeira.getValidador().validaPeriodo(
+				periodoCadeira.getCreditos() - removida.getCreditos())) {
+			throw new LimiteDeCreditosUltrapassadoException(
+					"Limite de Créditos Ultrapassado!");
+		}
 		// procura pela cadeira entre os periodos.
 		getPeriodo(removida.getPeriodo()).removerCadeira(removida);
 		// removida.setPeriodo(0);
@@ -421,13 +449,7 @@ public class PlanoDeCurso extends Model {
 	 */
 	public void setPeriodoAtual(int periodoAtual) {
 		this.periodoAtual = periodoAtual;
-		for (int periodoModificado = 1; periodoModificado <= periodoAtual; periodoModificado++) {
-			if (periodoModificado < periodoAtual) {
-				getPeriodo(periodoModificado).setValidador(
-						new ValidadorMaximoCreditos());
-			}
-
-		}
+		this.atualizaValidadores();
 
 	}
 
