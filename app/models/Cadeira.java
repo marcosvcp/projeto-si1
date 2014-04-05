@@ -32,7 +32,7 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 	private Long id;
 
 	@Constraints.Required
-	@Column(unique = true, nullable = false)
+	@Column(nullable = false)
 	private String nome;
 
 	private int creditos;
@@ -45,6 +45,9 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 
 	@Column(name = "periodo_default")
 	private int periodo;
+
+	@Column
+	private String tipoPlano;
 
 	/**
 	 * Construtor
@@ -165,6 +168,10 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 	public static Finder<Long, Cadeira> find = new Finder<Long, Cadeira>(
 			Long.class, Cadeira.class);
 
+	public static List<Cadeira> findByType(String type) {
+		return find.where().eq("tipoPlano", type).findList();
+	}
+
 	/**
 	 * cria cadeira na tabela
 	 * 
@@ -258,6 +265,14 @@ public class Cadeira extends Model implements Comparable<Cadeira> {
 	 */
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getTipoPlano() {
+		return tipoPlano;
+	}
+
+	public void setTipoPlano(String tipoPlano) {
+		this.tipoPlano = tipoPlano;
 	}
 
 }

@@ -1,9 +1,12 @@
 [0m[[0mdebug[0m] [0mCopy resource mappings: [0m
-[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto/conf/application.conf,/home/marcos/Documents/projeto/target/scala-2.10/classes/application.conf)[0m
-[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto/conf/messages.pt,/home/marcos/Documents/projeto/target/scala-2.10/classes/messages.pt)[0m
-[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto/conf/routes,/home/marcos/Documents/projeto/target/scala-2.10/classes/routes)[0m
-[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto/conf/evolutions,/home/marcos/Documents/projeto/target/scala-2.10/classes/evolutions)[0m
-[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto/conf/cadeirasPadrao.xml,/home/marcos/Documents/projeto/target/scala-2.10/classes/cadeirasPadrao.xml)[0m
-[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto/conf/evolutions/default,/home/marcos/Documents/projeto/target/scala-2.10/classes/evolutions/default)[0m
-[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto/conf/evolutions/default/1.sql,/home/marcos/Documents/projeto/target/scala-2.10/classes/evolutions/default/1.sql)[0m
-[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto/conf/evolutions/default/2.sql,/home/marcos/Documents/projeto/target/scala-2.10/classes/evolutions/default/2.sql)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto-test/conf/cadeirasComum.xml,/home/marcos/Documents/projeto-test/target/scala-2.10/classes/cadeirasComum.xml)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto-test/conf/cadeirasNovo.xml,/home/marcos/Documents/projeto-test/target/scala-2.10/classes/cadeirasNovo.xml)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto-test/conf/application.conf,/home/marcos/Documents/projeto-test/target/scala-2.10/classes/application.conf)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto-test/conf/messages.pt,/home/marcos/Documents/projeto-test/target/scala-2.10/classes/messages.pt)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto-test/conf/routes,/home/marcos/Documents/projeto-test/target/scala-2.10/classes/routes)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto-test/conf/evolutions,/home/marcos/Documents/projeto-test/target/scala-2.10/classes/evolutions)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto-test/conf/cadeirasPadrao.xml,/home/marcos/Documents/projeto-test/target/scala-2.10/classes/cadeirasPadrao.xml)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto-test/conf/evolutions/default,/home/marcos/Documents/projeto-test/target/scala-2.10/classes/evolutions/default)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto-test/conf/evolutions/default/2.sql~,/home/marcos/Documents/projeto-test/target/scala-2.10/classes/evolutions/default/2.sql~)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto-test/conf/evolutions/default/1.sql,/home/marcos/Documents/projeto-test/target/scala-2.10/classes/evolutions/default/1.sql)[0m
+[0m[[0mdebug[0m] [0m	(/home/marcos/Documents/projeto-test/conf/evolutions/default/2.sql,/home/marcos/Documents/projeto-test/target/scala-2.10/classes/evolutions/default/2.sql)[0m

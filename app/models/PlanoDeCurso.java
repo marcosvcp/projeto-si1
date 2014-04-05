@@ -264,6 +264,7 @@ public class PlanoDeCurso extends Model {
 			throws LimiteDeCreditosUltrapassadoException {
 		// PADRÃO DE PROJETO: CONTROLLER - para manter o baixo acoplamento
 		// essa classe vai ser a responsável por adicionar um cadeira ao periodo
+		boolean lancaExcecao = false;
 		Cadeira cadeira = mapaDeCadeiras.get(cadeiraNome);
 		Periodo periodoCorrente = getPeriodo(periodo);
 		int creditosTotais = periodoCorrente.getCreditos()
@@ -271,8 +272,7 @@ public class PlanoDeCurso extends Model {
 		if ((!(periodoCorrente.getCreditos() <= MINIMO_CREDITOS))
 				&& !periodoCorrente.getValidador()
 						.validaPeriodo(creditosTotais)) {
-			throw new LimiteDeCreditosUltrapassadoException(
-					"Limite de Créditos Ultrapassado!");
+			lancaExcecao = true;
 		}
 		// remove cadeira do periodo ou da lista de disciplinas disponiveis
 
@@ -281,8 +281,7 @@ public class PlanoDeCurso extends Model {
 				int creditosQueFicarao = p.getCreditos()
 						- cadeira.getCreditos();
 				if (!p.getValidador().validaPeriodo(creditosQueFicarao)) {
-					throw new LimiteDeCreditosUltrapassadoException(
-							"Limite de Créditos Ultrapassado!");
+					lancaExcecao = true;
 				}
 				p.removerCadeira(cadeira);
 			}
@@ -290,6 +289,10 @@ public class PlanoDeCurso extends Model {
 
 		// adiciona essa cadeira no periodo escolhido
 		getPeriodo(periodo).addCadeira(cadeira);
+		if (lancaExcecao) {
+			throw new LimiteDeCreditosUltrapassadoException(
+					"Limite de Créditos Ultrapassado!");
+		}
 	}
 
 	/**
@@ -304,12 +307,12 @@ public class PlanoDeCurso extends Model {
 		// if (getMapCadeirasAlocadas().get(cadeira) == null) {
 		// throw new Exception("Essa Cadeira não está alocada!");
 		// }
+		boolean lancaExcecao = false;
 		Cadeira removida = mapaDeCadeiras.get(cadeira);
 		Periodo periodoCadeira = this.getPeriodo(removida.getPeriodo());
 		if (!periodoCadeira.getValidador().validaPeriodo(
 				periodoCadeira.getCreditos() - removida.getCreditos())) {
-			throw new LimiteDeCreditosUltrapassadoException(
-					"Limite de Créditos Ultrapassado!");
+			lancaExcecao = true;
 		}
 		// procura pela cadeira entre os periodos.
 		getPeriodo(removida.getPeriodo()).removerCadeira(removida);
@@ -324,6 +327,10 @@ public class PlanoDeCurso extends Model {
 		}
 		for (Cadeira c : paraRemover) {
 			removeCadeira(c.getNome());
+		}
+		if (lancaExcecao) {
+			throw new LimiteDeCreditosUltrapassadoException(
+					"Limite de Créditos Ultrapassado!");
 		}
 	}
 
@@ -460,11 +467,36 @@ public class PlanoDeCurso extends Model {
 	 */
 	public List<Periodo> periodosComMenosQueMinimoDeCreditos() {
 		List<Periodo> menosQueMinimo = new ArrayList<Periodo>();
-		for (int i = this.getPeriodoAtual(); i <= this.getPeriodos().size(); i++) {
-			if (this.getPeriodo(i).getCreditos() < MINIMO_CREDITOS) {
+		for (int i = 1; i <= this.getPeriodos().size(); i++) {
+			Periodo periodo = this.getPeriodo(i);
+			if (!periodo.getValidador().validaPeriodo(periodo.getCreditos())) {
 				menosQueMinimo.add(this.getPeriodo(i));
 			}
 		}
 		return menosQueMinimo;
+	}
+
+	public enum TipoPlano {
+		Novo("novo"), Comum("comum"), Padrao("padrao");
+
+		private String nomeTipo;
+
+		private TipoPlano(String nomeTipo) {
+			this.nomeTipo = nomeTipo;
+
+		}
+
+		public String getNomeTipo() {
+			return nomeTipo;
+		}
+
+		public void setNomeTipo(String nomeTipo) {
+			this.nomeTipo = nomeTipo;
+		}
+
+		@Override
+		public String toString() {
+			return nomeTipo;
+		}
 	}
 }

@@ -3,11 +3,13 @@ package models;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import models.PlanoDeCurso.TipoPlano;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
@@ -37,6 +39,8 @@ public class User extends Model {
 	@OneToOne(cascade = CascadeType.ALL)
 	private PlanoDeCurso plano;
 
+	@Column
+	private TipoPlano tipoPlano;
 	public static Model.Finder<String, User> find = new Model.Finder<String, User>(
 			String.class, User.class);
 
@@ -72,6 +76,7 @@ public class User extends Model {
 
 	/**
 	 * Altera o plano de curso do usuario
+	 * 
 	 * @param plano
 	 */
 	public void setPlano(PlanoDeCurso plano) {
@@ -88,6 +93,7 @@ public class User extends Model {
 
 	/**
 	 * altera o email do usuario
+	 * 
 	 * @param email
 	 */
 	public void setEmail(String email) {
@@ -104,6 +110,7 @@ public class User extends Model {
 
 	/**
 	 * altera nome do usuario
+	 * 
 	 * @param name
 	 */
 	public void setName(String name) {
@@ -117,18 +124,17 @@ public class User extends Model {
 	public String getPassword() {
 		return password;
 	}
-	
 
 	/**
 	 * altera a senha do usuario
+	 * 
 	 * @param password
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 		this.password = String.valueOf(this.hashCode());
 	}
-	
-	
+
 	/**
 	 * toString para usuario
 	 */
@@ -144,4 +150,13 @@ public class User extends Model {
 	public int hashCode() {
 		return Objects.hashCode(email, password);
 	}
+
+	public TipoPlano getTipoPlano() {
+		return tipoPlano;
+	}
+
+	public void setTipoPlano(TipoPlano tipoPlano) {
+		this.tipoPlano = tipoPlano;
+	}
+
 }

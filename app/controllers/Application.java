@@ -6,6 +6,7 @@ import java.util.List;
 import models.Cadeira;
 import models.Periodo;
 import models.PlanoDeCurso;
+import models.PlanoDeCurso.TipoPlano;
 import models.User;
 import models.exceptions.LimiteDeCreditosUltrapassadoException;
 import models.validators.ValidadorMaximoCreditos;
@@ -28,14 +29,17 @@ public class Application extends Controller {
 			return redirect(routes.Application.login());
 		}
 		// Pega o plano da seção e carrega do Bd
+		User usuarioLogad = User.findByEmail(session("email"));
 		plano = PlanoDeCurso.find.byId(Long.parseLong(session("plano_ID")));
 		if (plano == null) {
 			plano = new PlanoDeCurso();
-			plano.distribuiCadeiras(Cadeira.find.all());
+			plano.distribuiCadeiras(Cadeira.findByType(usuarioLogad
+					.getTipoPlano().getNomeTipo()));
 			plano.setPeriodoAtual(1);
 		}
 		// Seta os validadores
-		plano.atualizaMapaCadeira(Cadeira.find.all());
+		plano.atualizaMapaCadeira(Cadeira.findByType(usuarioLogad
+				.getTipoPlano().getNomeTipo()));
 		plano.atualizaValidadores();
 		plano.getPeriodo(PlanoDeCurso.ULTIMO_PERIODO).setValidador(
 				new ValidadorMaximoMinimoCreditos());
@@ -77,7 +81,8 @@ public class Application extends Controller {
 		}
 		if (u.getPlano() == null) {
 			PlanoDeCurso plano = new PlanoDeCurso();
-			plano.distribuiCadeiras(Cadeira.find.all());
+			plano.distribuiCadeiras(Cadeira.findByType(u.getTipoPlano()
+					.getNomeTipo()));
 			u.setPlano(plano);
 			u.save();
 		}
@@ -115,8 +120,10 @@ public class Application extends Controller {
 			newUser.setEmail(cadastroForm.get().email);
 			newUser.setPassword(cadastroForm.get().password);
 			newUser.setName(cadastroForm.get().nome);
+			newUser.setTipoPlano(TipoPlano.Comum);
 			PlanoDeCurso newPlano = new PlanoDeCurso();
-			newPlano.distribuiCadeiras(Cadeira.find.all());
+			newPlano.distribuiCadeiras(Cadeira.findByType(newUser
+					.getTipoPlano().getNomeTipo()));
 			newUser.setPlano(newPlano);
 			newPlano.save();
 			newUser.save();
@@ -142,7 +149,8 @@ public class Application extends Controller {
 
 	private static void criaPlanoParaUsuario(User user) {
 		PlanoDeCurso newPlano = new PlanoDeCurso();
-		newPlano.distribuiCadeiras(Cadeira.find.all());
+		newPlano.distribuiCadeiras(Cadeira.findByType(user.getTipoPlano()
+				.getNomeTipo()));
 		user.setPlano(newPlano);
 		user.save();
 		newPlano.update();

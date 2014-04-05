@@ -9,7 +9,7 @@ create table cadeira (
   creditos                  integer,
   dificuldade               integer,
   periodo_default           integer,
-  constraint uq_cadeira_nome unique (nome),
+  tipo_plano                varchar(255),
   constraint pk_cadeira primary key (id))
 ;
 
@@ -30,6 +30,8 @@ create table account (
   name                      varchar(255),
   password                  varchar(255),
   plano_id                  bigint,
+  tipo_plano                integer,
+  constraint ck_account_tipo_plano check (tipo_plano in (0,1,2)),
   constraint pk_account primary key (email))
 ;
 
