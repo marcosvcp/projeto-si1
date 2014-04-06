@@ -271,9 +271,7 @@ public class PlanoDeCurso extends Model {
 		Periodo periodoCorrente = getPeriodo(periodo);
 		int creditosTotais = periodoCorrente.getCreditos()
 				+ cadeira.getCreditos();
-		if ((!(periodoCorrente.getCreditos() <= MINIMO_CREDITOS))
-				&& !periodoCorrente.getValidador()
-						.validaPeriodo(creditosTotais)) {
+		if (!periodoCorrente.getValidador().validaPeriodo(creditosTotais)) {
 			throw new LimiteDeCreditosUltrapassadoException(
 					"Limite de Créditos Ultrapassado!");
 		}
@@ -284,7 +282,7 @@ public class PlanoDeCurso extends Model {
 				p.removerCadeira(cadeira);
 			}
 		}
-
+		cadeira.setPeriodo(periodo);
 		// adiciona essa cadeira no periodo escolhido
 		getPeriodo(periodo).addCadeira(cadeira);
 	}
@@ -294,20 +292,13 @@ public class PlanoDeCurso extends Model {
 	 * 
 	 * @param cadeira
 	 */
-	public void removeCadeira(String cadeira)
-			throws LimiteDeCreditosUltrapassadoException {
+	public void removeCadeira(String cadeira){
 		// PADRÃO DE PROJETO: CONTROLLER - para manter o baixo acoplamento
 		// essa classe vai ser a responsável por remover uma cadeira ao periodo
 		// if (getMapCadeirasAlocadas().get(cadeira) == null) {
 		// throw new Exception("Essa Cadeira não está alocada!");
 		// }
-		boolean lancaExcecao = false;
 		Cadeira removida = mapaDeCadeiras.get(cadeira);
-		Periodo periodoCadeira = this.getPeriodo(removida.getPeriodo());
-		if (!periodoCadeira.getValidador().validaPeriodo(
-				periodoCadeira.getCreditos() - removida.getCreditos())) {
-			lancaExcecao = true;
-		}
 		// procura pela cadeira entre os periodos.
 		getPeriodo(removida.getPeriodo()).removerCadeira(removida);
 		// removida.setPeriodo(0);
