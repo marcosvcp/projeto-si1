@@ -1,6 +1,6 @@
 // @SOURCE:C:/Users/Dinho/si1/projeto-si1/conf/routes
-// @HASH:119ea7248c63838d77a15a97a5d096bd66c00e16
-// @DATE:Sun Apr 06 02:37:57 GMT-03:00 2014
+// @HASH:7ffa41b83521122c874697c0a080b703cc892e05
+// @DATE:Sun Apr 06 20:45:03 GMT-03:00 2014
 
 
 import play.core._
@@ -29,15 +29,15 @@ lazy val defaultPrefix = { if(Routes.prefix.endsWith("/")) "" else "/" }
 
 
 // @LINE:6
-private[this] lazy val controllers_Application_index0 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("index"))))
+private[this] lazy val controllers_Application_index0 = Route("GET", PathPattern(List(StaticPart(Routes.prefix))))
         
 
 // @LINE:7
-private[this] lazy val controllers_Application_login1 = Route("GET", PathPattern(List(StaticPart(Routes.prefix))))
+private[this] lazy val controllers_Application_atualizaPeriodo1 = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("atualizaPeriodo"))))
         
 
 // @LINE:8
-private[this] lazy val controllers_Application_atualizaPeriodo2 = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("index"))))
+private[this] lazy val controllers_Application_atualizaPeriodo2 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("atualizaPeriodo"))))
         
 
 // @LINE:11
@@ -87,7 +87,7 @@ private[this] lazy val controllers_Application_mostraGradeUsuario13 = Route("GET
 // @LINE:26
 private[this] lazy val controllers_Application_pesquisa14 = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("RedeSocial"))))
         
-def documentation = List(("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """index""","""controllers.Application.index()"""),("""GET""", prefix,"""controllers.Application.login()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """index""","""controllers.Application.atualizaPeriodo()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """remCadeira/$cadeira<[^/]+>""","""controllers.Application.remCadeira(cadeira:String)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """remCadeira/$cadeira<[^/]+>""","""controllers.Application.remCadeira(cadeira:String)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """addCadeira/$cadeira<[^/]+>/$periodo<[^/]+>""","""controllers.Application.addCadeira(cadeira:String, periodo:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """login""","""controllers.Application.login()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """cadastro""","""controllers.Application.cadastroPage()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """cadastro""","""controllers.Application.cadastro()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """login""","""controllers.Application.authenticate()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """logout""","""controllers.Application.logout()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """RedeSocial""","""controllers.Application.mostraPlanosDosUsuarios()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """GradeDoUsuario""","""controllers.Application.mostraGradeUsuario(email:String)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """RedeSocial""","""controllers.Application.pesquisa()""")).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
+def documentation = List(("""GET""", prefix,"""controllers.Application.index()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """atualizaPeriodo""","""controllers.Application.atualizaPeriodo()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """atualizaPeriodo""","""controllers.Application.atualizaPeriodo()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """remCadeira/$cadeira<[^/]+>""","""controllers.Application.remCadeira(cadeira:String)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """remCadeira/$cadeira<[^/]+>""","""controllers.Application.remCadeira(cadeira:String)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """addCadeira/$cadeira<[^/]+>/$periodo<[^/]+>""","""controllers.Application.addCadeira(cadeira:String, periodo:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """login""","""controllers.Application.login()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """cadastro""","""controllers.Application.cadastroPage()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """cadastro""","""controllers.Application.cadastro()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """login""","""controllers.Application.authenticate()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """logout""","""controllers.Application.logout()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """RedeSocial""","""controllers.Application.mostraPlanosDosUsuarios()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """GradeDoUsuario""","""controllers.Application.mostraGradeUsuario(email:String)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """RedeSocial""","""controllers.Application.pesquisa()""")).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
   case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
   case l => s ++ l.asInstanceOf[List[(String,String,String)]] 
 }}
@@ -98,15 +98,15 @@ def routes:PartialFunction[RequestHeader,Handler] = {
 // @LINE:6
 case controllers_Application_index0(params) => {
    call { 
-        invokeHandler(controllers.Application.index(), HandlerDef(this, "controllers.Application", "index", Nil,"GET", """ Home page""", Routes.prefix + """index"""))
+        invokeHandler(controllers.Application.index(), HandlerDef(this, "controllers.Application", "index", Nil,"GET", """ Home page""", Routes.prefix + """"""))
    }
 }
         
 
 // @LINE:7
-case controllers_Application_login1(params) => {
+case controllers_Application_atualizaPeriodo1(params) => {
    call { 
-        invokeHandler(controllers.Application.login(), HandlerDef(this, "controllers.Application", "login", Nil,"GET", """""", Routes.prefix + """"""))
+        invokeHandler(controllers.Application.atualizaPeriodo(), HandlerDef(this, "controllers.Application", "atualizaPeriodo", Nil,"POST", """""", Routes.prefix + """atualizaPeriodo"""))
    }
 }
         
@@ -114,7 +114,7 @@ case controllers_Application_login1(params) => {
 // @LINE:8
 case controllers_Application_atualizaPeriodo2(params) => {
    call { 
-        invokeHandler(controllers.Application.atualizaPeriodo(), HandlerDef(this, "controllers.Application", "atualizaPeriodo", Nil,"POST", """""", Routes.prefix + """index"""))
+        invokeHandler(controllers.Application.atualizaPeriodo(), HandlerDef(this, "controllers.Application", "atualizaPeriodo", Nil,"GET", """""", Routes.prefix + """atualizaPeriodo"""))
    }
 }
         

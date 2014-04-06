@@ -50,14 +50,14 @@ public class Application extends Controller {
 			throws LimiteDeCreditosUltrapassadoException {
 		plano.removeCadeira(cadeira);
 		plano.save();
-		return redirect(routes.Application.index());
+		return index();
 	}
 
 	public static Result addCadeira(String cadeira, int periodo)
 			throws LimiteDeCreditosUltrapassadoException {
 		plano.addCadeira(cadeira, periodo);
 		plano.save();
-		return redirect(routes.Application.index());
+		return index();
 	}
 
 	public static Result login() {

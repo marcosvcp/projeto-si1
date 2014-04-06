@@ -1,6 +1,6 @@
 // @SOURCE:C:/Users/Dinho/si1/projeto-si1/conf/routes
-// @HASH:119ea7248c63838d77a15a97a5d096bd66c00e16
-// @DATE:Sun Apr 06 02:37:57 GMT-03:00 2014
+// @HASH:7ffa41b83521122c874697c0a080b703cc892e05
+// @DATE:Sun Apr 06 20:45:03 GMT-03:00 2014
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._
@@ -61,8 +61,16 @@ class ReverseApplication {
     
 
 // @LINE:8
+// @LINE:7
 def atualizaPeriodo(): Call = {
-   Call("POST", _prefix + { _defaultPrefix } + "index")
+   () match {
+// @LINE:7
+case () if true => Call("POST", _prefix + { _defaultPrefix } + "atualizaPeriodo")
+                                                        
+// @LINE:8
+case () if true => Call("GET", _prefix + { _defaultPrefix } + "atualizaPeriodo")
+                                                        
+   }
 }
                                                 
 
@@ -130,21 +138,13 @@ def authenticate(): Call = {
 
 // @LINE:6
 def index(): Call = {
-   Call("GET", _prefix + { _defaultPrefix } + "index")
+   Call("GET", _prefix)
 }
                                                 
 
 // @LINE:17
-// @LINE:7
 def login(): Call = {
-   () match {
-// @LINE:7
-case () if true => Call("GET", _prefix)
-                                                        
-// @LINE:17
-case () if true => Call("GET", _prefix + { _defaultPrefix } + "login")
-                                                        
-   }
+   Call("GET", _prefix + { _defaultPrefix } + "login")
 }
                                                 
     
@@ -207,11 +207,17 @@ class ReverseApplication {
     
 
 // @LINE:8
+// @LINE:7
 def atualizaPeriodo : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Application.atualizaPeriodo",
    """
       function() {
-      return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "index"})
+      if (true) {
+      return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "atualizaPeriodo"})
+      }
+      if (true) {
+      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "atualizaPeriodo"})
+      }
       }
    """
 )
@@ -327,24 +333,18 @@ def index : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Application.index",
    """
       function() {
-      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "index"})
+      return _wA({method:"GET", url:"""" + _prefix + """"})
       }
    """
 )
                         
 
 // @LINE:17
-// @LINE:7
 def login : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Application.login",
    """
       function() {
-      if (true) {
-      return _wA({method:"GET", url:"""" + _prefix + """"})
-      }
-      if (true) {
       return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "login"})
-      }
       }
    """
 )
@@ -404,9 +404,9 @@ def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.
 class ReverseApplication {
     
 
-// @LINE:8
+// @LINE:7
 def atualizaPeriodo(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Application.atualizaPeriodo(), HandlerDef(this, "controllers.Application", "atualizaPeriodo", Seq(), "POST", """""", _prefix + """index""")
+   controllers.Application.atualizaPeriodo(), HandlerDef(this, "controllers.Application", "atualizaPeriodo", Seq(), "POST", """""", _prefix + """atualizaPeriodo""")
 )
                       
 
@@ -466,13 +466,13 @@ def authenticate(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
 
 // @LINE:6
 def index(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Application.index(), HandlerDef(this, "controllers.Application", "index", Seq(), "GET", """ Home page""", _prefix + """index""")
+   controllers.Application.index(), HandlerDef(this, "controllers.Application", "index", Seq(), "GET", """ Home page""", _prefix + """""")
 )
                       
 
-// @LINE:7
+// @LINE:17
 def login(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Application.login(), HandlerDef(this, "controllers.Application", "login", Seq(), "GET", """""", _prefix + """""")
+   controllers.Application.login(), HandlerDef(this, "controllers.Application", "login", Seq(), "GET", """Login""", _prefix + """login""")
 )
                       
     
