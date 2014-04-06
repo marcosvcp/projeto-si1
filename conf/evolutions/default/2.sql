@@ -315,7 +315,7 @@ insert into cadeira_requisito values(116,59);
 insert into cadeira values(117,'Equações Diferenciais',4,5,0,'comum');
 insert into cadeira_requisito values(117,71);
 
-insert into cadeira values(118,'Inglẽs',4,5,0,'comum');
+insert into cadeira values(118,'Inglês',4,5,0,'comum');
 
 insert into cadeira values(119,'Expressão Gráfica',4,5,0,'comum');
 

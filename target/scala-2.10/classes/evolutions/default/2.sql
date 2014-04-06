@@ -183,7 +183,7 @@ insert into cadeira values(74,'Fund. de Física Moderna',4,7,3,'comum');
 insert into cadeira_requisito values(74,67);
 insert into cadeira_requisito values(74,68);
 
-insert into cadeira values(75,'Gerência da Informação',59,5,5,'comum');
+insert into cadeira values(75,'Gerência da Informação',4,5,5,'comum');
 
 insert into cadeira values(76,'Métodos Estatísticos',4,5,5,'comum');
 insert into cadeira_requisito values(76,71);
@@ -315,7 +315,7 @@ insert into cadeira_requisito values(116,59);
 insert into cadeira values(117,'Equações Diferenciais',4,5,0,'comum');
 insert into cadeira_requisito values(117,71);
 
-insert into cadeira values(118,'Inglẽs',4,5,0,'comum');
+insert into cadeira values(118,'Inglês',4,5,0,'comum');
 
 insert into cadeira values(119,'Expressão Gráfica',4,5,0,'comum');
 

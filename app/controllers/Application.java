@@ -41,8 +41,6 @@ public class Application extends Controller {
 		plano.atualizaMapaCadeira(Cadeira.findByType(usuarioLogad
 				.getTipoPlano().getNomeTipo()));
 		plano.atualizaValidadores();
-		plano.getPeriodo(PlanoDeCurso.ULTIMO_PERIODO).setValidador(
-				new ValidadorMaximoMinimoCreditos());
 		plano.save();
 		User user = User.findByEmail(session("email"));
 		return ok(views.html.index.render(plano, user));

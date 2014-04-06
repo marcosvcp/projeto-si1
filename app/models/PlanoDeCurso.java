@@ -18,6 +18,7 @@ import javax.persistence.Transient;
 import models.exceptions.LimiteDeCreditosUltrapassadoException;
 import models.validators.ValidadorDeCreditos;
 import models.validators.ValidadorMaximoCreditos;
+import models.validators.ValidadorMinimoCreditos;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -251,6 +252,8 @@ public class PlanoDeCurso extends Model {
 			}
 
 		}
+		this.getPeriodo(ULTIMO_PERIODO).setValidador(
+				new ValidadorMinimoCreditos());
 	}
 
 	/**
@@ -264,7 +267,6 @@ public class PlanoDeCurso extends Model {
 			throws LimiteDeCreditosUltrapassadoException {
 		// PADRÃO DE PROJETO: CONTROLLER - para manter o baixo acoplamento
 		// essa classe vai ser a responsável por adicionar um cadeira ao periodo
-		boolean lancaExcecao = false;
 		Cadeira cadeira = mapaDeCadeiras.get(cadeiraNome);
 		Periodo periodoCorrente = getPeriodo(periodo);
 		int creditosTotais = periodoCorrente.getCreditos()
@@ -272,27 +274,19 @@ public class PlanoDeCurso extends Model {
 		if ((!(periodoCorrente.getCreditos() <= MINIMO_CREDITOS))
 				&& !periodoCorrente.getValidador()
 						.validaPeriodo(creditosTotais)) {
-			lancaExcecao = true;
+			throw new LimiteDeCreditosUltrapassadoException(
+					"Limite de Créditos Ultrapassado!");
 		}
 		// remove cadeira do periodo ou da lista de disciplinas disponiveis
 
 		for (Periodo p : periodos) {
 			if (p.getCadeiras().contains(cadeira)) {
-				int creditosQueFicarao = p.getCreditos()
-						- cadeira.getCreditos();
-				if (!p.getValidador().validaPeriodo(creditosQueFicarao)) {
-					lancaExcecao = true;
-				}
 				p.removerCadeira(cadeira);
 			}
 		}
 
 		// adiciona essa cadeira no periodo escolhido
 		getPeriodo(periodo).addCadeira(cadeira);
-		if (lancaExcecao) {
-			throw new LimiteDeCreditosUltrapassadoException(
-					"Limite de Créditos Ultrapassado!");
-		}
 	}
 
 	/**
@@ -327,10 +321,6 @@ public class PlanoDeCurso extends Model {
 		}
 		for (Cadeira c : paraRemover) {
 			removeCadeira(c.getNome());
-		}
-		if (lancaExcecao) {
-			throw new LimiteDeCreditosUltrapassadoException(
-					"Limite de Créditos Ultrapassado!");
 		}
 	}
 
