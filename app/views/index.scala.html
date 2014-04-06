@@ -58,9 +58,18 @@
 
 	<div>
 	@for(periodo <- plano.getPeriodos()) {
-	
-		<div id="@periodo.getNumero()" class="periodo" ondrop="drop(event, this)"
-			ondragover="allowDrop(event,this)" ondragleave="leave(event, this)">
+		@if(periodo.getNumero() < plano.getPeriodoAtual()){
+		<div id="@periodo.getNumero()" class="periodoPassado" ondrop="drop(event, this)"
+			ondragover="allowDrop(event,this)" ondragleave="leave(event, this)">			
+		}
+		@if(periodo.getNumero() == plano.getPeriodoAtual()){
+		<div id="@periodo.getNumero()" class="periodoAtual" ondrop="drop(event, this)"
+			ondragover="allowDrop(event,this)" ondragleave="leave(event, this)">			
+		}
+		@if(periodo.getNumero() > plano.getPeriodoAtual()){
+		<div id="@periodo.getNumero()" class="periodoFuturo" ondrop="drop(event, this)"
+			ondragover="allowDrop(event,this)" ondragleave="leave(event, this)">			
+		}
 
 		<ul style="list-style:none;">
 			<span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:-40px;">@periodo.getNumero() @Messages("nPeriodo") </span>

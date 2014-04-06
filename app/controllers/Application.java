@@ -99,6 +99,7 @@ public class Application extends Controller {
 		public String email;
 		public String password;
 		public String nome;
+		public String tipo;
 		public int periodo;
 	}
 
@@ -118,7 +119,16 @@ public class Application extends Controller {
 			newUser.setEmail(cadastroForm.get().email);
 			newUser.setPassword(cadastroForm.get().password);
 			newUser.setName(cadastroForm.get().nome);
-			newUser.setTipoPlano(TipoPlano.Comum);
+			if((cadastroForm.get().tipo).equals("novo")){
+				newUser.setTipoPlano(TipoPlano.Novo);
+				
+			}if((cadastroForm.get().tipo).equals( "comum")){
+				newUser.setTipoPlano(TipoPlano.Comum);
+				
+			}if((cadastroForm.get().tipo).equals("padrao")){
+				newUser.setTipoPlano(TipoPlano.Padrao);
+				
+			}
 			PlanoDeCurso newPlano = new PlanoDeCurso();
 			newPlano.distribuiCadeiras(Cadeira.findByType(newUser
 					.getTipoPlano().getNomeTipo()));

@@ -20,7 +20,7 @@
     <body>
     
     
-  	<div id="container">
+  	<div id="container" style="height: 380px; top: 50%;margin-top: -140px;">
   	<h3><center>Cadastre-se</center></h3>
 	@helper.form(routes.Application.cadastro) {
 		@if(form.hasGlobalErrors) {
@@ -37,6 +37,9 @@
        <input type="text" name="email" placeholder="Email" title="Digite seu e-mail" required value="@form("email").value">
        <input type="text" name="Nome" placeholder="Nome" title="Digite seu nome" required value="@form("nome").value">
        <input type="password" name="password" title="Digite sua senha" required placeholder="Password">
+       <input type="radio" name="tipo" id="padrao" value="padrao" checked style="margin-left: 15px;"> Grade Padrão <br>
+       <input type="radio" name="tipo" id="comum" value="comum" style="margin-left: 15px;"> Grade Comun<br>
+       <input type="radio" name="tipo" id="novo" value="novo" style="margin-left: 15px;"> Grade Nova <br>
        <div>
        <input type="submit" value="Cadastrar"></input>
 	}		
