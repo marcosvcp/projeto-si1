@@ -48,15 +48,19 @@ public class Application extends Controller {
 
 	public static Result remCadeira(String cadeira)
 			throws LimiteDeCreditosUltrapassadoException {
-		plano.removeCadeira(cadeira);
-		plano.save();
+		User usuarioLogad = User.findByEmail(session("email"));
+		PlanoDeCurso p = usuarioLogad.getPlano();
+		p.removeCadeira(cadeira);
+		p.save();
 		return index();
 	}
 
 	public static Result addCadeira(String cadeira, int periodo)
 			throws LimiteDeCreditosUltrapassadoException {
-		plano.addCadeira(cadeira, periodo);
-		plano.save();
+		User usuarioLogad = User.findByEmail(session("email"));
+		PlanoDeCurso p = usuarioLogad.getPlano();
+		p.addCadeira(cadeira, periodo);
+		p.save();
 		return index();
 	}
 
