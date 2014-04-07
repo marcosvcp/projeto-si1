@@ -35,7 +35,7 @@ function drop(ev, e){
 		  data: "",
 		  success: function(){
 		        alert( "Cadeira Adicionada");
-		        window.location = "/";
+		        window.location = "/home";
 		  },
 		  error: function(XMLHttpRequest, textStatus, errorThrown) {
 			  //parser pra achar a Excecao lancada
@@ -82,7 +82,7 @@ function remCadeira(cadeira, flagRequisitos){
 		  data: "",
 		  success: function(){
 		        alert( "Cadeira Removida");
-		        window.location = "/";
+		        window.location = "/home";
 		  },
 		  error: function(XMLHttpRequest, textStatus, errorThrown) {
 			  //parser pra achar a Excecao lancada

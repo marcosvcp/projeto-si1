@@ -1,6 +1,6 @@
 // @SOURCE:C:/Users/Dinho/si1/projeto-si1/conf/routes
-// @HASH:7ffa41b83521122c874697c0a080b703cc892e05
-// @DATE:Sun Apr 06 20:45:03 GMT-03:00 2014
+// @HASH:6514e2144d714b419fe0418562aea14a593659a9
+// @DATE:Sun Apr 06 22:49:24 GMT-03:00 2014
 
 
 import play.core._
@@ -29,7 +29,7 @@ lazy val defaultPrefix = { if(Routes.prefix.endsWith("/")) "" else "/" }
 
 
 // @LINE:6
-private[this] lazy val controllers_Application_index0 = Route("GET", PathPattern(List(StaticPart(Routes.prefix))))
+private[this] lazy val controllers_Application_index0 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("home"))))
         
 
 // @LINE:7
@@ -41,23 +41,23 @@ private[this] lazy val controllers_Application_atualizaPeriodo2 = Route("GET", P
         
 
 // @LINE:11
-private[this] lazy val controllers_Assets_at3 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("assets/"),DynamicPart("file", """.+""",false))))
+private[this] lazy val controllers_Application_login3 = Route("GET", PathPattern(List(StaticPart(Routes.prefix))))
         
 
 // @LINE:12
-private[this] lazy val controllers_Application_remCadeira4 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("remCadeira/"),DynamicPart("cadeira", """[^/]+""",true))))
+private[this] lazy val controllers_Assets_at4 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("assets/"),DynamicPart("file", """.+""",false))))
         
 
 // @LINE:13
-private[this] lazy val controllers_Application_remCadeira5 = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("remCadeira/"),DynamicPart("cadeira", """[^/]+""",true))))
+private[this] lazy val controllers_Application_remCadeira5 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("remCadeira/"),DynamicPart("cadeira", """[^/]+""",true))))
         
 
 // @LINE:14
-private[this] lazy val controllers_Application_addCadeira6 = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("addCadeira/"),DynamicPart("cadeira", """[^/]+""",true),StaticPart("/"),DynamicPart("periodo", """[^/]+""",true))))
+private[this] lazy val controllers_Application_remCadeira6 = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("remCadeira/"),DynamicPart("cadeira", """[^/]+""",true))))
         
 
-// @LINE:17
-private[this] lazy val controllers_Application_login7 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("login"))))
+// @LINE:15
+private[this] lazy val controllers_Application_addCadeira7 = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("addCadeira/"),DynamicPart("cadeira", """[^/]+""",true),StaticPart("/"),DynamicPart("periodo", """[^/]+""",true))))
         
 
 // @LINE:18
@@ -87,7 +87,7 @@ private[this] lazy val controllers_Application_mostraGradeUsuario13 = Route("GET
 // @LINE:26
 private[this] lazy val controllers_Application_pesquisa14 = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("RedeSocial"))))
         
-def documentation = List(("""GET""", prefix,"""controllers.Application.index()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """atualizaPeriodo""","""controllers.Application.atualizaPeriodo()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """atualizaPeriodo""","""controllers.Application.atualizaPeriodo()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """remCadeira/$cadeira<[^/]+>""","""controllers.Application.remCadeira(cadeira:String)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """remCadeira/$cadeira<[^/]+>""","""controllers.Application.remCadeira(cadeira:String)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """addCadeira/$cadeira<[^/]+>/$periodo<[^/]+>""","""controllers.Application.addCadeira(cadeira:String, periodo:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """login""","""controllers.Application.login()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """cadastro""","""controllers.Application.cadastroPage()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """cadastro""","""controllers.Application.cadastro()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """login""","""controllers.Application.authenticate()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """logout""","""controllers.Application.logout()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """RedeSocial""","""controllers.Application.mostraPlanosDosUsuarios()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """GradeDoUsuario""","""controllers.Application.mostraGradeUsuario(email:String)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """RedeSocial""","""controllers.Application.pesquisa()""")).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
+def documentation = List(("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """home""","""controllers.Application.index()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """atualizaPeriodo""","""controllers.Application.atualizaPeriodo()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """atualizaPeriodo""","""controllers.Application.atualizaPeriodo()"""),("""GET""", prefix,"""controllers.Application.login()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """remCadeira/$cadeira<[^/]+>""","""controllers.Application.remCadeira(cadeira:String)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """remCadeira/$cadeira<[^/]+>""","""controllers.Application.remCadeira(cadeira:String)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """addCadeira/$cadeira<[^/]+>/$periodo<[^/]+>""","""controllers.Application.addCadeira(cadeira:String, periodo:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """cadastro""","""controllers.Application.cadastroPage()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """cadastro""","""controllers.Application.cadastro()"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """login""","""controllers.Application.authenticate()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """logout""","""controllers.Application.logout()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """RedeSocial""","""controllers.Application.mostraPlanosDosUsuarios()"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """GradeDoUsuario""","""controllers.Application.mostraGradeUsuario(email:String)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """RedeSocial""","""controllers.Application.pesquisa()""")).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
   case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
   case l => s ++ l.asInstanceOf[List[(String,String,String)]] 
 }}
@@ -98,7 +98,7 @@ def routes:PartialFunction[RequestHeader,Handler] = {
 // @LINE:6
 case controllers_Application_index0(params) => {
    call { 
-        invokeHandler(controllers.Application.index(), HandlerDef(this, "controllers.Application", "index", Nil,"GET", """ Home page""", Routes.prefix + """"""))
+        invokeHandler(controllers.Application.index(), HandlerDef(this, "controllers.Application", "index", Nil,"GET", """ Home page""", Routes.prefix + """home"""))
    }
 }
         
@@ -120,17 +120,17 @@ case controllers_Application_atualizaPeriodo2(params) => {
         
 
 // @LINE:11
-case controllers_Assets_at3(params) => {
-   call(Param[String]("path", Right("/public")), params.fromPath[String]("file", None)) { (path, file) =>
-        invokeHandler(controllers.Assets.at(path, file), HandlerDef(this, "controllers.Assets", "at", Seq(classOf[String], classOf[String]),"GET", """ Map static resources from the /public folder to the /assets URL path""", Routes.prefix + """assets/$file<.+>"""))
+case controllers_Application_login3(params) => {
+   call { 
+        invokeHandler(controllers.Application.login(), HandlerDef(this, "controllers.Application", "login", Nil,"GET", """ Map static resources from the /public folder to the /assets URL path""", Routes.prefix + """"""))
    }
 }
         
 
 // @LINE:12
-case controllers_Application_remCadeira4(params) => {
-   call(params.fromPath[String]("cadeira", None)) { (cadeira) =>
-        invokeHandler(controllers.Application.remCadeira(cadeira), HandlerDef(this, "controllers.Application", "remCadeira", Seq(classOf[String]),"GET", """""", Routes.prefix + """remCadeira/$cadeira<[^/]+>"""))
+case controllers_Assets_at4(params) => {
+   call(Param[String]("path", Right("/public")), params.fromPath[String]("file", None)) { (path, file) =>
+        invokeHandler(controllers.Assets.at(path, file), HandlerDef(this, "controllers.Assets", "at", Seq(classOf[String], classOf[String]),"GET", """""", Routes.prefix + """assets/$file<.+>"""))
    }
 }
         
@@ -138,23 +138,23 @@ case controllers_Application_remCadeira4(params) => {
 // @LINE:13
 case controllers_Application_remCadeira5(params) => {
    call(params.fromPath[String]("cadeira", None)) { (cadeira) =>
-        invokeHandler(controllers.Application.remCadeira(cadeira), HandlerDef(this, "controllers.Application", "remCadeira", Seq(classOf[String]),"POST", """""", Routes.prefix + """remCadeira/$cadeira<[^/]+>"""))
+        invokeHandler(controllers.Application.remCadeira(cadeira), HandlerDef(this, "controllers.Application", "remCadeira", Seq(classOf[String]),"GET", """""", Routes.prefix + """remCadeira/$cadeira<[^/]+>"""))
    }
 }
         
 
 // @LINE:14
-case controllers_Application_addCadeira6(params) => {
-   call(params.fromPath[String]("cadeira", None), params.fromPath[Int]("periodo", None)) { (cadeira, periodo) =>
-        invokeHandler(controllers.Application.addCadeira(cadeira, periodo), HandlerDef(this, "controllers.Application", "addCadeira", Seq(classOf[String], classOf[Int]),"POST", """""", Routes.prefix + """addCadeira/$cadeira<[^/]+>/$periodo<[^/]+>"""))
+case controllers_Application_remCadeira6(params) => {
+   call(params.fromPath[String]("cadeira", None)) { (cadeira) =>
+        invokeHandler(controllers.Application.remCadeira(cadeira), HandlerDef(this, "controllers.Application", "remCadeira", Seq(classOf[String]),"POST", """""", Routes.prefix + """remCadeira/$cadeira<[^/]+>"""))
    }
 }
         
 
-// @LINE:17
-case controllers_Application_login7(params) => {
-   call { 
-        invokeHandler(controllers.Application.login(), HandlerDef(this, "controllers.Application", "login", Nil,"GET", """Login""", Routes.prefix + """login"""))
+// @LINE:15
+case controllers_Application_addCadeira7(params) => {
+   call(params.fromPath[String]("cadeira", None), params.fromPath[Int]("periodo", None)) { (cadeira, periodo) =>
+        invokeHandler(controllers.Application.addCadeira(cadeira, periodo), HandlerDef(this, "controllers.Application", "addCadeira", Seq(classOf[String], classOf[Int]),"POST", """""", Routes.prefix + """addCadeira/$cadeira<[^/]+>/$periodo<[^/]+>"""))
    }
 }
         
@@ -162,7 +162,7 @@ case controllers_Application_login7(params) => {
 // @LINE:18
 case controllers_Application_cadastroPage8(params) => {
    call { 
-        invokeHandler(controllers.Application.cadastroPage(), HandlerDef(this, "controllers.Application", "cadastroPage", Nil,"GET", """""", Routes.prefix + """cadastro"""))
+        invokeHandler(controllers.Application.cadastroPage(), HandlerDef(this, "controllers.Application", "cadastroPage", Nil,"GET", """Login""", Routes.prefix + """cadastro"""))
    }
 }
         
