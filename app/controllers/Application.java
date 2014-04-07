@@ -181,9 +181,11 @@ public class Application extends Controller {
 		Form<Cadastro> cadastroForm = Form.form(Cadastro.class)
 				.bindFromRequest();
 		int periodo = cadastroForm.get().periodo;
+		User usuarioLogad = User.findByEmail(session("email"));
+		PlanoDeCurso p = usuarioLogad.getPlano();
 		if (!(periodo < 1 || periodo > 10)) {
-			plano.setPeriodoAtual(periodo);
-			plano.update();
+			p.setPeriodoAtual(periodo);
+			p.update();
 		}
 		return index();
 	}
