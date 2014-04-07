@@ -188,7 +188,6 @@ public class PlanoDeCurso extends Model {
 	}
 
 	/**
-	 * 
 	 * @return lista com todos os periodos
 	 */
 	public List<Periodo> getPeriodos() {
@@ -197,7 +196,6 @@ public class PlanoDeCurso extends Model {
 	}
 
 	/**
-	 * 
 	 * @return um mapa de cadeira do curso
 	 */
 	public Map<String, Cadeira> getMapaCadeira() {
@@ -258,10 +256,6 @@ public class PlanoDeCurso extends Model {
 
 	/**
 	 * Adiciona uma {@code cadeira} ao {@code periodo}
-	 * 
-	 * @throws LimiteUltrapassadoException
-	 * 
-	 * @throws Exception
 	 */
 	public void addCadeira(String cadeiraNome, int periodo)
 			throws LimiteDeCreditosUltrapassadoException {
@@ -271,7 +265,9 @@ public class PlanoDeCurso extends Model {
 		Periodo periodoCorrente = getPeriodo(periodo);
 		int creditosTotais = periodoCorrente.getCreditos()
 				+ cadeira.getCreditos();
-		if (!periodoCorrente.getValidador().validaPeriodo(creditosTotais) && !this.periodosComMenosQueMinimoDeCreditos().contains(periodoCorrente)) {
+		if (!periodoCorrente.getValidador().validaPeriodo(creditosTotais)
+				&& !this.periodosComMenosQueMinimoDeCreditos().contains(
+						periodoCorrente)) {
 			throw new LimiteDeCreditosUltrapassadoException(
 					"Limite de Créditos Ultrapassado!");
 		}
@@ -282,17 +278,14 @@ public class PlanoDeCurso extends Model {
 				p.removerCadeira(cadeira);
 			}
 		}
-		cadeira.setPeriodo(periodo);
 		// adiciona essa cadeira no periodo escolhido
 		getPeriodo(periodo).addCadeira(cadeira);
 	}
 
 	/**
 	 * remove uma cadeira
-	 * 
-	 * @param cadeira
 	 */
-	public void removeCadeira(String cadeira){
+	public void removeCadeira(String cadeira) {
 		// PADRÃO DE PROJETO: CONTROLLER - para manter o baixo acoplamento
 		// essa classe vai ser a responsável por remover uma cadeira ao periodo
 		// if (getMapCadeirasAlocadas().get(cadeira) == null) {
@@ -301,7 +294,6 @@ public class PlanoDeCurso extends Model {
 		Cadeira removida = mapaDeCadeiras.get(cadeira);
 		// procura pela cadeira entre os periodos.
 		getPeriodo(removida.getPeriodo()).removerCadeira(removida);
-		// removida.setPeriodo(0);
 		List<Cadeira> paraRemover = new ArrayList<Cadeira>();
 		for (Periodo p : periodos) {
 			for (Cadeira c : p.getCadeiras()) {
@@ -317,10 +309,6 @@ public class PlanoDeCurso extends Model {
 
 	/**
 	 * Verifica se uma cadeira esta alocada corretamentes
-	 * 
-	 * @param c
-	 * @param p
-	 * @return
 	 */
 	public boolean isAlocadaNoLugarCorreto(Cadeira c, Periodo p) {
 		return verificaPreRequisitos(c, p.getNumero());
@@ -380,7 +368,6 @@ public class PlanoDeCurso extends Model {
 	}
 
 	/**
-	 * 
 	 * @return qt de creditos apenas do periodo atual
 	 */
 	public int getCreditosPeriodoAtual() {
@@ -388,7 +375,6 @@ public class PlanoDeCurso extends Model {
 	}
 
 	/**
-	 * 
 	 * @return qt de creditos do primeiro periodo ate o periodo atual
 	 */
 	public int getCreditosPeriodosPassados() {
@@ -400,7 +386,6 @@ public class PlanoDeCurso extends Model {
 	}
 
 	/**
-	 * 
 	 * @return qt de creditos do periodo atual ate o ultimo periodo
 	 */
 	public int getCreditosPeriodosFuturos() {
@@ -412,7 +397,6 @@ public class PlanoDeCurso extends Model {
 	}
 
 	/**
-	 * 
 	 * @return a qt de creditos das disciplinas que faltam ser alocadas somadas
 	 *         a qt de credito do periodo atual ate o ultimo periodo
 	 */
@@ -450,13 +434,17 @@ public class PlanoDeCurso extends Model {
 		List<Periodo> menosQueMinimo = new ArrayList<Periodo>();
 		for (int i = 1; i <= this.getPeriodos().size(); i++) {
 			Periodo periodo = this.getPeriodo(i);
-			if (!periodo.getValidador().validaPeriodo(periodo.getCreditos()) && periodo.getCreditos()<this.MINIMO_CREDITOS) {
+			if (!periodo.getValidador().validaPeriodo(periodo.getCreditos())
+					&& periodo.getCreditos() < this.MINIMO_CREDITOS) {
 				menosQueMinimo.add(this.getPeriodo(i));
 			}
 		}
 		return menosQueMinimo;
 	}
 
+	/**
+	 * Enumeração que representa os tipos de Planos possíveis de serem criados.
+	 */
 	public enum TipoPlano {
 		Novo("novo"), Comum("comum"), Padrao("padrao");
 
