@@ -1,6 +1,6 @@
 // @SOURCE:/home/marcos/Documents/projeto-heroku/conf/routes
 // @HASH:84bd0a245ede245210f95c3fd520353e32e61577
-// @DATE:Mon Apr 07 12:14:13 BRT 2014
+// @DATE:Mon Apr 07 12:49:25 BRT 2014
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._

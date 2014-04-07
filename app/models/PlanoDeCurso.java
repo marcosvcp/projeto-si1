@@ -293,7 +293,7 @@ public class PlanoDeCurso extends Model {
 		// }
 		Cadeira removida = mapaDeCadeiras.get(cadeira);
 		// procura pela cadeira entre os periodos.
-		getPeriodo(removida.getPeriodo()).removerCadeira(removida);
+		getPeriodo(procuraCadeira(removida)).removerCadeira(removida);
 		List<Cadeira> paraRemover = new ArrayList<Cadeira>();
 		for (Periodo p : periodos) {
 			for (Cadeira c : p.getCadeiras()) {
@@ -305,6 +305,15 @@ public class PlanoDeCurso extends Model {
 		for (Cadeira c : paraRemover) {
 			removeCadeira(c.getNome());
 		}
+	}
+
+	private int procuraCadeira(Cadeira removida) {
+		for (Periodo p : periodos) {
+			if (p.getCadeiras().contains(removida)) {
+				return periodos.indexOf(p) + 1;
+			}
+		}
+		return 0;
 	}
 
 	/**
@@ -434,8 +443,7 @@ public class PlanoDeCurso extends Model {
 		List<Periodo> menosQueMinimo = new ArrayList<Periodo>();
 		for (int i = 1; i <= this.getPeriodos().size(); i++) {
 			Periodo periodo = this.getPeriodo(i);
-			if (!periodo.getValidador().validaPeriodo(periodo.getCreditos())
-					&& periodo.getCreditos() < this.MINIMO_CREDITOS) {
+			if (!periodo.getValidador().validaPeriodo(periodo.getCreditos())) {
 				menosQueMinimo.add(this.getPeriodo(i));
 			}
 		}

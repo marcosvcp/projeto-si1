@@ -25,13 +25,13 @@
 			<div><br/>
            <span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:0px;"> Informacoes uteis</span><br></br>
                         			<strong><span class="periodoCreditos">Periodo Atual: @plano.getPeriodoAtual()</span></strong><br>
-			<span class="periodoCreditos">Creditos disciplinas nao alocadas: @plano.totalCreditosCadeirasNaoAlocadas()</span><br>
-			<span class="periodoCreditos">Creditos periodos passados: @plano.getCreditosPeriodosPassados()</span><br>
-			<span class="periodoCreditos">Creditos periodo atual: @plano.getCreditosPeriodoAtual()</span><br>
-			<span class="periodoCreditos">Creditos periodos Planejados: @plano.getCreditosPeriodosFuturos()</span><br>
-			<span class="periodoCreditos">Creditos minimos que faltam para me formar: @plano.getCreditosQueFaltamParaSeFormar()</span><br>
+			<span class="periodoCreditos">@Messages("disciplinasNaoAlocadas") @plano.totalCreditosCadeirasNaoAlocadas()</span><br>
+			<span class="periodoCreditos">@Messages("creditosUltrapassados") @plano.getCreditosPeriodosPassados()</span><br>
+			<span class="periodoCreditos">@Messages("periodoAtual") @plano.getCreditosPeriodoAtual()</span><br>
+			<span class="periodoCreditos">@Messages("creditosPlanejados") @plano.getCreditosPeriodosFuturos()</span><br>
+			<span class="periodoCreditos">@Messages("minimosPraSeFormar") @plano.getCreditosQueFaltamParaSeFormar()</span><br>
 
-			<strong><nome>Periodos abaixo do minimo de creditos:</nome></strong><br>
+			<strong><nome>@Messages("periodosErrados")</nome></strong><br>
 			@for(periodo <- plano.periodosComMenosQueMinimoDeCreditos()){
 				<strong><span class="periodoCreditos"> @periodo.toString()</span></strong><br>
 			}
