@@ -271,7 +271,7 @@ public class PlanoDeCurso extends Model {
 		Periodo periodoCorrente = getPeriodo(periodo);
 		int creditosTotais = periodoCorrente.getCreditos()
 				+ cadeira.getCreditos();
-		if (!periodoCorrente.getValidador().validaPeriodo(creditosTotais)) {
+		if (!periodoCorrente.getValidador().validaPeriodo(creditosTotais) && !this.periodosComMenosQueMinimoDeCreditos().contains(periodoCorrente)) {
 			throw new LimiteDeCreditosUltrapassadoException(
 					"Limite de Créditos Ultrapassado!");
 		}
@@ -450,7 +450,7 @@ public class PlanoDeCurso extends Model {
 		List<Periodo> menosQueMinimo = new ArrayList<Periodo>();
 		for (int i = 1; i <= this.getPeriodos().size(); i++) {
 			Periodo periodo = this.getPeriodo(i);
-			if (!periodo.getValidador().validaPeriodo(periodo.getCreditos())) {
+			if (!periodo.getValidador().validaPeriodo(periodo.getCreditos()) && periodo.getCreditos()<this.MINIMO_CREDITOS) {
 				menosQueMinimo.add(this.getPeriodo(i));
 			}
 		}
